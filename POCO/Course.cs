@@ -10,7 +10,7 @@ namespace POCO
   public class Course
   {
     [DataMember]
-    public string id { get; set; }
+    public string id { get; set;   }
 
     [DataMember]
     public string title { get; set; }
