@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DALTest
 {
-    class DALStaffTest
+    class DALMajorTest
     {
     }
 }
