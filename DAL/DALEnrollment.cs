@@ -18,12 +18,11 @@ namespace DAL
         {
             SqlConnection conn = new SqlConnection(connection_string);
             Transcript trans = new Transcript();
-            
+
             try
             {
                 //fill student info
                 trans.student = DALStudent.GetStudentDetail(id, ref errors);
-
                 string strSQL = "spGetEnrollmentList";
 
                 SqlDataAdapter mySA = new SqlDataAdapter(strSQL, conn);

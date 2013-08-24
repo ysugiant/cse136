@@ -8,7 +8,7 @@ using System.Configuration; // must add this... make sure to add "System.Configu
 using System.Data.SqlClient; // must add this...
 using System.Data; // must add this...
 
-namespace DAL
+namespace DAL  
 {
   public class DALCourse
   {
