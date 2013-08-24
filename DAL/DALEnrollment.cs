@@ -17,12 +17,11 @@ namespace DAL
         {
             SqlConnection conn = new SqlConnection(connection_string);
             Transcript trans = new Transcript();
-            
+
             try
             {
                 //fill student info
-                trans.student = new Student();
-                //(Student)DAL.DALStudent.GetStudentDetail(id, errors);
+                //trans.student = DALStudent.GetStudentDetail(id, errors);
                 //List<Student> t = DAL.DALStudent.GetStudentList(errors);
                 //DALStudent.GetStudentDetail(id, errors);
                 string strSQL = "spGetEnrollmentList";
