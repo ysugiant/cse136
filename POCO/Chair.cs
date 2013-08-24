@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Runtime.Serialization; // this is required
 
-namespace POCO
+namespace POCO 
 {
     [DataContract]
     public class Chair// : Staff
@@ -38,6 +38,7 @@ namespace POCO
                    email + ";" +
                    password + ";" +
                    dept.id + ";";
+            //TESTING
         }
 
     }
