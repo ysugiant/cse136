@@ -31,6 +31,15 @@ namespace POCO
     public string day { get; set; }
 
     [DataMember]
+    public int timeID { get; set; }
+
+    [DataMember]
+    public int dayID { get; set; }
+
+    [DataMember]
+    public int instr_id { get; set; }//PAUL ADDED THIS
+
+    [DataMember]
     public string instructor_fName { get; set; }//JUSTIN ADDED THIS
 
     [DataMember]
@@ -43,8 +52,9 @@ namespace POCO
                quarter + ";" +
                session + ";" +
                course + ";" +
-               time + ";" +
+               time + ";" + 
                day + ";" +
+               instr_id + ";" +
                instructor_fName + ";" +//JUSTIN ADDED THIS
                instructor_lName + ";";//JUSTIN ADDED THIS
     }
