@@ -13,10 +13,10 @@ namespace DAL
   {
     static string connection_string = ConfigurationManager.AppSettings["dsn"];
 
-    public static int InsertCourseSchedule(ScheduledCourse sched, ref List<string> errors)
+    public static void InsertCourseSchedule(ScheduledCourse sched, ref List<string> errors, out int ID)
     {
+        ID = -1;
         SqlConnection conn = new SqlConnection(connection_string);
-        int ID = 0;
 
         try
         {
@@ -42,6 +42,7 @@ namespace DAL
 
             DataSet myDS = new DataSet();
             mySA.Fill(myDS);
+            ID = Convert.ToInt32(myDS.Tables[0].Rows[0]["autoIncID"].ToString());
         }
         catch (Exception e)
         {
@@ -54,34 +55,13 @@ namespace DAL
             conn = null;
         }
 
-        try
-        {
-            string strSQL = "spGetLastAddedID";
-
-            SqlDataAdapter mySA = new SqlDataAdapter(strSQL, conn);
-            mySA.SelectCommand.CommandType = CommandType.StoredProcedure;
-            DataSet myDS = new DataSet();
-            mySA.Fill(myDS);
-
-            ID = Convert.ToInt32(myDS.Tables[0].Rows[0]["last_id_added"].ToString());
-        }
-        catch (Exception e)
-        {
-            errors.Add("Error: " + e.ToString());
-            System.Diagnostics.Debug.WriteLine("Did not successfully build a  object from SP.\n" + e);
-        }
-        finally
-        {
-            conn.Dispose();
-            conn = null;
-        }
-        //return staffID;
-        return ID;
+        
     }
 
     public static void UpdateCourseSchedule(ScheduledCourse sched, ref List<string> errors)
     {
         SqlConnection conn = new SqlConnection(connection_string);
+        
         try
         {
             string strSQL = "spUpdateScheduleInfo";

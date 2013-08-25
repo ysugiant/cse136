@@ -13,10 +13,10 @@ namespace DAL
     {
         static string connection_string = ConfigurationManager.AppSettings["dsn"];
 
-        public static int InsertMajor(string majorName, int deptID, ref List<string> errors)
+        public static void InsertMajor(string majorName, int deptID, ref List<string> errors, out int ID)
         {
+            ID = -1;
             SqlConnection conn = new SqlConnection(connection_string);
-            int ID = 0;
 
             try
             {
@@ -32,6 +32,7 @@ namespace DAL
 
                 DataSet myDS = new DataSet();
                 mySA.Fill(myDS);
+                ID = Convert.ToInt32(myDS.Tables[0].Rows[0]["autoIncID"].ToString());
             }
             catch (Exception e)
             {
@@ -43,30 +44,6 @@ namespace DAL
                 conn.Dispose();
                 conn = null;
             }
-
-            try
-            {
-                string strSQL = "spGetLastAddedID";
-
-                SqlDataAdapter mySA = new SqlDataAdapter(strSQL, conn);
-                mySA.SelectCommand.CommandType = CommandType.StoredProcedure;
-                DataSet myDS = new DataSet();
-                mySA.Fill(myDS);
-
-                ID = Convert.ToInt32(myDS.Tables[0].Rows[0]["last_id_added"].ToString());
-            }
-            catch (Exception e)
-            {
-                errors.Add("Error: " + e.ToString());
-                System.Diagnostics.Debug.WriteLine("Did not successfully build a  object from SP.\n" + e);
-            }
-            finally
-            {
-                conn.Dispose();
-                conn = null;
-            }
-            //return staffID;
-            return ID;
         }
 
         public static void UpdateMajor(int majorID, string majorName, int deptID, ref List<string> errors)

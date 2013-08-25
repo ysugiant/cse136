@@ -12,12 +12,12 @@ namespace DALTest
     /// Summary description for UnitTest1
     /// </summary>
     [TestClass]
-    class DALCourseScheduleTest2
+    public class DALCourseScheduleTest
     {
         static ScheduledCourse sCourse = null;
         static ScheduledCourse sCourse2 = null;
 
-        public DALCourseScheduleTest2()
+        public DALCourseScheduleTest()
         {
             //
             // TODO: Add constructor logic here
@@ -94,6 +94,7 @@ namespace DALTest
 
             sCourse = new ScheduledCourse();
             //sCourse.id = auto incremented
+            sCourse.course = new Course();
             sCourse.course.id = 1;
             sCourse.year = 2013;
             sCourse.quarter = "Spring";
@@ -103,12 +104,15 @@ namespace DALTest
             sCourse.timeID = 13;
 
             List<string> errors = new List<string>();
-            int sqlID = DALCourseSchedule.InsertCourseSchedule(sCourse, ref errors);
+            int ID = 0;
+            DALCourseSchedule.InsertCourseSchedule(sCourse, ref errors, out ID);
 
             Assert.AreEqual(0, errors.Count);
 
-            ScheduledCourse verifyCourseSchedule = DALCourseSchedule.GetCourseScheduleDetail(sqlID, ref errors);
-
+            ScheduledCourse verifyCourseSchedule = DALCourseSchedule.GetCourseScheduleDetail(ID, ref errors);
+            
+            System.Diagnostics.Debug.WriteLine("value of auto incremented ID is: " + ID);
+            
             Assert.AreEqual(0, errors.Count);
             Assert.AreEqual(sCourse.id, verifyCourseSchedule.id);
             Assert.AreEqual(sCourse.course.id, verifyCourseSchedule.course.id);
