@@ -36,9 +36,10 @@ namespace DAL
             mySA.SelectCommand.Parameters["@year"].Value = sched.year;
             mySA.SelectCommand.Parameters["@quarter"].Value = sched.quarter;
             mySA.SelectCommand.Parameters["@session"].Value = sched.session;
-            mySA.SelectCommand.Parameters["@schedule_day_id"].Value = sched.day;
+            mySA.SelectCommand.Parameters["@schedule_day_id"].Value = sched.dayID;
             mySA.SelectCommand.Parameters["@staff_id"].Value = sched.instr_id;
-            mySA.SelectCommand.Parameters["@schedule_time_id"].Value = sched.time;
+            mySA.SelectCommand.Parameters["@schedule_time_id"].Value = sched.timeID;
+
 
             DataSet myDS = new DataSet();
             mySA.Fill(myDS);
@@ -78,13 +79,13 @@ namespace DAL
             mySA.SelectCommand.Parameters.Add(new SqlParameter("@schedule_time_id", SqlDbType.Int));
 
             mySA.SelectCommand.Parameters["@schedule_id"].Value = sched.id;
-            mySA.SelectCommand.Parameters["@course_id"].Value = sched.course;
+            mySA.SelectCommand.Parameters["@course_id"].Value = sched.course.id;
             mySA.SelectCommand.Parameters["@year"].Value = sched.year;
             mySA.SelectCommand.Parameters["@quarter"].Value = sched.quarter;
             mySA.SelectCommand.Parameters["@session"].Value = sched.session;
-            mySA.SelectCommand.Parameters["@schedule_day_id"].Value = sched.day;
+            mySA.SelectCommand.Parameters["@schedule_day_id"].Value = sched.dayID;
             mySA.SelectCommand.Parameters["@staff_id"].Value = sched.instr_id;
-            mySA.SelectCommand.Parameters["@schedule_time_id"].Value = sched.time;
+            mySA.SelectCommand.Parameters["@schedule_time_id"].Value = sched.timeID;
 
             DataSet myDS = new DataSet();
             mySA.Fill(myDS);
@@ -92,6 +93,7 @@ namespace DAL
         catch (Exception e)
         {
             errors.Add("Error: " + e.ToString());
+            System.Diagnostics.Debug.WriteLine("value of e is: " + e);
         }
         finally
         {
@@ -165,8 +167,8 @@ namespace DAL
             course.description = myDS.Tables[0].Rows[0]["course_description"].ToString();
             sCourse.course = course;
 
-            sCourse.time = myDS.Tables[0].Rows[0]["schedule_time"].ToString();
-            sCourse.day = myDS.Tables[0].Rows[0]["schedule_day"].ToString();
+            sCourse.timeID = Convert.ToInt32(myDS.Tables[0].Rows[0]["schedule_time_id"].ToString());
+            sCourse.dayID = Convert.ToInt32(myDS.Tables[0].Rows[0]["schedule_day_id"].ToString());
             sCourse.instr_id = Convert.ToInt32(myDS.Tables[0].Rows[0]["staff_id"].ToString());
             sCourse.instructor_fName = myDS.Tables[0].Rows[0]["first_name"].ToString();
             sCourse.instructor_lName = myDS.Tables[0].Rows[0]["last_name"].ToString();

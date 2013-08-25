@@ -6,10 +6,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DAL;
 using POCO;
 
+
+//4 Tests
 namespace DALTest
 {
     /// <summary>
-    /// Summary description for UnitTest1
+    /// Course Schedule Test
     /// </summary>
     [TestClass]
     public class DALCourseScheduleTest
@@ -106,7 +108,7 @@ namespace DALTest
             List<string> errors = new List<string>();
             int ID = 0;
             DALCourseSchedule.InsertCourseSchedule(sCourse, ref errors, out ID);
-
+            sCourse.id = ID;
             Assert.AreEqual(0, errors.Count);
 
             ScheduledCourse verifyCourseSchedule = DALCourseSchedule.GetCourseScheduleDetail(ID, ref errors);
@@ -119,6 +121,7 @@ namespace DALTest
             Assert.AreEqual(sCourse.year, verifyCourseSchedule.year);
             Assert.AreEqual(sCourse.quarter, verifyCourseSchedule.quarter);
             Assert.AreEqual(sCourse.session, verifyCourseSchedule.session);
+            //System.Diagnostics.Debug.WriteLine("value of auto dayID is: " + sCourse.dayID + "; " + verifyCourseSchedule.dayID);
             Assert.AreEqual(sCourse.dayID, verifyCourseSchedule.dayID);
             Assert.AreEqual(sCourse.instr_id, verifyCourseSchedule.instr_id);
             Assert.AreEqual(sCourse.timeID, verifyCourseSchedule.timeID);
@@ -127,7 +130,8 @@ namespace DALTest
             //ScheduledCourse sCourse2 = null;
 
             sCourse2 = new ScheduledCourse();
-            //sCourse.id = auto incremented
+            sCourse2.id = sCourse.id;
+            sCourse2.course = new Course();
             sCourse2.course.id = 2;
             sCourse2.year = 2013;
             sCourse2.quarter = "Summer 1";
@@ -135,7 +139,7 @@ namespace DALTest
             sCourse2.dayID = 1;
             sCourse2.instr_id = 1;
             sCourse2.timeID = 17;
-
+            
             DALCourseSchedule.UpdateCourseSchedule(sCourse2, ref errors);
 
             Assert.AreEqual(0, errors.Count);
