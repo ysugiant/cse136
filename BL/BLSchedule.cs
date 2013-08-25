@@ -9,7 +9,7 @@ namespace BL
 {
   public static class BLSchedule
   {
-    public static List<ScheduleCourse> GetScheduleList(string year, string quarter, ref List<string> errors)
+    public static List<ScheduledCourse> GetScheduleList(string year, string quarter, ref List<string> errors)
     {
       return (DALCourseSchedule.GetScheduleList(year, quarter, ref errors));
     }

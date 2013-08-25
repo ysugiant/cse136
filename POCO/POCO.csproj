@@ -42,7 +42,7 @@
   <ItemGroup>
     <Compile Include="Grade.cs" />
     <Compile Include="StudentLevel.cs" />
-    <Compile Include="ScheduleCourse.cs" />
+    <Compile Include="ScheduledCourse.cs" />
     <Compile Include="GPA.cs" />
     <Compile Include="Major.cs" />
     <Compile Include="Department.cs" />

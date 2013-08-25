@@ -14,6 +14,6 @@ namespace SL136
   public interface ISLSchedule
   {
     [OperationContract]
-    List<ScheduleCourse> GetScheduleList(string year, string quarter, ref List<string> errors);
+    List<ScheduledCourse> GetScheduleList(string year, string quarter, ref List<string> errors);
   }
 }

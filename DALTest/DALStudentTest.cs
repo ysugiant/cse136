@@ -79,7 +79,7 @@ namespace DALTest
       student.major = 1;//JUSTIN ADDED THIS
       student.level = StudentLevel.freshman;//JUSTIN ADDED THIS
       student.status = 0;//JUSTIN ADDED THIS
-      student.enrolled = new List<ScheduleCourse>();//JUSTIN ADDED THIS
+      student.enrolled = new List<ScheduledCourse>();//JUSTIN ADDED THIS
 
       List<string> errors = new List<string>();
       DALStudent.InsertStudent(student, ref errors);
@@ -133,7 +133,7 @@ namespace DALTest
       Assert.AreEqual(student2.level, verifyStudent.level);//JUSTIN ADDED THIS
       Assert.AreEqual(student2.status, verifyStudent.status);//JUSTIN ADDED THIS
 
-      List<ScheduleCourse> scheduleList = DALCourseSchedule.GetScheduleList("", "", ref errors);
+      List<ScheduledCourse> scheduleList = DALCourseSchedule.GetScheduleList("", "", ref errors);
       Assert.AreEqual(0, errors.Count);
 
       /*

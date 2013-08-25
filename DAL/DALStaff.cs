@@ -13,8 +13,9 @@ namespace DAL
     {
         static string connection_string = ConfigurationManager.AppSettings["dsn"];
 
-        public static void InsertStaff(Staff staffMember, ref List<string> errors)
+        public static void InsertStaff(Staff staffMember, ref List<string> errors, out int newID)
         {
+            newID = -1;
             SqlConnection conn = new SqlConnection(connection_string);
             try
             {
@@ -41,6 +42,8 @@ namespace DAL
                 DataSet myDS = new DataSet();
                 mySA.Fill(myDS);
 
+                newID = Convert.ToInt32(myDS.Tables[0].Rows[0]["last_id_added"].ToString());
+
             }
             catch (Exception e)
             {
@@ -49,6 +52,7 @@ namespace DAL
             }
             finally
             {
+                //newID = Convert.ToInt32(myDS.Tables[0].Rows[0]["last_id_added"].ToString()); ;
                 conn.Dispose();
                 conn = null;
             }
@@ -89,6 +93,7 @@ namespace DAL
             catch (Exception e)
             {
                 errors.Add("Error: " + e.ToString());
+                System.Diagnostics.Debug.WriteLine(e);//JUSTIN ADDED THIS
             }
             finally
             {
@@ -189,7 +194,7 @@ namespace DAL
             catch (Exception e)
             {
                 errors.Add("Error: " + e.ToString());
-                System.Diagnostics.Debug.WriteLine(e);//JUSTIN ADDED THIS
+                System.Diagnostics.Debug.WriteLine("Did not successfully build a staff object from getStaffInfo SP.\n" + e);//JUSTIN ADDED THIS
             }
             finally
             {
@@ -306,5 +311,6 @@ namespace DAL
             }
 
         }*/
+
     }
 }

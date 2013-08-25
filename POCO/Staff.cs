@@ -30,5 +30,16 @@ namespace POCO
 
     [DataMember]
     public bool isInstructor { get; set; }
+
+    public override string ToString()
+    {
+        return id + "; " +
+                first_name + "; " +
+                last_name + "; " +
+                email + "; " +
+                password + "; " +
+                dept.id + "; " +
+                isInstructor + "; ";
+    }
   }
 }

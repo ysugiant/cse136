@@ -180,8 +180,8 @@ namespace DAL
 
             if (myDS.Tables[1] != null)
             {
-                student.enrolled = new List<ScheduleCourse>();
-                ScheduleCourse schedule = new ScheduleCourse();
+                student.enrolled = new List<ScheduledCourse>();
+                ScheduledCourse schedule = new ScheduledCourse();
                 Course course = new Course();
                 for (int i = 0; i < myDS.Tables[1].Rows.Count; i++)
                 {

@@ -108,7 +108,7 @@ namespace BLTest
       student.major = 1;
       student.level = 0;
       student.status = 0;
-      student.enrolled = new List<ScheduleCourse>();
+      student.enrolled = new List<ScheduledCourse>();
 
       List<string> errors = new List<string>();
       BLStudent.InsertStudent(student, ref errors);
@@ -129,7 +129,7 @@ namespace BLTest
       Assert.AreEqual(student.level, verifyStudent.level);
       Assert.AreEqual(student.status, verifyStudent.status);
 
-      List<ScheduleCourse> scheduleList = BLSchedule.GetScheduleList("", "", ref errors);
+      List<ScheduledCourse> scheduleList = BLSchedule.GetScheduleList("", "", ref errors);
       Assert.AreEqual(0, errors.Count);
 
       // enroll all available scheduled courses for this student

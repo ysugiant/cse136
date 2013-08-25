@@ -69,34 +69,40 @@ namespace DALTest
         {
             // Creating instructor to insert into database
             Staff instructor = new Instructor();
-            instructor.id = 123456; //Guid.NewGuid().ToString().Substring(0, 20);
+            //instructor.id = 123456; //Guid.NewGuid().ToString().Substring(0, 20);
             instructor.first_name = "first";
             instructor.last_name = " last";
             instructor.email = "myemail@ucsd.edu";
             instructor.password = "pass1234";
-            Department dept = new Department();
-            dept.id = 1;
-
-            instructor.dept = dept; 
+            instructor.dept = new Department();
+            instructor.dept.id = 1;
             instructor.isInstructor = true;
+            //System.Diagnostics.Debug.WriteLine("Instructor info: " + instructor.ToString());
 
             //========================================BEGIN STAFF INSERT TEST=============================================
             List<string> errors = new List<string>();
-            DALStaff.InsertStaff(instructor, ref errors);
-            Assert.AreEqual(0, errors.Count);
-            System.Diagnostics.Debug.WriteLine("Instructor info: " + instructor.ToString());
 
-            Staff verifyInstructor = DALStaff.GetStaffDetail(instructor.id, ref errors);
+            int newInstrID;
+            DALStaff.InsertStaff(instructor, ref errors, out newInstrID);
+            Assert.AreEqual(0, errors.Count);
+            instructor.id = newInstrID;
+            System.Diagnostics.Debug.WriteLine("Retrieved instructor's id: " + newInstrID);
+            System.Diagnostics.Debug.WriteLine("Inserted instructor's id: " + instructor.id);
+            //=======================================BEGIN STAFF GET TEST=================================================
+            
+            Staff verifyInstructor = DALStaff.GetStaffDetail(newInstrID, ref errors);
+            
             //Assert.AreEqual(chair.ToString(),verifychair.ToString());//JUSTIN ADDED THIS
             Assert.AreEqual(0, errors.Count);
 
-            System.Diagnostics.Debug.WriteLine("" + verifyInstructor.id + " " + instructor.id);
+
+            //System.Diagnostics.Debug.WriteLine("" + verifyInstructor.id + " " + instructor.id);
             Assert.AreEqual(instructor.id, verifyInstructor.id);
             Assert.AreEqual(instructor.first_name, verifyInstructor.first_name);
             Assert.AreEqual(instructor.last_name, verifyInstructor.last_name);
             Assert.AreEqual(instructor.email, verifyInstructor.email);
             Assert.AreEqual(instructor.password, verifyInstructor.password);
-            Assert.AreEqual(instructor.dept, verifyInstructor.dept);// NOT SURE ABOUT THIS YET
+            Assert.AreEqual(instructor.dept.id, verifyInstructor.dept.id);// NOT SURE ABOUT THIS YET
             Assert.AreEqual(instructor.isInstructor, verifyInstructor.isInstructor);
 
             //===================================== BEGIN STAFF UPDATE CHECK ==========================================
@@ -107,7 +113,7 @@ namespace DALTest
             staffMember2.email = "myemail2@ucsd.edu";
             staffMember2.password = "pass1234";
             staffMember2.dept = new Department();
-
+            staffMember2.dept.id = 1;
             DALStaff.UpdateStaff(staffMember2, ref errors);
 
             verifyInstructor = DALStaff.GetStaffDetail(staffMember2.id, ref errors);
@@ -117,7 +123,7 @@ namespace DALTest
             Assert.AreEqual(staffMember2.last_name, verifyInstructor.last_name);
             Assert.AreEqual(staffMember2.email, verifyInstructor.email);
             Assert.AreEqual(staffMember2.password, verifyInstructor.password);
-            Assert.AreEqual(staffMember2.dept, verifyInstructor.dept);// NOT SURE ABOUT THIS YET
+            Assert.AreEqual(staffMember2.dept.id, verifyInstructor.dept.id);// NOT SURE ABOUT THIS YET
 
             //List<ScheduleCourse> scheduleList = DALSchedule.GetScheduleList("", "", ref errors);
             Assert.AreEqual(0, errors.Count);

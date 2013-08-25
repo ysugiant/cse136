@@ -7,7 +7,7 @@ using System.Runtime.Serialization; // this is required
 namespace POCO
 {
   [DataContract]
-  public class ScheduleCourse
+  public class ScheduledCourse
   {
     [DataMember]
     public int id { get; set; }

@@ -10,6 +10,17 @@ namespace POCO
     public class Instructor : Staff
     {
         [DataMember]
-        public List<ScheduleCourse> courseSchedule;
+        public List<ScheduledCourse> courseSchedule;
+
+        public override string ToString()
+        {
+            return id + "; " +
+                    first_name + "; " +
+                    last_name + "; " +
+                    email + "; " +
+                    password + "; " +
+                    dept.id + "; " +
+                    isInstructor + "; ";
+        }
     }
 }

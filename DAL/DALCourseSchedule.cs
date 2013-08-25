@@ -13,10 +13,10 @@ namespace DAL
   {
     static string connection_string = ConfigurationManager.AppSettings["dsn"];
 
-    public static List<ScheduleCourse> GetScheduleList(string year, string quarter, ref List<string> errors)
+    public static List<ScheduledCourse> GetScheduleList(string year, string quarter, ref List<string> errors)
     {
       SqlConnection conn = new SqlConnection(connection_string);
-      List<ScheduleCourse> scheduleList = new List<ScheduleCourse>();
+      List<ScheduledCourse> scheduleList = new List<ScheduledCourse>();
 
       try
       {
@@ -46,7 +46,7 @@ namespace DAL
 
         for (int i = 0; i < myDS.Tables[0].Rows.Count; i++)
         {
-          ScheduleCourse schedule = new ScheduleCourse();
+          ScheduledCourse schedule = new ScheduledCourse();
           schedule.id = Convert.ToInt32(myDS.Tables[0].Rows[i]["schedule_id"].ToString());
           schedule.year = Convert.ToInt32(myDS.Tables[0].Rows[i]["year"].ToString());
           schedule.quarter = myDS.Tables[0].Rows[i]["quarter"].ToString();

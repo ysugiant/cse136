@@ -44,7 +44,7 @@ namespace POCO
     public int major { get; set; }//JUSTIN ADDED THIS
     
     [DataMember]
-    public List<ScheduleCourse> enrolled;//JUSTIN ADDED THIS
+    public List<ScheduledCourse> enrolled;//JUSTIN ADDED THIS
 
     public override string ToString()
     {
