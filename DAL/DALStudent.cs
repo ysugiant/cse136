@@ -185,7 +185,7 @@ namespace DAL
                 Course course = new Course();
                 for (int i = 0; i < myDS.Tables[1].Rows.Count; i++)
                 {
-                    course.id = myDS.Tables[1].Rows[i]["course_id"].ToString();
+                    course.id = Convert.ToInt32(myDS.Tables[1].Rows[i]["course_id"]);
                     course.title = myDS.Tables[1].Rows[i]["course_title"].ToString();
                     course.description = myDS.Tables[1].Rows[i]["course_description"].ToString();
                     course.level = (CourseLevel)Enum.Parse(typeof(CourseLevel), myDS.Tables[0].Rows[0]["level"].ToString());//JUSTIN ADDED THIS

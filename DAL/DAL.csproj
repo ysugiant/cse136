@@ -42,14 +42,12 @@
   <ItemGroup>
     <Compile Include="DALAuth.cs" />
     <Compile Include="DALCourse.cs" />
-    <Compile Include="DALCourseRule.cs" />
     <Compile Include="DALCourseSchedule.cs" />
     <Compile Include="DALDepartment.cs" />
     <Compile Include="DALEnrollment.cs" />
     <Compile Include="DALMajor.cs" />
     <Compile Include="DALScheduleDay.cs" />
     <Compile Include="DALScheduleTime.cs" />
-    <Compile Include="DALStaff.cs" />
     <Compile Include="DALStudent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

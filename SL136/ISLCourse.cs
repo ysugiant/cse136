@@ -12,7 +12,8 @@ namespace SL136
   [ServiceContract]
   public interface ISLCourse
   {
+    //should pass int the error to test
     [OperationContract]
-    List<Course> GetCourseList();
+    List<Course> GetCourseList(ref List<string> errors);
   }
 }
