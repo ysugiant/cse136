@@ -9,7 +9,7 @@ using System.Data; // must add this...
 
 namespace DAL
 {
-    class DALMajor
+    public static class DALMajor
     {
         static string connection_string = ConfigurationManager.AppSettings["dsn"];
 
@@ -69,6 +69,8 @@ namespace DAL
             catch (Exception e)
             {
                 errors.Add("Error: " + e.ToString());
+                System.Diagnostics.Debug.WriteLine("Error retrieving Update major data..." + e);
+
             }
             finally
             {
@@ -105,10 +107,10 @@ namespace DAL
             }
         }
 
-        public static string GetMajorDetail(int id, ref List<string> errors)
+        public static Major GetMajorDetail(int id, ref List<string> errors)
         {
             SqlConnection conn = new SqlConnection(connection_string);
-            string result = null;
+            Major major = new Major();
 
             try
             {
@@ -126,7 +128,8 @@ namespace DAL
                 if (myDS.Tables[0].Rows.Count == 0)
                     return null;
 
-                result = myDS.Tables[0].Rows[0]["major_name"].ToString();
+                major.majorName = myDS.Tables[0].Rows[0]["major_name"].ToString();
+                major.deptId = Convert.ToInt32(myDS.Tables[0].Rows[0]["dept_id"]);
             }
             catch (Exception e)
             {
@@ -139,7 +142,7 @@ namespace DAL
                 conn = null;
             }
 
-            return result;
+            return major;
         }
 
         public static List<Tuple<string, string>> GetMajorList(ref List<string> errors)

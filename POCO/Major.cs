@@ -15,6 +15,9 @@ namespace POCO
     [DataMember]
     public string majorName { get; set; }
 
+    [DataMember]
+    public int deptId { get; set; }
+
     public override string ToString()
     {
         return id + ";" +
