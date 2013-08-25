@@ -85,7 +85,7 @@ namespace DALTest
         #endregion
 
         [TestMethod]
-        public void InsertCourseScheduleTest()
+        public void CourseScheduleTest()
         {
             ScheduledCourse sCourse = null;
             ScheduledCourse sCourse2 = null;
