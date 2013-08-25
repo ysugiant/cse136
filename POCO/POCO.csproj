@@ -40,8 +40,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Advisor.cs" />
-    <Compile Include="Chair.cs" />
     <Compile Include="Grade.cs" />
     <Compile Include="StudentLevel.cs" />
     <Compile Include="ScheduleCourse.cs" />

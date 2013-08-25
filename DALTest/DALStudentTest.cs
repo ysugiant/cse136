@@ -83,7 +83,6 @@ namespace DALTest
 
       List<string> errors = new List<string>();
       DALStudent.InsertStudent(student, ref errors);
-
       Assert.AreEqual(0, errors.Count);
 
       Student verifyStudent = DALStudent.GetStudentDetail(student.id, ref errors);
@@ -137,6 +136,7 @@ namespace DALTest
       List<ScheduleCourse> scheduleList = DALCourseSchedule.GetScheduleList("", "", ref errors);
       Assert.AreEqual(0, errors.Count);
 
+      /*
       // enroll all available scheduled courses for this student
       for (int i = 0; i < scheduleList.Count; i++)
       {
@@ -151,7 +151,7 @@ namespace DALTest
         DALStudent.DropEnrolledSchedule(student.id, scheduleList[i].id, ref errors);
         Assert.AreEqual(0, errors.Count);
       }
-
+      */
       DALStudent.DeleteStudent(student.id, ref errors);
 
       Student verifyEmptyStudent = DALStudent.GetStudentDetail(student.id, ref errors);
