@@ -178,7 +178,7 @@ namespace DAL
             sCourse.session = myDS.Tables[0].Rows[0]["session"].ToString();
 
             Course course = new Course();
-            course.id = myDS.Tables[0].Rows[0]["course_id"].ToString();
+            course.id = Convert.ToInt32(myDS.Tables[0].Rows[0]["course_id"].ToString());
             course.units = Convert.ToInt32(myDS.Tables[0].Rows[0]["units"].ToString());
             course.title = myDS.Tables[0].Rows[0]["course_title"].ToString();            
             course.level = (CourseLevel)Enum.Parse(typeof(CourseLevel), myDS.Tables[0].Rows[0]["course_level"].ToString());//JUSTIN ADDED THIS
@@ -252,7 +252,7 @@ namespace DAL
           schedule.course =
             new Course
             {
-              id = myDS.Tables[0].Rows[i]["course_id"].ToString(),
+              id = Convert.ToInt32(myDS.Tables[0].Rows[i]["course_id"].ToString()),
               title = myDS.Tables[0].Rows[i]["course_title"].ToString(),
               level = (CourseLevel)Enum.Parse(typeof(CourseLevel), myDS.Tables[0].Rows[i]["course_level"].ToString()),//JUSTIN ADDED THIS
               description = myDS.Tables[0].Rows[i]["course_description"].ToString(),

@@ -11,7 +11,7 @@ namespace BL
   {
     public static List<ScheduledCourse> GetScheduleList(string year, string quarter, ref List<string> errors)
     {
-      return (DALCourseSchedule.GetScheduleList(year, quarter, ref errors));
+      return (DALCourseSchedule.GetCourseScheduleList(year, quarter, ref errors));
     }
   }
 }

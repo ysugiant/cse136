@@ -133,7 +133,7 @@ namespace DALTest
       Assert.AreEqual(student2.level, verifyStudent.level);//JUSTIN ADDED THIS
       Assert.AreEqual(student2.status, verifyStudent.status);//JUSTIN ADDED THIS
 
-      List<ScheduledCourse> scheduleList = DALCourseSchedule.GetScheduleList("", "", ref errors);
+      List<ScheduledCourse> scheduleList = DALCourseSchedule.GetCourseScheduleList("", "", ref errors);
       Assert.AreEqual(0, errors.Count);
 
       /*

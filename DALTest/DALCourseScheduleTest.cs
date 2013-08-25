@@ -94,7 +94,7 @@ namespace DALTest
 
             sCourse = new ScheduledCourse();
             //sCourse.id = auto incremented
-            sCourse.course.id = "1";
+            sCourse.course.id = 1;
             sCourse.year = 2013;
             sCourse.quarter = "Spring";
             sCourse.session = "A00";
@@ -127,7 +127,7 @@ namespace DALTest
 
             sCourse2 = new ScheduledCourse();
             //sCourse.id = auto incremented
-            sCourse2.course.id = "2";
+            sCourse2.course.id = 2;
             sCourse2.year = 2013;
             sCourse2.quarter = "Summer 1";
             sCourse2.session = "A00";
