@@ -14,15 +14,12 @@ namespace DAL
         static string connection_string = ConfigurationManager.AppSettings["dsn"];
 
         //Done By student
-        public static Transcript GetEnrollment(string id, ref List<string> errors)
+        public static List<Grade> GetEnrollment(string id, ref List<string> errors)
         {
             SqlConnection conn = new SqlConnection(connection_string);
-            Transcript trans = new Transcript();
-
+            List<Grade> grade = null;
             try
             {
-                //fill student info
-                trans.student = DALStudent.GetStudentDetail(id, ref errors);
                 string strSQL = "spGetEnrollmentList";
 
                 SqlDataAdapter mySA = new SqlDataAdapter(strSQL, conn);
@@ -38,20 +35,24 @@ namespace DAL
 
                 if (myDS.Tables[0].Rows.Count == 0)
                     return null;
+                grade = new List<Grade>();
 
                 for (int i = 0; i < myDS.Tables[0].Rows.Count; i++)
                 {
                     Grade gr = new Grade();
                     gr.year = Convert.ToInt32(myDS.Tables[0].Rows[i]["year"].ToString());
                     gr.quarter = myDS.Tables[0].Rows[i]["quarter"].ToString();
+                    gr.grade = myDS.Tables[0].Rows[i]["grade"].ToString();
                     gr.course =
                       new Course
                       {
-                          id = Convert.ToInt32(myDS.Tables[0].Rows[i]["course_id"]),
-                          title = myDS.Tables[0].Rows[i]["course_title"].ToString(),
-                          description = myDS.Tables[0].Rows[i]["course_description"].ToString(),
+                        id = Convert.ToInt32(myDS.Tables[0].Rows[i]["course_id"]),
+                        title = myDS.Tables[0].Rows[i]["course_title"].ToString(),
+                        level = (CourseLevel)Enum.Parse(typeof(CourseLevel), myDS.Tables[0].Rows[i]["course_level"].ToString()),
+                        description = myDS.Tables[0].Rows[i]["course_description"].ToString(),
+                        units = Convert.ToInt32(myDS.Tables[0].Rows[i]["units"])
                       };
-                    trans.grade.Add(gr);
+                    grade.Add(gr);
                 }
             }
             catch (Exception e)
@@ -64,7 +65,7 @@ namespace DAL
                 conn = null;
             }
 
-            return trans;
+            return grade;
         }
 
         //Done by student
