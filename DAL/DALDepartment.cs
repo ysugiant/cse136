@@ -127,6 +127,7 @@ namespace DAL
             return dept;
         }
 
+
         public static void DeleteDepartment(string name, ref List<string> errors)
         {
             SqlConnection conn = new SqlConnection(connection_string);

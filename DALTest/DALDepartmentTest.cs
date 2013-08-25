@@ -86,7 +86,7 @@ namespace DALTest
         }
 
         [TestMethod]
-        public void InsertUpdateDepartmentTest()
+        public void UpdateDepartmentTest()
         {
             Department dept = new Department();
             dept.deptName = "Test Department";
@@ -114,6 +114,53 @@ namespace DALTest
 
             DALDepartment.DeleteDepartment(dept.deptName, ref errors);
 
+
+        }
+
+        [TestMethod]
+        public void GetDetailDepartmentTest()
+        {
+            Department dept = new Department();
+            dept.deptName = "Test Department";
+            dept.chairID = 1;
+
+            List<string> errors = new List<string>();
+            DALDepartment.InsertDepartment(dept, ref errors);
+
+            Assert.AreEqual(0, errors.Count);
+            Department verifyDept = DALDepartment.GetDepartmentDetail(dept.deptName, ref errors);
+            dept.id = verifyDept.id;
+            Assert.AreEqual(dept.ToString(), verifyDept.ToString());
+            Assert.AreEqual(0, errors.Count);
+            Assert.AreEqual(dept.ToString(), dept.ToString());
+
+            DALDepartment.DeleteDepartment(dept.deptName, ref errors);
+
+        }
+
+        [TestMethod]
+        public void DeleteDepartmentTest()
+        {
+            Department dept = new Department();
+            dept.deptName = "Test Department";
+            dept.chairID = 1;
+
+            List<string> errors = new List<string>();
+            DALDepartment.InsertDepartment(dept, ref errors);
+
+            Assert.AreEqual(0, errors.Count);
+            Department verifyDept = DALDepartment.GetDepartmentDetail(dept.deptName, ref errors);
+            dept.id = verifyDept.id;
+            Assert.AreEqual(dept.ToString(), verifyDept.ToString());
+            Assert.AreEqual(0, errors.Count);
+            Assert.AreEqual(dept.ToString(), dept.ToString());
+
+            DALDepartment.DeleteDepartment(dept.deptName, ref errors);
+            Assert.AreEqual(0, errors.Count);
+
+            verifyDept = DALDepartment.GetDepartmentDetail(dept.deptName, ref errors);
+            Assert.AreEqual(0, errors.Count);
+            Assert.AreEqual(verifyDept, null);
 
         }
     }
