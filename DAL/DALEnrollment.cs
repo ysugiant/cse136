@@ -49,7 +49,7 @@ namespace DAL
                     gr.course =
                       new Course
                       {
-                          id = myDS.Tables[0].Rows[i]["course_id"].ToString(),
+                          id = Convert.ToInt32(myDS.Tables[0].Rows[i]["course_id"]),
                           title = myDS.Tables[0].Rows[i]["course_title"].ToString(),
                           description = myDS.Tables[0].Rows[i]["course_description"].ToString(),
                       };

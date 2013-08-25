@@ -10,9 +10,10 @@ namespace BL
 {
   public class BLCourse
   {
-    public static List<Course> GetCourseList()
+    //should pass by the default list ref errors 
+    public static List<Course> GetCourseList(ref List<string> errors)
     {
-      return (DALCourse.GetCourseList());
+      return (DALCourse.GetCourseList(ref errors));
     }
 
   }
