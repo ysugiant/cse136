@@ -14,9 +14,6 @@ namespace DALTest
     [TestClass]
     public class DALCourseScheduleTest
     {
-        static ScheduledCourse sCourse = null;
-        static ScheduledCourse sCourse2 = null;
-
         public DALCourseScheduleTest()
         {
             //
@@ -90,6 +87,9 @@ namespace DALTest
         [TestMethod]
         public void InsertCourseScheduleTest()
         {
+            ScheduledCourse sCourse = null;
+            ScheduledCourse sCourse2 = null;
+            //INSERT TEST
             //ScheduledCourse sCourse = null;
 
             sCourse = new ScheduledCourse();
@@ -122,11 +122,8 @@ namespace DALTest
             Assert.AreEqual(sCourse.dayID, verifyCourseSchedule.dayID);
             Assert.AreEqual(sCourse.instr_id, verifyCourseSchedule.instr_id);
             Assert.AreEqual(sCourse.timeID, verifyCourseSchedule.timeID);
-        }
-
-        [TestMethod]
-        public void UpdateCourseScheduleTest()
-        {
+      
+            //UPDATE TEST
             //ScheduledCourse sCourse2 = null;
 
             sCourse2 = new ScheduledCourse();
@@ -139,12 +136,11 @@ namespace DALTest
             sCourse2.instr_id = 1;
             sCourse2.timeID = 17;
 
-            List<string> errors = new List<string>();
             DALCourseSchedule.UpdateCourseSchedule(sCourse2, ref errors);
 
             Assert.AreEqual(0, errors.Count);
 
-            ScheduledCourse verifyCourseSchedule = DALCourseSchedule.GetCourseScheduleDetail(sCourse2.id, ref errors);
+            verifyCourseSchedule = DALCourseSchedule.GetCourseScheduleDetail(sCourse2.id, ref errors);
 
             Assert.AreEqual(0, errors.Count);
             Assert.AreEqual(sCourse2.id, verifyCourseSchedule.id);
@@ -155,12 +151,8 @@ namespace DALTest
             Assert.AreEqual(sCourse2.dayID, verifyCourseSchedule.dayID);
             Assert.AreEqual(sCourse2.instr_id, verifyCourseSchedule.instr_id);
             Assert.AreEqual(sCourse2.timeID, verifyCourseSchedule.timeID);
-        }
-
-        [TestMethod]
-        public void DeleteCourseScheduleTest()
-        {
-            List<string> errors = new List<string>();
+            
+            //DELETE  TEST CASE
             DALCourseSchedule.DeleteCourseSchedule(sCourse2.id, ref errors);
 
             ScheduledCourse verifyEmptyCourseSchedule = DALCourseSchedule.GetCourseScheduleDetail(sCourse2.id, ref errors);
