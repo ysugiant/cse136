@@ -65,7 +65,7 @@ namespace DALTest
         ///A test for InsertStudent
         ///</summary>
         [TestMethod]
-        public void InsertGetDeleteScheduleTimeTest()
+        public void ScheduleTimeTest()
         {
             string time = "23.00-24.00";
 
@@ -91,22 +91,17 @@ namespace DALTest
 
             DALScheduleTime.DeleteScheduleTime(time, ref errors);
 
-        }
+        //GET TEST
+            time = "23.00-24.00";
 
-        [TestMethod]
-        public void GetScheduleTimeTest()
-        {
-            string time = "23.00-24.00";
-
-            List<string> errors = new List<string>();
             DALScheduleTime.InsertScheduleTime(time, ref errors);
 
             Assert.AreEqual(0, errors.Count);
-            List<string> listtime = DALScheduleTime.GetScheduleTimeList(ref errors);
+            listtime = DALScheduleTime.GetScheduleTimeList(ref errors);
 
             System.Diagnostics.Debug.WriteLine(listtime.Count);
 
-            bool x = false;
+            x = false;
             for (int i = 0; i < listtime.Count; i++)
             {
                 System.Diagnostics.Debug.WriteLine(listtime[i]);
@@ -120,22 +115,17 @@ namespace DALTest
 
             DALScheduleTime.DeleteScheduleTime(time, ref errors);
 
-        }
+        //DELETE TEST
+            time = "23.00-24.00";
 
-        [TestMethod]
-        public void DeleteScheduleTimeTest()
-        {
-            string time = "23.00-24.00";
-
-            List<string> errors = new List<string>();
             DALScheduleTime.InsertScheduleTime(time, ref errors);
 
             Assert.AreEqual(0, errors.Count);
-            List<string> listtime = DALScheduleTime.GetScheduleTimeList(ref errors);
+            listtime = DALScheduleTime.GetScheduleTimeList(ref errors);
 
             System.Diagnostics.Debug.WriteLine(listtime.Count);
 
-            bool x = false;
+            x = false;
             for (int i = 0; i < listtime.Count; i++)
             {
                 System.Diagnostics.Debug.WriteLine(listtime[i]);
@@ -145,7 +135,6 @@ namespace DALTest
             }
             Assert.AreEqual(x, true);
             Assert.AreEqual(0, errors.Count);
-
 
             DALScheduleTime.DeleteScheduleTime(time, ref errors);
             Assert.AreEqual(0, errors.Count);

@@ -65,7 +65,7 @@ namespace DALTest
         ///A test for InsertStaff
         ///</summary>
         [TestMethod]
-        public void InsertStaffTest()
+        public void StaffTest()
         {
             // Creating instructor to insert into database
             Staff instructor = new Instructor();

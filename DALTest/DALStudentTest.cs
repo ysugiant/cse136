@@ -65,7 +65,7 @@ namespace DALTest
     ///A test for InsertStudent
     ///</summary>
     [TestMethod]
-    public void InsertStudentTest()
+    public void StudentTest()
     {
       Student student = new Student();
       student.first_name = "first";

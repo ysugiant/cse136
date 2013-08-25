@@ -65,7 +65,7 @@ namespace DALTest
         ///A test for InsertStudent
         ///</summary>
         [TestMethod]
-        public void InsertDepartmentTest()
+        public void DepartmentTest()
         {
             Department dept = new Department();
             dept.deptName = "Test Department";
@@ -83,22 +83,17 @@ namespace DALTest
 
             DALDepartment.DeleteDepartment(dept.deptName, ref errors);
 
-        }
-
-        [TestMethod]
-        public void UpdateDepartmentTest()
-        {
-            Department dept = new Department();
+        //UPDATE TEST
+            dept = new Department();
             dept.deptName = "Test Department";
             dept.chairID = 1;
-
-            List<string> errors = new List<string>();
+            
             DALDepartment.InsertDepartment(dept, ref errors);
 
             Assert.AreEqual(0, errors.Count);
 
             //updating
-            Department verifyDept = DALDepartment.GetDepartmentDetail(dept.deptName, ref errors);
+            verifyDept = DALDepartment.GetDepartmentDetail(dept.deptName, ref errors);
             dept.id = verifyDept.id;
             dept.deptName = "Te Department";
             dept.chairID = 1;
@@ -114,21 +109,15 @@ namespace DALTest
 
             DALDepartment.DeleteDepartment(dept.deptName, ref errors);
 
-
-        }
-
-        [TestMethod]
-        public void GetDetailDepartmentTest()
-        {
-            Department dept = new Department();
+         //GET TEST
+            dept = new Department();
             dept.deptName = "Test Department";
             dept.chairID = 1;
 
-            List<string> errors = new List<string>();
             DALDepartment.InsertDepartment(dept, ref errors);
 
             Assert.AreEqual(0, errors.Count);
-            Department verifyDept = DALDepartment.GetDepartmentDetail(dept.deptName, ref errors);
+            verifyDept = DALDepartment.GetDepartmentDetail(dept.deptName, ref errors);
             dept.id = verifyDept.id;
             Assert.AreEqual(dept.ToString(), verifyDept.ToString());
             Assert.AreEqual(0, errors.Count);
@@ -136,20 +125,15 @@ namespace DALTest
 
             DALDepartment.DeleteDepartment(dept.deptName, ref errors);
 
-        }
-
-        [TestMethod]
-        public void DeleteDepartmentTest()
-        {
-            Department dept = new Department();
+        //DELETE TEST
+            dept = new Department();
             dept.deptName = "Test Department";
             dept.chairID = 1;
 
-            List<string> errors = new List<string>();
             DALDepartment.InsertDepartment(dept, ref errors);
 
             Assert.AreEqual(0, errors.Count);
-            Department verifyDept = DALDepartment.GetDepartmentDetail(dept.deptName, ref errors);
+            verifyDept = DALDepartment.GetDepartmentDetail(dept.deptName, ref errors);
             dept.id = verifyDept.id;
             Assert.AreEqual(dept.ToString(), verifyDept.ToString());
             Assert.AreEqual(0, errors.Count);

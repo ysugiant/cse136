@@ -65,7 +65,7 @@ namespace DALTest
         ///A test for InsertStudent
         ///</summary>
         [TestMethod]
-        public void InsertScheduleDayTest()
+        public void ScheduleDayTest()
         {
             string day = "TestDay";
 
@@ -91,22 +91,17 @@ namespace DALTest
 
             DALScheduleDay.DeleteScheduleDay(day, ref errors);
 
-        }
+            //TEST
+            day = "TestDay";
 
-        [TestMethod]
-        public void GetScheduleDayTest()
-        {
-            string day = "TestDay";
-
-            List<string> errors = new List<string>();
             DALScheduleDay.InsertScheduleDay(day, ref errors);
 
             Assert.AreEqual(0, errors.Count);
-            List<string> listday = DALScheduleDay.GetScheduleDayList(ref errors);
+            listday = DALScheduleDay.GetScheduleDayList(ref errors);
 
             System.Diagnostics.Debug.WriteLine(listday.Count);
 
-            bool x = false;
+            x = false;
             for (int i = 0; i < listday.Count; i++)
             {
                 System.Diagnostics.Debug.WriteLine(listday[i]);
@@ -120,22 +115,18 @@ namespace DALTest
 
             DALScheduleDay.DeleteScheduleDay(day, ref errors);
 
-        }
+        //DELETE TEST
+            day = "TestDay";
 
-        [TestMethod]
-        public void DeleteScheduleDayTest()
-        {
-            string day = "TestDay";
-
-            List<string> errors = new List<string>();
+            errors = new List<string>();
             DALScheduleDay.InsertScheduleDay(day, ref errors);
 
             Assert.AreEqual(0, errors.Count);
-            List<string> listday = DALScheduleDay.GetScheduleDayList(ref errors);
+            listday = DALScheduleDay.GetScheduleDayList(ref errors);
 
             System.Diagnostics.Debug.WriteLine(listday.Count);
 
-            bool x = false;
+            x = false;
             for (int i = 0; i < listday.Count; i++)
             {
                 System.Diagnostics.Debug.WriteLine(listday[i]);

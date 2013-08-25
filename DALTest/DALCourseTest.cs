@@ -65,7 +65,7 @@ namespace DALTest
         ///A test for InsertStudent
         ///</summary>
         [TestMethod]
-        public void InsertCourseTest()
+        public void CourseTest()
         {
             //System.Diagnostics.Debug.WriteLine("Yay!");
             //student has 11 fields, and one list of <Schedule>'s
