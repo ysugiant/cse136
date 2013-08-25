@@ -7,26 +7,28 @@ using System.Runtime.Serialization; // this is required
 namespace POCO
 {
  
-  public interface Staff
+  public class Staff
   {
 
     [DataMember]
-    int id { get; set; }
+    public int id { get; set; }
 
     [DataMember]
-    string first_name { get; set; }
+    public string first_name { get; set; }
 
     [DataMember]
-    string last_name { get; set; }
+    public string last_name { get; set; }
 
     [DataMember]
-    string email { get; set; }
+    public string email { get; set; }
 
     [DataMember]
-    string password { get; set; }
+    public string password { get; set; }
 
     [DataMember]
-    Department dept { get; set; }
+    public Department dept { get; set; }
 
+    [DataMember]
+    public bool isInstructor { get; set; }
   }
 }
