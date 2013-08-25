@@ -70,6 +70,7 @@ namespace DAL
       catch (Exception e)
       {
         errors.Add("Error: " + e.ToString());
+        System.Diagnostics.Debug.WriteLine("Error in GetScheduleList \n" + e);
       }
       finally
       {
