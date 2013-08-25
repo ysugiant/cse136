@@ -14,7 +14,7 @@ namespace DAL
     {
         static string connection_string = ConfigurationManager.AppSettings["dsn"];
 
-        public static void InsertScheduleTime(string day, ref List<string> errors)
+        public static void InsertScheduleDay(string day, ref List<string> errors)
         {
             SqlConnection conn = new SqlConnection(connection_string);
             try
@@ -46,11 +46,11 @@ namespace DAL
         public static List<string> GetScheduleDayList(ref List<string> errors)
         {
             SqlConnection conn = new SqlConnection(connection_string);
-            List<string> time = null;
+            List<string> day = new List<string>();
 
             try
             {
-                string strSQL = "spGetScheduleDayInfo";
+                string strSQL = "spGetScheduleDayList";
 
                 SqlDataAdapter mySA = new SqlDataAdapter(strSQL, conn);
                 mySA.SelectCommand.CommandType = CommandType.StoredProcedure;
@@ -61,11 +61,9 @@ namespace DAL
                 if (myDS.Tables[0].Rows.Count == 0)
                     return null;
 
-                time = new List<string>();
-
                 for (int i = 0; i < myDS.Tables[0].Rows.Count; i++)
                 {
-                    time.Add(myDS.Tables[0].Rows[i]["schedule_day"].ToString());
+                    day.Add(myDS.Tables[0].Rows[i]["schedule_day"].ToString());
                 }
 
             }
@@ -79,10 +77,10 @@ namespace DAL
                 conn = null;
             }
 
-            return time;
+            return day;
         }
 
-        public static void DeleteScheduleTime(string day, ref List<string> errors)
+        public static void DeleteScheduleDay(string day, ref List<string> errors)
         {
             SqlConnection conn = new SqlConnection(connection_string);
             try
