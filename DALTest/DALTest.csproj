@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="DALCourseTest.cs" />
     <Compile Include="DALDepartmentTest.cs" />
+    <Compile Include="DALEnrollmentTest.cs" />
     <Compile Include="DALMajorTest.cs" />
     <Compile Include="DALScheduleDayTest.cs" />
     <Compile Include="DALScheduleTimeTest.cs" />

@@ -87,7 +87,7 @@ namespace DALTest
 
             List<ScheduleCourse> scheduleList = DALCourseSchedule.GetScheduleList("", "", ref errors);
             Assert.AreEqual(0, errors.Count);
-
+            System.Diagnostics.Debug.WriteLine("pass1");
             // enroll all available scheduled courses for this student
             for (int i = 0; i < scheduleList.Count; i++)
             {
@@ -95,13 +95,25 @@ namespace DALTest
                 DALEnrollment.InsertEnrollment(student.id, scheduleList[i].id, ref errors);
                 Assert.AreEqual(0, errors.Count);
             }
-
-            Transcript trans = DALEnrollment.GetEnrollment(student.id, ref errors);
-
-            /*for (int i = 0; i < trans.grade.Count; i++)
+            
+            //updating grade
+            for (int i = 0; i < scheduleList.Count; i++)
             {
-                Assert.AreEqual(trans.grade[i].course, scheduleList[i].id);
-            }*/
+                DALEnrollment.UpdateEnrollment(student.id, scheduleList[i].id, "Aplus", ref errors);
+                Assert.AreEqual(0, errors.Count);
+            }
+
+            //get enroll data
+            List<Grade> trans = DALEnrollment.GetEnrollment(student.id, ref errors);
+            Assert.AreEqual(0, errors.Count);
+
+            //compare the result
+            for (int i = 0; i < trans.Count; i++)
+            {
+                System.Diagnostics.Debug.WriteLine(trans[i].grade);
+                Assert.AreEqual(trans[i].grade, "Aplus");
+            }
+            System.Diagnostics.Debug.WriteLine("pass5");
 
             // drop all available scheduled courses for this student
             for (int i = 0; i < scheduleList.Count; i++)
