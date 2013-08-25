@@ -46,11 +46,11 @@ namespace DAL
         public static List<string> GetScheduleTimeList(ref List<string> errors)
         {
             SqlConnection conn = new SqlConnection(connection_string);
-            List<string> time = null;
+            List<string> time = new List<string>();
 
             try
             {
-                string strSQL = "spGetScheduleTimeInfo";
+                string strSQL = "spGetScheduleTimeList";
 
                 SqlDataAdapter mySA = new SqlDataAdapter(strSQL, conn);
                 mySA.SelectCommand.CommandType = CommandType.StoredProcedure;
@@ -60,8 +60,6 @@ namespace DAL
 
                 if (myDS.Tables[0].Rows.Count == 0)
                     return null;
-
-                time = new List<string>();
 
                 for (int i = 0; i < myDS.Tables[0].Rows.Count; i++)
                 {
