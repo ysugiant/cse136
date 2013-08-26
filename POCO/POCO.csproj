@@ -40,7 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Grade.cs" />
+    <Compile Include="Enrollment.cs" />
     <Compile Include="StudentLevel.cs" />
     <Compile Include="ScheduledCourse.cs" />
     <Compile Include="GPA.cs" />

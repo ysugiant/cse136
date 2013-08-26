@@ -95,7 +95,7 @@ namespace DALTest
                 DALEnrollment.InsertEnrollment(student.id, scheduleList[i].id, ref errors);
                 Assert.AreEqual(0, errors.Count);
             }
-            
+            System.Diagnostics.Debug.WriteLine("pass1");
             //updating grade
             for (int i = 0; i < scheduleList.Count; i++)
             {
@@ -104,9 +104,9 @@ namespace DALTest
             }
 
             //get enroll data
-            List<Grade> trans = DALEnrollment.GetEnrollment(student.id, ref errors);
+            List<Enrollment> trans = DALEnrollment.GetEnrollment(student.id, ref errors);
             Assert.AreEqual(0, errors.Count);
-
+            System.Diagnostics.Debug.WriteLine("pass1");
             //compare the result
             for (int i = 0; i < trans.Count; i++)
             {

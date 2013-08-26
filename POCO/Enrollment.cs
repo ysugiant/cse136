@@ -7,16 +7,10 @@ using System.Runtime.Serialization; // this is required
 namespace POCO
 {
     [DataContract]
-    public class Grade
+    public class Enrollment
     {
         [DataMember]
-        public int year { get; set; }
-
-        [DataMember]
-        public string quarter { get; set; }
-
-        [DataMember]
-        public Course course { get; set; }
+        public ScheduledCourse ScheduledCourse { get; set; }
 
         [DataMember]
         public string grade { get; set; }

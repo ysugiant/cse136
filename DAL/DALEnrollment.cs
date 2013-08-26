@@ -14,10 +14,10 @@ namespace DAL
         static string connection_string = ConfigurationManager.AppSettings["dsn"];
 
         //Done By student
-        public static List<Grade> GetEnrollment(string id, ref List<string> errors)
+        public static List<Enrollment> GetEnrollment(string id, ref List<string> errors)
         {
             SqlConnection conn = new SqlConnection(connection_string);
-            List<Grade> grade = null;
+            List<Enrollment> grade = null;
             try
             {
                 string strSQL = "spGetEnrollmentList";
@@ -33,17 +33,32 @@ namespace DAL
                 DataSet myDS = new DataSet();
                 mySA.Fill(myDS);
 
+                System.Diagnostics.Debug.WriteLine(myDS.Tables[0].Rows.Count);
+
                 if (myDS.Tables[0].Rows.Count == 0)
                     return null;
-                grade = new List<Grade>();
+                grade = new List<Enrollment>();
+               
+
 
                 for (int i = 0; i < myDS.Tables[0].Rows.Count; i++)
                 {
-                    Grade gr = new Grade();
-                    gr.year = Convert.ToInt32(myDS.Tables[0].Rows[i]["year"].ToString());
-                    gr.quarter = myDS.Tables[0].Rows[i]["quarter"].ToString();
+                    Enrollment gr = new Enrollment();
+                    ScheduledCourse sc = new ScheduledCourse();
+                    sc.year = Convert.ToInt32(myDS.Tables[0].Rows[i]["year"].ToString());
+                    sc.quarter = myDS.Tables[0].Rows[i]["quarter"].ToString();
+                    sc.day = myDS.Tables[0].Rows[i]["schedule_day"].ToString();
+                    sc.time = myDS.Tables[0].Rows[i]["schedule_time"].ToString();
+                    sc.instructor_fName = myDS.Tables[0].Rows[i]["first_name"].ToString();
+                    sc.instructor_lName = myDS.Tables[0].Rows[i]["last_name"].ToString();
+                    System.Diagnostics.Debug.WriteLine("x");
+                    sc.session = myDS.Tables[0].Rows[i]["session"].ToString();
+                    sc.instr_id = Convert.ToInt32(myDS.Tables[0].Rows[i]["staff_id"].ToString());
+                    sc.timeID = Convert.ToInt32(myDS.Tables[0].Rows[i]["schedule_time_id"].ToString());
+                    sc.dayID = Convert.ToInt32(myDS.Tables[0].Rows[i]["schedule_day_id"].ToString());
                     gr.grade = myDS.Tables[0].Rows[i]["grade"].ToString();
-                    gr.course =
+
+                    sc.course =
                       new Course
                       {
                         id = Convert.ToInt32(myDS.Tables[0].Rows[i]["course_id"]),
@@ -52,6 +67,7 @@ namespace DAL
                         description = myDS.Tables[0].Rows[i]["course_description"].ToString(),
                         units = Convert.ToInt32(myDS.Tables[0].Rows[i]["units"])
                       };
+                    gr.ScheduledCourse = sc;
                     grade.Add(gr);
                 }
             }
