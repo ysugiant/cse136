@@ -85,7 +85,11 @@ namespace BL
       }
 
       // anything else to validate?
-
+        // JUSTIN : added the following test. I admit, kinda pointless. No one would try a negative schedule ID, but who knows.
+      if (schedule_id < 0)
+      {
+          errors.Add("Cannot have a negative schedule ID.");
+      }
       if (errors.Count > 0)
         return;
 

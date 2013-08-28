@@ -129,23 +129,38 @@ namespace BLTest
       Assert.AreEqual(student.level, verifyStudent.level);
       Assert.AreEqual(student.status, verifyStudent.status);
 
-      List<ScheduledCourse> scheduleList = BLSchedule.GetScheduleList("", "", ref errors);
+      //List<ScheduledCourse> scheduleList = BLSchedule.GetScheduleList("", "", ref errors); // This was the original code.
+      List<ScheduledCourse> scheduleList = BLSchedule.GetScheduleList(2011, "Fall", ref errors);//JUSTIN ADDED THIS FOR DUBUG PURPOSES
       Assert.AreEqual(0, errors.Count);
 
       // enroll all available scheduled courses for this student
       for (int i = 0; i < scheduleList.Count; i++)
       {
+        student.enrolled.Add(scheduleList[i]);// JUSTIN : for testing purposes. Will compare this with the List<ScheduledCourse>.
+        //System.Diagnostics.Debug.WriteLine("Added a course to student course schedule: " + student.enrolled[i].course.title);//JUSTIN ADDED THIS
+        
         BLStudent.EnrollSchedule(student.id, scheduleList[i].id, ref errors);
+        //System.Diagnostics.Debug.WriteLine("Added a course to scheduleList: " + scheduleList[i].course.title);//JUSTIN ADDED THIS
         Assert.AreEqual(0, errors.Count);
       }
+
+      // JUSTIN : Extra test to ensure that ALL the courses from the selected course schedule were added, verifies by count.
+      System.Diagnostics.Debug.WriteLine("scheduleList size: " + scheduleList.Count + "\nStudent schedule size: " + student.enrolled.Count);//JUSTIN ADDED THIS
+      Assert.AreEqual(scheduleList.Count, student.enrolled.Count);
 
       // drop all available scheduled courses for this student
       for (int i = 0; i < scheduleList.Count; i++)
       {
         BLStudent.DropEnrolledSchedule(student.id, scheduleList[i].id, ref errors);
+        // This is not an accurate test because it doesn't verify that the student's enrollment schedule is empty.
         Assert.AreEqual(0, errors.Count);
+        student.enrolled.Remove(scheduleList[i]);// JUSTIN : to use in the following assertion.
       }
+      Assert.AreEqual(0, student.enrolled.Count);// JUSTIN : This makes sure that the student's enroll Sched is empty.
 
+      /* JUSTIN : now the student object is up-to-date, including their course schedule.
+       * NOTE: I think we should always keep the object updated, through every method acting upon it. Yeah? No?
+       * */
       BLStudent.DeleteStudent(student.id, ref errors);
 
       Student verifyEmptyStudent = BLStudent.GetStudent(student.id, ref errors);

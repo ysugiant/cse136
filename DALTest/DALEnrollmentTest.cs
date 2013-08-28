@@ -85,7 +85,7 @@ namespace DALTest
             //System.Diagnostics.Debug.WriteLine("value of student.level is: " + student.level.ToString());
             DALStudent.InsertStudent(student, ref errors);
 
-            List<ScheduledCourse> scheduleList = DALCourseSchedule.GetCourseScheduleList("", "", ref errors);
+            List<ScheduledCourse> scheduleList = DALCourseSchedule.GetCourseScheduleList(0, "", ref errors);
             Assert.AreEqual(0, errors.Count);
             System.Diagnostics.Debug.WriteLine("pass1");
             // enroll all available scheduled courses for this student

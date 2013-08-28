@@ -90,7 +90,7 @@ namespace DALTest
             Major major2 = new Major();
 
             major2.majorName = "Math";
-            major2.deptId = 88;
+            major2.deptId = 120;
 
             DALMajor.UpdateMajor(ID,major2.majorName, major2.deptId, ref errors);
 

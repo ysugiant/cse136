@@ -189,7 +189,7 @@ namespace DAL
         return sCourse;
     }
 
-    public static List<ScheduledCourse> GetCourseScheduleList(string year, string quarter, ref List<string> errors)
+    public static List<ScheduledCourse> GetCourseScheduleList(int year, string quarter, ref List<string> errors)
     {
       SqlConnection conn = new SqlConnection(connection_string);
       List<ScheduledCourse> scheduleList = new List<ScheduledCourse>();
@@ -200,7 +200,7 @@ namespace DAL
 
         SqlDataAdapter mySA = new SqlDataAdapter(strSQL, conn);
 
-        if (year.Length > 0)
+        if (year > 0)
         {
           mySA.SelectCommand.Parameters.Add(new SqlParameter("@year", SqlDbType.Int));
           mySA.SelectCommand.Parameters["@year"].Value = year;
