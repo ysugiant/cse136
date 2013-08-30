@@ -26,7 +26,7 @@ namespace BL
             checkMajorID(student.major, ref errors);
             checkStudentLevel(student.level, ref errors);
             for (int i = 0; i < student.enrolled.Count; i++) {
-                checkScheduleErrors(student.enrolled[i], ref errors);
+                checkCourseScheduleErrors(student.enrolled[i], ref errors);
             }
         }
 
@@ -38,7 +38,7 @@ namespace BL
             checkEmail(staff.email, ref errors);
             checkPassword(staff.email, ref errors);
             checkDepartmentErrors(staff.dept, ref errors);
-
+            //don't need to check the instructor bit because it can only be true or false.
         }
         
         public static void checkCourseErrors(Course course, ref List<string> errors)
@@ -53,21 +53,33 @@ namespace BL
             checkDeptID(dept.id, ref errors);
             checkChairID(dept.chairID, ref errors);
         }
-        
+
         public static void checkMajorErrors(Major major, ref List<string> errors)
         {
-        
+            checkNullObject(major, ref errors);
+            checkMajorName(major.majorName, ref errors);
+            checkMajorID(major.id, ref errors);
+            checkDeptID(major.deptId, ref errors);
         }
-       
-        public static void checkScheduleErrors(ScheduledCourse sCourse, ref List<string> errors)
+
+        public static void checkCourseScheduleErrors(ScheduledCourse sCourse, ref List<string> errors)
         {
-        
+            checkNullObject(sCourse, ref errors);
+            checkCourseID(sCourse.course.id, ref errors); //might be an issue?
+            checkStaffID(sCourse.instr_id, ref errors);
+            checkScheduleID(sCourse.id, ref errors);
+            checkScheduleDayID(sCourse.dayID, ref errors);
+            checkScheduleTimeID(sCourse.timeID, ref errors);
+            checkYear(sCourse.year, ref errors);
+            checkQuarter(sCourse.quarter, ref errors);
+            checkSession(sCourse.session, ref errors);
+
         }
         
         public static void checkEnrollmentErrors(Enrollment enrolledCourse, ref List<string> errors)
         {
             checkNullObject(enrolledCourse, ref errors);
-            checkScheduleErrors(enrolledCourse.ScheduledCourse, ref errors);
+            checkCourseScheduleErrors(enrolledCourse.ScheduledCourse, ref errors);
             checkGrade(enrolledCourse.grade, ref errors);
         }
         
@@ -237,7 +249,6 @@ namespace BL
             //CheckStudentID
             //CheckScheduleID
 
-
         //MAJOR
         public static void checkMajorName(string name, ref List<string> errors)
         {
@@ -276,11 +287,7 @@ namespace BL
         //IN GENERAL
             //CheckDeptID
 
-        //STAFF
-        public static void checkInstructorBit(string name, ref List<string> errors)
-        {
-
-        }
+        
         //IN GENERAL
             //CheckEmail
             //CheckName
@@ -289,19 +296,41 @@ namespace BL
             //CheckStaffID
 
         //COURSE SCHEDULE
-        public static void checkYear(string name, ref List<string> errors)
+        public static void checkYear(int year, ref List<string> errors)
         {
-
-        }
-        
-        public static void checkQuarter(string name, ref List<string> errors)
-        {
-
+            if (year > 2014)
+                errors.Add("Year cannot be greater than 2013");
+            else if (year < 1950)
+                errors.Add("Year cannot be less than 1950");
         }
 
-        public static void checkSession(string name, ref List<string> errors)
+        public static void checkQuarter(string quarter, ref List<string> errors)
         {
+            if (!quarter.Equals("Fall") ||
+                !quarter.Equals("Winter") ||
+                !quarter.Equals("Spring") ||
+                !quarter.Equals("Summer 1") ||
+                !quarter.Equals("Summer 2"))
+                errors.Add("Quarter is invalid");
+        }
 
+        public static void checkSession(string session, ref List<string> errors)
+        {
+            string firstChar = session.Substring(0, 0);
+            string secondChar = session.Substring(1, 1);
+            string thirdChar = session.Substring(2, 2);
+
+            System.Diagnostics.Debug.WriteLine("first char: " + firstChar);
+            System.Diagnostics.Debug.WriteLine("second char: " + secondChar);
+            System.Diagnostics.Debug.WriteLine("third char: " + thirdChar);
+
+            string strRegex1 = @"[A-Za-z]";
+            string strRegex2 = @"[0-9]";
+
+            if (!Regex.IsMatch(firstChar, strRegex1) ||
+                !Regex.IsMatch(secondChar, strRegex2) ||
+                !Regex.IsMatch(thirdChar, strRegex2))
+                errors.Add("The session format is incorrect");
         }
         //IN GENERAL
             //CheckCourseID

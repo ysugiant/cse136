@@ -29,10 +29,10 @@ namespace SL136
     [OperationContract]
     List<Student> GetStudentList(ref List<string> errors);
 
-    [OperationContract]
+    /*[OperationContract]
     void EnrollSchedule(string student_id, int schedule_id, ref List<string> errors);
 
     [OperationContract]
-    void DropEnrolledSchedule(string student_id, int schedule_id, ref List<string> errors);
+    void DropEnrolledSchedule(string student_id, int schedule_id, ref List<string> errors);*/
   }
 }

@@ -76,7 +76,7 @@ namespace BLTest
     }
 
     [TestMethod]
-    public void StudentErrorTest()
+    public void GetStudentErrorTest()
     {
       List<string> errors = new List<string>();
 
@@ -100,9 +100,9 @@ namespace BLTest
       student.first_name = "first";
       student.last_name = " last";
       student.id = Guid.NewGuid().ToString().Substring(0, 20);
-      student.ssn = "888991234";
-      student.email = "myemail@ucsd.edu";
-      student.password = "pass1234";
+      student.ssn = "555555555";
+      student.email = "myemail15@ucsd.edu";
+      student.password = "pass123456";
       student.shoe_size = 0;
       student.weight = 0;
       student.major = 1;
@@ -112,7 +112,6 @@ namespace BLTest
 
       List<string> errors = new List<string>();
       BLStudent.InsertStudent(student, ref errors);
-
       Assert.AreEqual(0, errors.Count);
 
       Student verifyStudent = BLStudent.GetStudent(student.id, ref errors);
@@ -130,11 +129,11 @@ namespace BLTest
       Assert.AreEqual(student.status, verifyStudent.status);
 
       //List<ScheduledCourse> scheduleList = BLSchedule.GetScheduleList("", "", ref errors); // This was the original code.
-      List<ScheduledCourse> scheduleList = BLSchedule.GetScheduleList(2011, "Fall", ref errors);//JUSTIN ADDED THIS FOR DUBUG PURPOSES
-      Assert.AreEqual(0, errors.Count);
+      //List<ScheduledCourse> scheduleList = BLCourseSchedule.GetScheduleList(2011, "Fall", ref errors);//JUSTIN ADDED THIS FOR DUBUG PURPOSES
+      //Assert.AreEqual(0, errors.Count);
 
       // enroll all available scheduled courses for this student
-      for (int i = 0; i < scheduleList.Count; i++)
+      /*for (int i = 0; i < scheduleList.Count; i++)
       {
         student.enrolled.Add(scheduleList[i]);// JUSTIN : for testing purposes. Will compare this with the List<ScheduledCourse>.
         //System.Diagnostics.Debug.WriteLine("Added a course to student course schedule: " + student.enrolled[i].course.title);//JUSTIN ADDED THIS

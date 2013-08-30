@@ -37,7 +37,7 @@ namespace SL136
       return BLStudent.GetStudentList(ref errors);
     }
 
-    public void EnrollSchedule(string student_id, int schedule_id, ref List<string> errors)
+    /*public void EnrollSchedule(string student_id, int schedule_id, ref List<string> errors)
     {
       BLStudent.EnrollSchedule(student_id, schedule_id, ref errors);
     }
@@ -45,6 +45,6 @@ namespace SL136
     public void DropEnrolledSchedule(string student_id, int schedule_id, ref List<string> errors)
     {
       BLStudent.DropEnrolledSchedule(student_id, schedule_id, ref errors);
-    }
+    }*/
   }
 }

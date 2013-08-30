@@ -50,24 +50,24 @@ namespace BLTest
             errors = new List<string>();
 
             Staff instructor = new Staff();
-            //staffMember.id = 15;// Not possible, because student_id cannot be set. It is auto-incremented
-            instructor.first_name = "Joon-Lehng";
-            instructor.last_name = "Bo";
-            instructor.email = "staff@....edu";//purposefully made this a an invalid email format
-            instructor.password = "password1234";
+            instructor.first_name = "";// fail, empty string
+            instructor.last_name = null;// fail, null
+            instructor.email = "staff@....edu";//fail, regex
+            instructor.password = "password123456789";// fail, > 15 chars
             instructor.dept = new Department();
-            instructor.dept.chairID = 1;
-            instructor.dept.deptName = "Computer Science and Engineering";
-            instructor.isInstructor = true;
+            instructor.dept.chairID = -1;// fail, negative ID
+            instructor.dept.deptName = "";// fail, empty string
+            instructor.isInstructor = true;// impossible to fail.
 
             //Should catch the regEx for email, invalid formatting error
             BLStaff.InsertStaff(instructor, ref errors, out newStaffID);
-            Assert.AreEqual(1, errors.Count);
+            instructor.id = newStaffID;//assigning the auto-inc staff_id to this instructor object
+            Assert.AreEqual(6, errors.Count);
 
         }
 
         [TestMethod]
-        public void StaffErrorTest()
+        public void GetStaffErrorTest()
         {
             List<string> errors = new List<string>();
 
@@ -88,11 +88,12 @@ namespace BLTest
         public void StaffInsertAndSelectTest()
         {
             Student student = new Student();
+            int studentID;
             student.first_name = "first";
             student.last_name = " last";
             student.id = Guid.NewGuid().ToString().Substring(0, 20);
-            student.ssn = "888991234";
-            student.email = "myemail@ucsd.edu";
+            student.ssn = "777777777";
+            student.email = "myemail97@ucsd.edu";
             student.password = "pass1234";
             student.shoe_size = 0;
             student.weight = 0;
@@ -103,7 +104,7 @@ namespace BLTest
 
             List<string> errors = new List<string>();
             BLStudent.InsertStudent(student, ref errors);
-
+            student.id = studentID;
             Assert.AreEqual(0, errors.Count);
 
             Student verifyStudent = BLStudent.GetStudent(student.id, ref errors);
@@ -120,6 +121,7 @@ namespace BLTest
             Assert.AreEqual(student.level, verifyStudent.level);
             Assert.AreEqual(student.status, verifyStudent.status);
 
+            /*
             //List<ScheduledCourse> scheduleList = BLSchedule.GetScheduleList("", "", ref errors); // This was the original code.
             List<ScheduledCourse> scheduleList = BLSchedule.GetScheduleList(2011, "Fall", ref errors);//JUSTIN ADDED THIS FOR DUBUG PURPOSES
             Assert.AreEqual(0, errors.Count);

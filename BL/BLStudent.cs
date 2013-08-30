@@ -11,7 +11,6 @@ namespace BL
   {
     public static void InsertStudent(Student student, ref List<string> errors)
     {
-      //BLCheck.checkStudentID(student.id, ref errors);
         BLCheck.checkStudentErrors(student, ref errors);
       if (errors.Count > 0)
         return;
@@ -21,15 +20,7 @@ namespace BL
 
     public static void UpdateStudent(Student student, ref List<string> errors)
     {
-      if (student == null)
-      {
-        errors.Add("Student cannot be null");
-      }
-
-      if (student.id.Length < 5)
-      {
-        errors.Add("Invalid student ID");
-      }
+        BLCheck.checkStudentID(student.id, ref errors);
 
       if (errors.Count > 0)
         return;
@@ -39,12 +30,7 @@ namespace BL
 
     public static Student GetStudent(string id, ref List<string> errors)
     {
-      if (id == null)
-      {
-        errors.Add("Invalid student ID");
-      }
-
-      // anything else to validate?
+      BLCheck.checkStudentID(id, ref errors);
 
       if (errors.Count > 0)
         return null;
@@ -54,10 +40,7 @@ namespace BL
 
     public static void DeleteStudent(string id, ref List<string> errors)
     {
-      if (id == null)
-      {
-        errors.Add("Invalid student ID");
-      }
+      BLCheck.checkStudentID(id, ref errors);
 
       if (errors.Count > 0)
         return;
@@ -70,19 +53,11 @@ namespace BL
       return DALStudent.GetStudentList(ref errors);
     }
 
-    public static void EnrollSchedule(string student_id, int schedule_id, ref List<string> errors)
+    /*public static void EnrollSchedule(string student_id, int schedule_id, ref List<string> errors)
     {
-      if (student_id == null)
-      {
-        errors.Add("Invalid student ID");
-      }
-
-      // anything else to validate?
-        // JUSTIN : added the following test. I admit, kinda pointless. No one would try a negative schedule ID, but who knows.
-      if (schedule_id < 0)
-      {
-          errors.Add("Cannot have a negative schedule ID.");
-      }
+      ScheduledCourse sCourse = BLCourseSchedule.GetCourseScheduleDetail(student_id, ref errors);
+      
+      BLCheck.checkScheduleErrors(
       if (errors.Count > 0)
         return;
 
@@ -102,7 +77,7 @@ namespace BL
         return;
 
       DALStudent.DropEnrolledSchedule(student_id, schedule_id, ref errors);
-    }
+    }*/
 
   }
 }
