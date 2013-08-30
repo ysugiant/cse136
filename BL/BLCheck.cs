@@ -48,7 +48,10 @@ namespace BL
        
         public static void checkDepartmentErrors(Department dept, ref List<string> errors)
         {
-        
+            checkNullObject(dept, ref errors);
+            checkDeptName(dept.deptName, ref errors);
+            checkDeptID(dept.id, ref errors);
+            checkChairID(dept.chairID, ref errors);
         }
         
         public static void checkMajorErrors(Major major, ref List<string> errors)
@@ -63,7 +66,9 @@ namespace BL
         
         public static void checkEnrollmentErrors(Enrollment enrolledCourse, ref List<string> errors)
         {
-        
+            checkNullObject(enrolledCourse, ref errors);
+            checkScheduleErrors(enrolledCourse.ScheduledCourse, ref errors);
+            checkGrade(enrolledCourse.grade, ref errors);
         }
         
 
@@ -236,21 +241,37 @@ namespace BL
         //MAJOR
         public static void checkMajorName(string name, ref List<string> errors)
         {
-
+            if (name == null)
+                errors.Add("Major name cannot be null");
+            else if (name == "")
+                errors.Add("Major name cannot be empty");
+            else if (name.Length > 50)
+                errors.Add("Major name cannot be more than 9");
         }
         //IN GENERAL
             //CheckMajorID
             //CheckDeptID
 
         //DEPARTMENT
-        public static void checkChairID(string name, ref List<string> errors)
+        public static void checkChairID(int id, ref List<string> errors)
         {
-
+            checkID(id, "Chair", ref errors);
         }
 
         public static void checkDeptName(string name, ref List<string> errors)
         {
-
+            if (name == null)
+            {
+                errors.Add("Department name cannot be null");
+            }
+            else if (name == "")
+            {
+                errors.Add("Department name cannot be empty");
+            }
+            else if (name.Length > 50)
+            {
+                errors.Add("Department name cannot be more than 50");
+            }
         }
         //IN GENERAL
             //CheckDeptID

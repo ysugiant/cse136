@@ -70,7 +70,7 @@ namespace DALTest
             List<string> errors = new List<string>();
             int ID;
             Major major = new Major();
-            major.majorName = "Computer Science";
+            major.majorName = "Test Major";
             major.deptId = 1;
 
 
@@ -89,7 +89,7 @@ namespace DALTest
 
             Major major2 = new Major();
 
-            major2.majorName = "Math";
+            major2.majorName = "Test2 Major";
             major2.deptId = 1;
 
             DALMajor.UpdateMajor(ID,major2.majorName, major2.deptId, ref errors);
