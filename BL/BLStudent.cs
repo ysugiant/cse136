@@ -11,15 +11,7 @@ namespace BL
   {
     public static void InsertStudent(Student student, ref List<string> errors)
     {
-      if (student == null)
-      {
-        errors.Add("Student cannot be null");
-      }
-      else if (student.id.Length < 5)
-      {
-        errors.Add("Invalid student ID");
-      }
-
+      BLCheck.checkStudentID(student.id, ref errors);
       if (errors.Count > 0)
         return;
 

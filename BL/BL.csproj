@@ -58,7 +58,7 @@
     <Compile Include="BLAuth.cs" />
     <Compile Include="BLCourse.cs" />
     <Compile Include="BLEnrollment.cs" />
-    <Compile Include="BLRegex.cs" />
+    <Compile Include="BLCheck.cs" />
     <Compile Include="BLSchedule.cs" />
     <Compile Include="BLScheduleDay.cs" />
     <Compile Include="BLScheduleTime.cs" />
