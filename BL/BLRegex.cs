@@ -22,15 +22,13 @@ namespace BL
 
         public static bool checkEmail(string email)
         {
-            if (email != null && )
+            if (email != null)
             {
                 string strRegex = @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z";
                 return Regex.IsMatch(email, strRegex);
             }
             else
                 return false;
-        }
-
-        public static 
+        }    
     }
 }
