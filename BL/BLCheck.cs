@@ -236,7 +236,12 @@ namespace BL
         //MAJOR
         public static void checkMajorName(string name, ref List<string> errors)
         {
-
+            if (name == null)
+                errors.Add("Major name cannot be null");
+            else if (name == "")
+                errors.Add("Major name cannot be empty");
+            else if (name.Length > 50)
+                errors.Add("Major name cannot be more than 9");
         }
         //IN GENERAL
             //CheckMajorID
