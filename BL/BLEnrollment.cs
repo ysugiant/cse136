@@ -9,54 +9,41 @@ namespace BL
 {
     public static class BLEnrollment
     {
-        public static List<string> GetScheduleDayList(ref List<string> errors)
+        public static List<Enrollment> GetEnrollmentList(string student_id, ref List<string> errors)
         {
-            return (DALScheduleDay.GetScheduleDayList(ref errors));
-        }
-
-        public static void DeleteScheduleDay(string day, ref List<string> errors)
-        {
-            if (day == null)
-            {
-                errors.Add("Invalid day");
-            }
+            BLCheck.checkStudentID(student_id, ref errors);
 
             if (errors.Count > 0)
-                return;
+                return new List<Enrollment>();
 
-            DALScheduleDay.DeleteScheduleDay(day, ref errors);
+            return (DALEnrollment.GetEnrollment(student_id, ref errors));
         }
 
         public static void InsertEnrollment(string student_id, int schedule_id, ref List<string> errors)
         {
-            if (student_id == null)//using regex
-            {
-                errors.Add("Invalid student ID");
-            }
+            BLCheck.checkStudentID(student_id, ref errors);
+            BLCheck.checkScheduleID(schedule_id, ref errors);
 
-            if (schedule_id < 0)
-            {
-                errors.Add("Cannot have a negative schedule ID.");
-            }
             if (errors.Count > 0)
                 return;
 
-            DALStudent.EnrollSchedule(student_id, schedule_id, ref errors);
+            DALEnrollment.InsertEnrollment(student_id, schedule_id, ref errors);
+        }
+
+        public static void UpdateEnrollment(Enrollment enroll, ref List<string> errors)
+        {
         }
 
         public static void DeleteEnrollement(string student_id, int schedule_id, ref List<string> errors)
         {
-            if (student_id == null)//using regex
-            {
-                errors.Add("Invalid student ID");
-            }
+            BLCheck.checkStudentID(student_id, ref errors);
 
             // anything else to validate?
 
             if (errors.Count > 0)
                 return;
 
-            DALStudent.DropEnrolledSchedule(student_id, schedule_id, ref errors);
+            DALEnrollment.DeleteEnrollment(student_id, schedule_id, ref errors);
         }
     }
 }

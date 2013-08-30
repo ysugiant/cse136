@@ -63,6 +63,7 @@
     <Compile Include="BLScheduleDay.cs" />
     <Compile Include="BLScheduleTime.cs" />
     <Compile Include="BLStudent.cs" />
+    <Compile Include="BLDepartment.cs" />
     <Compile Include="BLStaff.cs" />
     <Compile Include="ErrorLog\AsynchLog.cs" />
     <Compile Include="ErrorLog\ErrorLogFactory.cs" />

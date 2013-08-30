@@ -215,9 +215,20 @@ namespace BL
 
 
         //ENROLLMENT
-        public static void checkGrade(string name, ref List<string> errors)
+        public static void checkGrade(string grade, ref List<string> errors)
         {
-
+            if (grade == null)
+            {
+                errors.Add("Grade cannot be null");
+            }
+            else if (grade == "")
+            {
+                errors.Add("Grade cannot be empty");
+            }
+            else if (grade.Length > 50)
+            {
+                errors.Add("Grade cannot be more than 50");
+            }
         }
         //IN GENERAL
             //CheckStudentID

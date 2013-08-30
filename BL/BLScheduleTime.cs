@@ -9,7 +9,7 @@ namespace BL
 {
     public static class BLScheduleTime
     {
-        public static void InsertScheduleTimr(string time, ref List<string> errors)
+        public static void InsertScheduleTime(string time, ref List<string> errors)
         {
             BLCheck.checkScheduleTime(time, ref errors);
 
