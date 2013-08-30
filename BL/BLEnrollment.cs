@@ -27,7 +27,7 @@ namespace BL
             if (errors.Count > 0)
                 return;
 
-            DALStudent.EnrollSchedule(student_id, schedule_id, ref errors);
+            DALEnrollment.InsertEnrollment(student_id, schedule_id, ref errors);
         }
 
         public static void UpdateEnrollment(Enrollment enroll, ref List<string> errors)
@@ -43,7 +43,7 @@ namespace BL
             if (errors.Count > 0)
                 return;
 
-            DALStudent.DropEnrolledSchedule(student_id, schedule_id, ref errors);
+            DALEnrollment.DeleteEnrollment(student_id, schedule_id, ref errors);
         }
     }
 }

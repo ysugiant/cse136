@@ -50,7 +50,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="BLScheduleDayTest.cs" />
     <Compile Include="BLStudentTest.cs" />
+    <Compile Include="BLScheduleTimeTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
