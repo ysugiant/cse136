@@ -11,7 +11,7 @@ namespace BL
     {
         public static bool checkStudentId(string st_id)
         {
-            if (st_id == null || st_id == "")
+            if (st_id == null || st_id == "" || st_id.Length > 50)
                 return false;
             else
             {
@@ -22,7 +22,7 @@ namespace BL
 
         public static bool checkEmail(string email)
         {
-            if (email != null)
+            if (email != null && email.Length <= 50)
             {
                 string strRegex = @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z";
                 return Regex.IsMatch(email, strRegex);
