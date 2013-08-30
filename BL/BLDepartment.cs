@@ -20,9 +20,7 @@ namespace BL
 
         public static void InsertDepartment(Department dept, ref List<string> errors)
         {
-            /*BLCheck.checkStudentID(student_id, ref errors);
-            BLCheck.checkScheduleID(schedule_id, ref errors);
-            */
+            BLCheck.checkDepartmentErrors(dept, ref errors);
             if (errors.Count > 0)
                 return;
 
@@ -31,6 +29,11 @@ namespace BL
 
         public static void UpdateDepartment(Department dept, ref List<string> errors)
         {
+            BLCheck.checkDepartmentErrors(dept, ref errors);
+            if (errors.Count > 0)
+                return;
+
+            DALDepartment.UpdateDepartment(dept, ref errors);
         }
 
         public static void DeleteDepartment(string name, ref List<string> errors)
