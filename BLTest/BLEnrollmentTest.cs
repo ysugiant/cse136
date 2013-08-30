@@ -64,7 +64,7 @@ namespace BLTest
         /// <summary>
         ///A test for InsertStudent
         ///</summary>
-        [TestMethod]
+        /*[TestMethod]
         public void EnrollmentTest()
         {
             List<string> errors = new List<string>();
@@ -123,7 +123,7 @@ namespace BLTest
             }
 
             BLStudent.DeleteStudent(student.id, ref errors);
-        }
+        }*/
 
     }
 }
