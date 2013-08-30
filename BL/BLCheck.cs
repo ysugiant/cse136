@@ -180,11 +180,7 @@ namespace BL
         //STUDENT
         public static void checkStudentLevel(StudentLevel level, ref List<string> errors)
         {
-            if (level == null)
-            {
-                errors.Add("Student level cannot be null.");
-            }
-            else if (level.Equals("freshman") || level.Equals("sophomore") || level.Equals("junior") || 
+            if (level.Equals("freshman") || level.Equals("sophomore") || level.Equals("junior") || 
                      level.Equals("senior") || level.Equals("grad") || level.Equals("phd")) {
                          errors.Add("Student level cannot be anything other than: 'freshman', 'sophomore', 'junior'," +
                                      "'senior', 'grad', or 'phd'.");
@@ -245,7 +241,12 @@ namespace BL
         //MAJOR
         public static void checkMajorName(string name, ref List<string> errors)
         {
-
+            if (name == null)
+                errors.Add("Major name cannot be null");
+            else if (name == "")
+                errors.Add("Major name cannot be empty");
+            else if (name.Length > 50)
+                errors.Add("Major name cannot be more than 9");
         }
         //IN GENERAL
             //CheckMajorID
