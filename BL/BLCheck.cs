@@ -378,22 +378,46 @@ namespace BL
             //CheckScheduleTimeID
 
         //COURSE
-        public static void checkCourseTitle(string name, ref List<string> errors)
+        public static void checkCourseTitle(string coursetitle, ref List<string> errors)
+        {
+            if (coursetitle == null)
+            {
+                errors.Add("course title cannot be null");
+            }
+            else if (coursetitle == "")
+            {
+                errors.Add("course title cannot be empty");
+            }
+            else if (coursetitle.Length > 100)
+            {
+                errors.Add("course title cannot be more than 100");
+            }
+        }
+
+        public static void checkCourseLevel(string courselevel, ref List<string> errors)
+        {
+            if (courselevel == null)
+            {
+                errors.Add("course level cannot be null");
+            }
+            else if (courselevel == "")
+            {
+                errors.Add("course level cannot be empty");
+            }
+            else if (courselevel.Length > 10)
+            {
+                errors.Add("course level cannot be more than 100");
+            }
+            
+
+        }
+
+        public static void checkCourseDescription(string courseDescription, ref List<string> errors)
         {
 
         }
 
-        public static void checkCourseLevel(string name, ref List<string> errors)
-        {
-
-        }
-
-        public static void checkCourseDescription(string name, ref List<string> errors)
-        {
-
-        }
-
-        public static void checkCourseUnits(string name, ref List<string> errors)
+        public static void checkCourseUnits(string courseUnits, ref List<string> errors)
         {
 
         }
