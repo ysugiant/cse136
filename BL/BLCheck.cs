@@ -245,17 +245,39 @@ namespace BL
             //CheckScheduleTimeID
 
         //SCHEDULE DAY
-        public static void checkScheduleDay(string name, ref List<string> errors)
+        public static void checkScheduleDay(string day, ref List<string> errors)
         {
-
+            if (day == null)
+            {
+                errors.Add("Day cannot be null");
+            }
+            else if (day == "")
+            {
+                errors.Add("Day cannot be empty");
+            }
+            else if (day.Length > 50)
+            {
+                errors.Add("Day cannot be more than 50");
+            }
         }
         //IN GENERAL
             //CheckScheduleDayID
 
         //******************* SCHEDULE TIME *******************
-        public static void checkScheduleTime(string name, ref List<string> errors)
+        public static void checkScheduleTime(string time, ref List<string> errors)
         {
-
+            if (time == null)
+            {
+                errors.Add("Time cannot be null");
+            }
+            else if (time == "")
+            {
+                errors.Add("Time cannot be empty");
+            }
+            else if (time.Length > 50)
+            {
+                errors.Add("Time cannot be more than 50");
+            }
         }
         //IN GENERAL
             //CheckScheduleTimeID

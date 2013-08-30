@@ -11,14 +11,7 @@ namespace BL
     {
         public static void InsertScheduleDay(string day, ref List<string> errors)
         {
-            if (day == null)
-            {
-                errors.Add("Day cannot be null");
-            }
-            else if (day == "")
-            {
-                errors.Add("Invalid day");
-            }
+            BLCheck.checkScheduleDay(day, ref errors);
 
             if (errors.Count > 0)
                 return;
@@ -33,10 +26,7 @@ namespace BL
 
         public static void DeleteScheduleDay(string day, ref List<string> errors)
         {
-            if (day == null)
-            {
-                errors.Add("Invalid day");
-            }
+            BLCheck.checkScheduleDay(day, ref errors);
 
             if (errors.Count > 0)
                 return;

@@ -11,14 +11,7 @@ namespace BL
     {
         public static void InsertScheduleTimr(string time, ref List<string> errors)
         {
-            if (time == null)
-            {
-                errors.Add("Time cannot be null");
-            }
-            else if (time == "")
-            {
-                errors.Add("Invalid time");
-            }
+            BLCheck.checkScheduleTime(time, ref errors);
 
             if (errors.Count > 0)
                 return;
@@ -33,10 +26,7 @@ namespace BL
 
         public static void DeleteScheduleTime(string time, ref List<string> errors)
         {
-            if (time == null)
-            {
-                errors.Add("Invalid time");
-            }
+            BLCheck.checkScheduleTime(time, ref errors);
 
             if (errors.Count > 0)
                 return;
