@@ -142,7 +142,7 @@ namespace BL
             }
         }
 
-        /*public static void checkScheduleID(int id, ref List<string> errors)
+        public static void checkScheduleID(int id, ref List<string> errors)
         {
             checkID(id, "Schedule", ref errors);
         }
@@ -170,7 +170,7 @@ namespace BL
         public static void checkScheduleTimeID(int id, ref List<string> errors)
         {
             checkID(id, "Schedule Time", ref errors);
-        }*/
+        }
 
         //STUDENT
         public static void checkStudentLevel(StudentLevel level, ref List<string> errors)
@@ -188,8 +188,10 @@ namespace BL
 
         public static void checkStudentStatus(int status, ref List<string> errors)
         {
-            if (status < 0) {
+            if (status < 0)
+            {
                 errors.Add("Student cannot have a null.");
+            }
         }
 
         public static void checkStudentShoeSize(float shoeSize, ref List<string> errors)

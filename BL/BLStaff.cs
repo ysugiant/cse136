@@ -13,7 +13,7 @@ namespace BL
         {
             BLCheck.checkStaffErrors(staffMember, ref errors);
 
-            //int newStaffID;
+            int newStaffID;
             DALStaff.InsertStaff(staffMember, ref errors, out newStaffID);
         }
 
@@ -52,9 +52,9 @@ namespace BL
 
         public static void DeleteStaff(int id, ref List<string> errors)
         {
-            if (id == null)
+            if (id < 0)
             {
-                errors.Add("Invalid staff ID");
+                errors.Add("Invalid staff ID. ID must be a non-negative integer.");
             }
 
             if (errors.Count > 0)
@@ -68,7 +68,7 @@ namespace BL
             return DALStaff.GetStaffList(ref errors);
         }
 
-        public static void EnrollSchedule(int staff_id, int schedule_id, ref List<string> errors)
+        /*public static void EnrollSchedule(int staff_id, int schedule_id, ref List<string> errors)
         {
             if (staff_id == null)
             {
@@ -85,10 +85,10 @@ namespace BL
                 return;
 
             //DALStaff.EnrollSchedule(staff_id, schedule_id, ref errors);
-            DALEnrollment.InsertEnrollment();
-        }
+            DALEnrollment.InsertEnrollment(staff_id, );
+        }*/
 
-        public static void DropEnrolledSchedule(int staff_id, int schedule_id, ref List<string> errors)
+        /*public static void DropEnrolledSchedule(int staff_id, int schedule_id, ref List<string> errors)
         {
             if (staff_id == null)
             {
@@ -101,7 +101,7 @@ namespace BL
                 return;
 
             DALStaff.DropEnrolledSchedule(staff_id, schedule_id, ref errors);
-        }
+        }*/
 
     }
 }
