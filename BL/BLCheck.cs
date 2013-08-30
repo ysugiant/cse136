@@ -38,7 +38,7 @@ namespace BL
             checkEmail(staff.email, ref errors);
             checkPassword(staff.email, ref errors);
             checkDepartmentErrors(staff.dept, ref errors);
-
+            //don't need to check the instructor bit because it can only be true or false.
         }
         
         public static void checkCourseErrors(Course course, ref List<string> errors)
@@ -255,11 +255,7 @@ namespace BL
         //IN GENERAL
             //CheckDeptID
 
-        //STAFF
-        public static void checkInstructorBit(string name, ref List<string> errors)
-        {
-
-        }
+        
         //IN GENERAL
             //CheckEmail
             //CheckName

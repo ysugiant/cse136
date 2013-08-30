@@ -9,25 +9,17 @@ namespace BL
 {
     public static class BLStaff
     {
-        public static void InsertStaff(Staff staffMember, List<string> errors)
+        public static void InsertStaff(Staff staffMember, List<string> errors, out int newStaffID)
         {
             BLCheck.checkStaffErrors(staffMember, ref errors);
-
-            int newStaffID;
             DALStaff.InsertStaff(staffMember, ref errors, out newStaffID);
         }
 
         public static void UpdateStaff(Staff staffMember, ref List<string> errors)
         {
-            if (staffMember == null)
-            {
-                errors.Add("Staff member cannot be null");
-            }
-
-            if (staffMember.id < 5)
-            {
-                errors.Add("Invalid staff ID");
-            }
+            if (staffMember.id < 0)
+                errors.Add("Staff id must be a non-negative integer.");
+            BLCheck.checkStaffErrors(staffMember, ref errors);
 
             if (errors.Count > 0)
                 return;

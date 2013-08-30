@@ -59,7 +59,6 @@
     <Compile Include="BLCourse.cs" />
     <Compile Include="BLEnrollment.cs" />
     <Compile Include="BLCheck.cs" />
-    <Compile Include="BLSchedule.cs" />
     <Compile Include="BLScheduleDay.cs" />
     <Compile Include="BLScheduleTime.cs" />
     <Compile Include="BLStudent.cs" />

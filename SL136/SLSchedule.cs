@@ -10,11 +10,11 @@ using BL;
 namespace SL136
 {
   // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "SLSchedule" in both code and config file together.
-  public class SLSchedule : ISLSchedule
+  public class SLSchedule : ISLCourseSchedule
   {
     public List<ScheduledCourse> GetScheduleList(int year, string quarter, ref List<string> errors)
     {
-      return BLSchedule.GetScheduleList(year, quarter, ref errors);
+      return BLCourseSchedule.GetScheduleList(year, quarter, ref errors);
     }
   }
 }
