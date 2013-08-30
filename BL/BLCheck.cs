@@ -175,11 +175,7 @@ namespace BL
         //STUDENT
         public static void checkStudentLevel(StudentLevel level, ref List<string> errors)
         {
-            if (level == null)
-            {
-                errors.Add("Student level cannot be null.");
-            }
-            else if (level.Equals("freshman") || level.Equals("sophomore") || level.Equals("junior") || 
+            if (level.Equals("freshman") || level.Equals("sophomore") || level.Equals("junior") || 
                      level.Equals("senior") || level.Equals("grad") || level.Equals("phd")) {
                          errors.Add("Student level cannot be anything other than: 'freshman', 'sophomore', 'junior'," +
                                      "'senior', 'grad', or 'phd'.");
