@@ -4,51 +4,78 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using POCO;
+using DAL;
 
 namespace BL
 {
-    public class BLCheck
+    public static class BLCheck
     {
         //MAIN METHODS
-        /*
-        public static void checkStudentErrors(string email, ref List<string> errors)
+        
+        public static void checkStudentErrors(Student student, ref List<string> errors)
+        {
+            checkNullObject(student, ref errors);
+            checkStudentID(student.id, ref errors);
+            checkName(student.first_name, "student", ref errors);
+            checkEmail(student.email, ref errors);
+            checkPassword(student.password, ref errors);
+            checkStudentSSN(student.ssn, ref errors);
+            checkStudentShoeSize(student.shoe_size, ref errors);
+            checkStudentWeight(student.weight, ref errors);
+            checkMajorID(student.major, ref errors);
+            checkStudentLevel(student.level, ref errors);
+            for (int i = 0; i < student.enrolled.Count; i++) {
+                checkScheduleErrors(student.enrolled[i], ref errors);
+            }
+        }
+
+        public static void checkStaffErrors(Staff staff, ref List<string> errors)
+        {
+            checkNullObject(staff, ref errors);
+            checkName(staff.first_name, "first", ref errors);
+            checkName(staff.last_name, "last", ref errors);
+            checkEmail(staff.email, ref errors);
+            checkPassword(staff.email, ref errors);
+            checkDepartmentErrors(staff.dept, ref errors);
+
+        }
+        
+        public static void checkCourseErrors(Course course, ref List<string> errors)
         {
         
         }
        
-        public static void checkStaffErrors(string email, ref List<string> errors)
+        public static void checkDepartmentErrors(Department dept, ref List<string> errors)
         {
         
         }
         
-        public static void checkCourseErrors(string email, ref List<string> errors)
-        {
-        
-        }
-       
-        public static void checkDepartmentErrors(string email, ref List<string> errors)
-        {
-        
-        }
-        
-        public static void checkMajorErrors(string email, ref List<string> errors)
+        public static void checkMajorErrors(Major major, ref List<string> errors)
         {
         
         }
        
-        public static void checkScheduleErrors(string email, ref List<string> errors)
+        public static void checkScheduleErrors(ScheduledCourse sCourse, ref List<string> errors)
         {
         
         }
         
-        public static void checkEnrollmentErrors(string email, ref List<string> errors)
+        public static void checkEnrollmentErrors(Enrollment enrolledCourse, ref List<string> errors)
         {
         
         }
-        */
+        
 
         //GENERAL ERROR CHECKING
-        public static void checkEmail(string email, ref List<string> errors)
+        static void checkNullObject(Object obj, ref List<string> errors)
+        {
+            if (obj == null)
+            {
+                errors.Add("Cannot insert or update a null object.");
+            }
+        }
+        static void checkEmail(string email, ref List<string> errors)
         {
             if (email != null && email.Length <= 50)
             {
@@ -58,7 +85,7 @@ namespace BL
             } 
         }
 
-        public static void checkName(string name, string FirstOrLast, ref List<string> errors)
+        static void checkName(string name, string FirstOrLast, ref List<string> errors)
         {
             if (name == null)
                 errors.Add(FirstOrLast + " name cannot be null");
@@ -68,17 +95,17 @@ namespace BL
                 errors.Add(FirstOrLast + " name cannot greater than 50 characters");
         }
 
-        public static void checkFirstName(string name, ref List<string> errors)
+        static void checkFirstName(string name, ref List<string> errors)
         {
             checkName(name, "First", ref errors);
         }
 
-        public static void checkLastName(string name, ref List<string> errors)
+        static void checkLastName(string name, ref List<string> errors)
         {
             checkName(name, "Last", ref errors);
         }
 
-        public static void checkPassword(string password, ref List<string> errors)
+        static void checkPassword(string password, ref List<string> errors)
         {
             if (password == null)
                 errors.Add("password cannot be null");
@@ -88,7 +115,7 @@ namespace BL
                 errors.Add("password length cannot exceed 15 characters or be less than 8 characters");
         }
 
-        public static void checkID(int id, string tableName, ref List<string> errors)
+        static void checkID(int id, string tableName, ref List<string> errors)
         {
             if (id < 0)
                 errors.Add(tableName + " ID cannot be negative");
@@ -115,7 +142,7 @@ namespace BL
             }
         }
 
-        public static void checkScheduleID(int id, ref List<string> errors)
+        /*public static void checkScheduleID(int id, ref List<string> errors)
         {
             checkID(id, "Schedule", ref errors);
         }
@@ -143,25 +170,34 @@ namespace BL
         public static void checkScheduleTimeID(int id, ref List<string> errors)
         {
             checkID(id, "Schedule Time", ref errors);
-        }
+        }*/
 
         //STUDENT
-        public static void checkStudentLevel(string name, ref List<string> errors)
+        public static void checkStudentLevel(StudentLevel level, ref List<string> errors)
+        {
+            if (level == null)
+            {
+                errors.Add("Student level cannot be null.");
+            }
+            else if (level.Equals("freshman") || level.Equals("sophomore") || level.Equals("junior") || 
+                     level.Equals("senior") || level.Equals("grad") || level.Equals("phd")) {
+                         errors.Add("Student level cannot be anything other than: 'freshman', 'sophomore', 'junior'," +
+                                     "'senior', 'grad', or 'phd'.");
+            }
+        }
+
+        public static void checkStudentStatus(int status, ref List<string> errors)
+        {
+            if (status < 0) {
+                errors.Add("Student cannot have a null.");
+        }
+
+        public static void checkStudentShoeSize(float shoeSize, ref List<string> errors)
         {
 
         }
 
-        public static void checkStudentStatus(string name, ref List<string> errors)
-        {
-
-        }
-
-        public static void checkStudentShoeSize(string name, ref List<string> errors)
-        {
-
-        }
-
-        public static void checkStudentWeight(string name, ref List<string> errors)
+        public static void checkStudentWeight(int weight, ref List<string> errors)
         {
 
         }

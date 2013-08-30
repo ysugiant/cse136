@@ -11,7 +11,8 @@ namespace BL
   {
     public static void InsertStudent(Student student, ref List<string> errors)
     {
-      BLCheck.checkStudentID(student.id, ref errors);
+      //BLCheck.checkStudentID(student.id, ref errors);
+        BLCheck.checkStudentErrors(student, ref errors);
       if (errors.Count > 0)
         return;
 
