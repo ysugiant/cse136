@@ -14,7 +14,7 @@ namespace SL136
   {
     public List<ScheduledCourse> GetScheduleList(int year, string quarter, ref List<string> errors)
     {
-      return BLCourseSchedule.GetScheduleList(year, quarter, ref errors);
+      return BLCourseSchedule.GetCourseScheduleList(year, quarter, ref errors);
     }
   }
 }

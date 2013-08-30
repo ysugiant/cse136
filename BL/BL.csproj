@@ -57,8 +57,10 @@
     <Compile Include="Award\Resolver.cs" />
     <Compile Include="BLAuth.cs" />
     <Compile Include="BLCourse.cs" />
+    <Compile Include="BLCourseSchedule.cs" />
     <Compile Include="BLEnrollment.cs" />
     <Compile Include="BLCheck.cs" />
+    <Compile Include="BLMajor.cs" />
     <Compile Include="BLScheduleDay.cs" />
     <Compile Include="BLScheduleTime.cs" />
     <Compile Include="BLStudent.cs" />
