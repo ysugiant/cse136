@@ -123,12 +123,16 @@ namespace BLTest
             // drop all available scheduled courses for this student
             for (int i = 0; i < scheduleList.Count; i++)
             {
-                BLEnrollment.DeleteEnrollment(student.id, scheduleList[i].id, ref errors);
+                BLEnrollment.DeleteEnrollment(student.id, scheduleList[i].id, ref errors);                
                 Assert.AreEqual(0, errors.Count);
             }
 
             BLStudent.DeleteStudent(student.id, ref errors);
+            //VERIFY, GET
+            Student verifyEmptyStudent = BLStudent.GetStudent(student.id, ref errors);
             Assert.AreEqual(0, errors.Count);
+            Assert.AreEqual(null, verifyEmptyStudent);
+            
 
             BLCheck.printErrorLog(ref errors);
         }
@@ -193,10 +197,16 @@ namespace BLTest
                 Assert.AreEqual(x, errors.Count);
             }
             System.Diagnostics.Debug.WriteLine("end");
+            errors = new List<string>();
             BLStudent.DeleteStudent("A12345649", ref errors);   //Dont know why it is not working
-            Assert.AreEqual(x, errors.Count);
-
-            BLCheck.printErrorLog(ref errors);
+            //Assert.AreEqual(x, errors.Count);
+            //VERIFY, GET
+            Assert.AreEqual(0, errors.Count);
+           
+            //Student verifyEmptyStudent = BLStudent.GetStudent("A12345649", ref errors);
+  
+            
+            //BLCheck.printErrorLog(ref errors);
         }
 
     }
