@@ -69,8 +69,8 @@ namespace BLTest
         major.majorName = "Test Major";
         major.deptId = 1;
 
-        int ID = -1;
-        BLMajor.InsertMajor(major.majorName, major.deptId, ref errors, out ID);
+        int ID;
+        BLMajor.InsertMajor(major, ref errors, out ID);
         major.id = ID;
 
         //check for errors
@@ -81,9 +81,9 @@ namespace BLTest
         
         //check for errors
         Assert.AreEqual(0, errors.Count);
-
-        Assert.AreEqual(major.id, verifyMajor.id);
-        Assert.AreEqual(major.majorName, verifyMajor.majorName);
+        
+        Assert.AreEqual(major.id, verifyMajor.id);       
+        Assert.AreEqual(major.majorName, verifyMajor.majorName);        
         Assert.AreEqual(major.deptId, verifyMajor.deptId);
 
         //check for errors
@@ -98,10 +98,10 @@ namespace BLTest
         major2.majorName = "Test2 Major";
         major2.deptId = 1;
 
-        BLMajor.UpdateMajor(major2.id, major2.majorName, major2.deptId, ref errors);
+        BLMajor.UpdateMajor(major2, ref errors);
 
         //VERIFY, GET
-        verifyMajor = BLMajor.GetMajorDetail(ID, ref errors);
+        verifyMajor = BLMajor.GetMajorDetail(major2.id, ref errors);
 
         //check for errors
         Assert.AreEqual(0, errors.Count);
@@ -118,10 +118,10 @@ namespace BLTest
         Assert.AreEqual(0, errors.Count);
 
         //DELETE
-        BLMajor.DeleteMajor(ID, ref errors);
+        BLMajor.DeleteMajor(major2.id, ref errors);
 
         //VERIFY, GET
-        Major verifyEmptyMajor = BLMajor.GetMajorDetail(ID, ref errors);
+        Major verifyEmptyMajor = BLMajor.GetMajorDetail(major2.id, ref errors);
         Assert.AreEqual(0, errors.Count);
         Assert.AreEqual(null, verifyEmptyMajor);
     }

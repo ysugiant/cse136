@@ -66,60 +66,68 @@ namespace DALTest
         [TestMethod]
         public void MajorTest()
         {
-            //NOT IMPLEMENTED
-            List<string> errors = new List<string>();
-            int ID;
+            List<string> errors = new List<string>(); //ERRORS list
+            
+            //INSERT
             Major major = new Major();
             major.majorName = "Test Major";
             major.deptId = 1;
 
+            int ID;
+            DALMajor.InsertMajor(major, ref errors, out ID);
+            major.id = ID;
 
-            DALMajor.InsertMajor(major.majorName,  major.deptId, ref errors, out ID);
-
+            //check for errors
             Assert.AreEqual(0, errors.Count);
 
-            Major verifyMajor = new Major();
-            verifyMajor = DALMajor.GetMajorDetail(ID, ref errors);
-            //Assert.AreEqual(student.ToString(),verifyStudent.ToString());
+            //VERIFY, GET
+            Major verifyMajor = DALMajor.GetMajorDetail(ID, ref errors);
+            
+            //check for errors
             Assert.AreEqual(0, errors.Count);
+
+            Assert.AreEqual(major.id, verifyMajor.id);
             Assert.AreEqual(major.majorName, verifyMajor.majorName);
             Assert.AreEqual(major.deptId, verifyMajor.deptId);
-            DALMajor.GetMajorDetail(ID, ref errors);
 
+            //check for errors
+            Assert.AreEqual(0, errors.Count);
 
+            //DALMajor.GetMajorDetail(ID, ref errors);
+
+            //UPDATE
             Major major2 = new Major();
 
+            major2.id = major.id;
             major2.majorName = "Test2 Major";
             major2.deptId = 1;
 
-            DALMajor.UpdateMajor(ID,major2.majorName, major2.deptId, ref errors);
+            DALMajor.UpdateMajor(major2, ref errors);
 
-            verifyMajor = DALMajor.GetMajorDetail(ID, ref errors);
+            //VERIFY, GET
+            verifyMajor = DALMajor.GetMajorDetail(major2.id, ref errors);
+
+            //check for errors
             Assert.AreEqual(0, errors.Count);
-            //   Assert.AreEqual(course2.id, verifyCourse.id);
+
+            Assert.AreEqual(major2.id, verifyMajor.id);
             Assert.AreEqual(major2.majorName,verifyMajor.majorName);
             Assert.AreEqual(major2.deptId, verifyMajor.deptId);
-            
 
+            //check for errors
+            Assert.AreEqual(0, errors.Count);
 
-
-            // need to modify!!!!!
-
-
+            //GET LIST (NEED TO MODIFY?)
             List<Tuple<string, string>> majorList = DALMajor.GetMajorList(ref errors);
             Assert.AreEqual(0, errors.Count);
 
-          
-
-            DALMajor.DeleteMajor(ID, ref errors);
+            //DELETE
+            DALMajor.DeleteMajor(major2.id, ref errors);
       
-            Major verifyEmptyMajor = DALMajor.GetMajorDetail(ID, ref errors);
+            //VERIFY, GET
+            Major verifyEmptyMajor = DALMajor.GetMajorDetail(major2.id, ref errors);
             Assert.AreEqual(0, errors.Count);
             Assert.AreEqual(null, verifyEmptyMajor);
-
-
-
         }
-
     }
 }

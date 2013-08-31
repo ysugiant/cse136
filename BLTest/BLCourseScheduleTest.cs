@@ -76,7 +76,7 @@ namespace BLTest
             sCourse.dayID = 3;
             sCourse.instr_id = 1;
             
-            int ID = -1;
+            int ID;
             BLCourseSchedule.InsertCourseSchedule(sCourse, ref errors, out ID);
             sCourse.id = ID;
             

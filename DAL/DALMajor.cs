@@ -13,7 +13,7 @@ namespace DAL
     {
         static string connection_string = ConfigurationManager.AppSettings["dsn"];
 
-        public static void InsertMajor(string majorName, int deptID, ref List<string> errors, out int ID)
+        public static void InsertMajor(Major major, ref List<string> errors, out int ID)
         {
             ID = -1;
             SqlConnection conn = new SqlConnection(connection_string);
@@ -27,8 +27,8 @@ namespace DAL
                 mySA.SelectCommand.Parameters.Add(new SqlParameter("@major_name", SqlDbType.VarChar, 50));
                 mySA.SelectCommand.Parameters.Add(new SqlParameter("@dept_id", SqlDbType.Int));
 
-                mySA.SelectCommand.Parameters["@major_name"].Value = majorName;
-                mySA.SelectCommand.Parameters["@dept_id"].Value = deptID;
+                mySA.SelectCommand.Parameters["@major_name"].Value = major.majorName;
+                mySA.SelectCommand.Parameters["@dept_id"].Value = major.deptId;
 
                 DataSet myDS = new DataSet();
                 mySA.Fill(myDS);
@@ -46,7 +46,7 @@ namespace DAL
             }
         }
 
-        public static void UpdateMajor(int majorID, string majorName, int deptID, ref List<string> errors)
+        public static void UpdateMajor(Major major, ref List<string> errors)
         {
             SqlConnection conn = new SqlConnection(connection_string);
             try
@@ -59,9 +59,9 @@ namespace DAL
                 mySA.SelectCommand.Parameters.Add(new SqlParameter("@major_name", SqlDbType.VarChar, 50));
                 mySA.SelectCommand.Parameters.Add(new SqlParameter("@dept_id", SqlDbType.Int));
 
-                mySA.SelectCommand.Parameters["@major_id"].Value = majorID ;
-                mySA.SelectCommand.Parameters["@major_name"].Value = majorName;
-                mySA.SelectCommand.Parameters["@dept_id"].Value = deptID;
+                mySA.SelectCommand.Parameters["@major_id"].Value = major.id;
+                mySA.SelectCommand.Parameters["@major_name"].Value = major.majorName;
+                mySA.SelectCommand.Parameters["@dept_id"].Value = major.deptId;
 
                 DataSet myDS = new DataSet();
                 mySA.Fill(myDS);
@@ -128,6 +128,7 @@ namespace DAL
                 if (myDS.Tables[0].Rows.Count == 0)
                     return null;
 
+                major.id = Convert.ToInt32(myDS.Tables[0].Rows[0]["major_id"].ToString());
                 major.majorName = myDS.Tables[0].Rows[0]["major_name"].ToString();
                 major.deptId = Convert.ToInt32(myDS.Tables[0].Rows[0]["dept_id"]);
             }

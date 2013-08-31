@@ -11,6 +11,7 @@ namespace BL
     {
         public static void InsertCourseSchedule(ScheduledCourse sched, ref List<string> errors, out int ID)
         {
+            ID = -1;
             BLCheck.checkCourseScheduleErrors(sched, ref errors);
             DALCourseSchedule.InsertCourseSchedule(sched, ref errors, out ID);
         }
