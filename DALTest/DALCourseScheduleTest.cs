@@ -106,14 +106,14 @@ namespace DALTest
             sCourse.timeID = 13;
 
             List<string> errors = new List<string>();
-            int ID = 0;
+            int ID;
             DALCourseSchedule.InsertCourseSchedule(sCourse, ref errors, out ID);
             sCourse.id = ID;
             Assert.AreEqual(0, errors.Count);
 
             ScheduledCourse verifyCourseSchedule = DALCourseSchedule.GetCourseScheduleDetail(ID, ref errors);
             
-            System.Diagnostics.Debug.WriteLine("value of auto incremented ID is: " + ID);
+            //System.Diagnostics.Debug.WriteLine("value of auto incremented ID is: " + ID);
             
             Assert.AreEqual(0, errors.Count);
             Assert.AreEqual(sCourse.id, verifyCourseSchedule.id);

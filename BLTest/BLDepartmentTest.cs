@@ -147,5 +147,26 @@ namespace BLTest
             Assert.AreEqual(verifyDept, null);
 
         }
+
+        [TestMethod]
+        public void BusinessLayerDepartmentErrorTest()
+        {
+            Department dept = new Department();
+            dept.deptName = "Test Department12345678901234567890123456789012345678901234567890";
+            dept.chairID = -1;
+
+            List<string> errors = new List<string>();
+            BLDepartment.InsertDepartment(dept, ref errors);
+            Assert.AreEqual(2, errors.Count);
+
+            Department verifyDept = BLDepartment.GetDepartmentDetail(dept.deptName, ref errors);
+            Assert.AreEqual(3, errors.Count);
+
+            BLDepartment.UpdateDepartment(dept, ref errors);
+            Assert.AreEqual(5, errors.Count);
+
+            BLDepartment.DeleteDepartment(dept.deptName, ref errors);
+            Assert.AreEqual(6, errors.Count);
+        }
     }
 }

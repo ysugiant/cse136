@@ -59,108 +59,9 @@ namespace BLTest
         //
         #endregion
 
-        [TestMethod]
-        public void InsertCourseErrorTest()
-        {
-            List<string> errors = new List<string>();
+   
 
-            BLCourse.InsertCourse(null, ref errors);
-            //BLCOurse check all of them
-            Assert.AreEqual(1, errors.Count);
-
-            errors = new List<string>();
-
-            Course course = new Course();
-            course.id = -1;
-            course.title = "";
-            course.description = "";
-            course.units = -1;
-            BLCourse.InsertCourse(course, ref errors);
-            Assert.AreEqual(4, errors.Count);
-
-            /*
-            errors = new List<string>();
-            course = new Course();
-            course.title = "";
-            BLCourse.InsertCourse(course, ref errors);
-            Assert.AreEqual(1, errors.Count);
-
-
-            errors = new List<string>();
-            course = new Course();
-            course = "";
-            BLCourse.InsertCourse(course, ref errors);
-            Assert.AreEqual(1, errors.Count);
-             */
-
-
-        }
-
-        [TestMethod]
-        public void GetCourseErrorTest()
-        {
-            List<string> errors = new List<string>();
-
-            BLCourse.GetCourse(null, ref errors);
-            Assert.AreEqual(1, errors.Count);
-
-            errors = new List<string>();
-            String coursetitle = "";
-            BLCourse.GetCourse(coursetitle, ref errors);
-            Assert.AreEqual(1, errors.Count);
-
-        }
-
-        [TestMethod]
-        public void DeleteCourseErrorTest()
-        {
-            List<string> errors = new List<string>();
-
-            BLCourse.GetCourse(null, ref errors);
-            Assert.AreEqual(1, errors.Count);
-
-            errors = new List<string>();
-            String coursetitle = "";
-            BLCourse.DeleteCourse(coursetitle, ref errors);
-            Assert.AreEqual(1, errors.Count);
-        }
-
-        [TestMethod]
-        public void InsertPrerequisiteErrorTest()
-        {
-            List<string> errors = new List<string>();
-
-            int courseid = -1;
-            int course_pre_id = -1;
-
-            BLCourse.InsertPrerequisite(courseid, course_pre_id, ref errors);
-            Assert.AreEqual(2, errors.Count);
-        }
-
-        [TestMethod]
-        public void UpdatePrerequisiteErrorTest()
-        {
-            List<string> errors = new List<string>();
-
-            int courseid = -1;
-            int course_pre_id = -1;
-            int change_id = -1;
-
-            BLCourse.UpdatePrerequisite(courseid, course_pre_id, change_id, ref errors);
-            Assert.AreEqual(3, errors.Count);
-        }
-
-        [TestMethod]
-        public void DeletePrerequisiteErrorTest()
-        {
-            List<string> errors = new List<string>();
-
-            int courseid = -1;
-            int course_pre_id = -1;
-
-            BLCourse.DeletePrerequisite(courseid, course_pre_id, ref errors);
-            Assert.AreEqual(2, errors.Count);
-        }
+ 
 
 
 
@@ -236,6 +137,76 @@ namespace BLTest
             Assert.AreEqual(null, verifyEmptyStudent);
 
 
+        }
+
+        [TestMethod]
+        public void BusinessLayerCourseErrorTest()
+        {
+
+            //insert course
+            List<string> errors = new List<string>();
+
+            BLCourse.InsertCourse(null, ref errors);
+            //BLCOurse check all of them
+            Assert.AreEqual(1, errors.Count);
+
+            errors = new List<string>();
+
+            Course course = new Course();
+            course.id = -1;
+            course.title = "";
+            course.description = "";
+            course.units = -1;
+            BLCourse.InsertCourse(course, ref errors);
+            Assert.AreEqual(4, errors.Count);
+
+
+
+            //get course  
+            errors = new List<string>();
+
+            BLCourse.GetCourse(null, ref errors);
+            Assert.AreEqual(1, errors.Count);
+
+            errors = new List<string>();
+            String coursetitle = "";
+            BLCourse.GetCourse(coursetitle, ref errors);
+            Assert.AreEqual(1, errors.Count);
+
+
+            errors = new List<string>();
+
+            BLCourse.GetCourse(null, ref errors);
+            Assert.AreEqual(1, errors.Count);
+
+            errors = new List<string>();
+             coursetitle = "";
+            BLCourse.DeleteCourse(coursetitle, ref errors);
+            Assert.AreEqual(1, errors.Count);
+
+            errors = new List<string>();
+
+            int courseid = -1;
+            int course_pre_id = -1;
+
+            BLCourse.InsertPrerequisite(courseid, course_pre_id, ref errors);
+            Assert.AreEqual(2, errors.Count);
+
+            errors = new List<string>();
+
+            courseid = -1;
+            course_pre_id = -1;
+            int change_id = -1;
+
+            BLCourse.UpdatePrerequisite(courseid, course_pre_id, change_id, ref errors);
+            Assert.AreEqual(3, errors.Count);
+
+            errors = new List<string>();
+             courseid = -1;
+             course_pre_id = -1;
+
+            BLCourse.DeletePrerequisite(courseid, course_pre_id, ref errors);
+            Assert.AreEqual(2, errors.Count);
         }
 
     }

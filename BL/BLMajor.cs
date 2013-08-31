@@ -9,26 +9,22 @@ namespace BL
 {
     public static class BLMajor
     {
-        public static void InsertMajor(string majorName, int deptID, ref List<string> errors)
+        public static void InsertMajor(Major major, ref List<string> errors, out int ID)
         {
-            BLCheck.checkMajorName(majorName, ref errors);
-            BLCheck.checkDeptID(deptID, ref errors);
+            ID = -1;
+            BLCheck.checkMajorErrors(major, ref errors);
             if (errors.Count > 0)
                 return;
-
-            int majorID;
-            DALMajor.InsertMajor(majorName, deptID, ref errors, out majorID);   
+            DALMajor.InsertMajor(major, ref errors, out ID);   
         }
 
-        public static void UpdateMajor(int majorID, string majorName, int deptID, ref List<string> errors)
+        public static void UpdateMajor(Major major, ref List<string> errors)
         {
-            BLCheck.checkMajorID(majorID, ref errors);
-            BLCheck.checkMajorName(majorName, ref errors);
-            BLCheck.checkDeptID(deptID, ref errors);
+            BLCheck.checkMajorErrors(major, ref errors);
             if (errors.Count > 0)
                 return;
 
-            DALMajor.UpdateMajor(majorID, majorName, deptID, ref errors);
+            DALMajor.UpdateMajor(major, ref errors);
         }
 
         public static Major GetMajorDetail(int id, ref List<string> errors)
