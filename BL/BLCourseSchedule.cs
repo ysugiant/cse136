@@ -13,6 +13,8 @@ namespace BL
         {
             ID = -1;
             BLCheck.checkCourseScheduleErrors(sched, ref errors);
+            if (errors.Count > 0)
+                return;
             DALCourseSchedule.InsertCourseSchedule(sched, ref errors, out ID);
         }
 

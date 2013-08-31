@@ -62,7 +62,6 @@ namespace BLTest
     [TestMethod]
     public void BusinessLayerMajorTest()
     {
-        //INSERT
         List<string> errors = new List<string>(); //ERRORS list
 
         Major major = new Major();
@@ -78,12 +77,12 @@ namespace BLTest
 
         //VERIFY, GET
         Major verifyMajor = BLMajor.GetMajorDetail(ID, ref errors);
-        
+
         //check for errors
         Assert.AreEqual(0, errors.Count);
-        
-        Assert.AreEqual(major.id, verifyMajor.id);       
-        Assert.AreEqual(major.majorName, verifyMajor.majorName);        
+
+        Assert.AreEqual(major.id, verifyMajor.id);
+        Assert.AreEqual(major.majorName, verifyMajor.majorName);
         Assert.AreEqual(major.deptId, verifyMajor.deptId);
 
         //check for errors
@@ -126,25 +125,54 @@ namespace BLTest
         Assert.AreEqual(null, verifyEmptyMajor);
     }
 
-    [TestMethod]
+      [TestMethod]
     public void BusinessLayerMajorErrorTest()
     {
-        //INSERT        InsertMajor(string majorName, int deptID, ref List<string> errors)
-        //checkMajorName
-        //CheckDeptID
+        List<string> errors = new List<string>(); //ERRORS list
 
-        //UPDATE        UpdateMajor(int majorID, string majorName, int deptID, ref List<string> errors)
-        //checkMajorName
-        //CheckMajorID
-        //CheckDeptID
+        //MALFORMED POCOS
+        //errors.Add("Major name cannot be empty");
+        Major majorEmpty = new Major();
+        majorEmpty.majorName = "";
+        majorEmpty.deptId = 1;
 
-        //DELETE        DeleteMajor(int id, ref List<string> errors)
-        //CheckMajorID
+        //errors.Add("Major name cannot be more than 50");
+        Major major50 = new Major();
+        //60 characters
+        major50.majorName = "123456789012345678901234567890123456789012345678901234567890"; 
+        major50.deptId = -9;
 
-        //GET           GetMajorDetail(int id, ref List<string> errors)
-        //CheckMajorID
+        //errors.Add("Major name cannot be null");
+        Major majorNull = new Major();
+        majorNull.majorName = null;
+        majorNull.deptId = 1;
 
-        //GET LIST      GetMajorList(ref List<string> errors)
+        //INSERT 1
+        int ID1;
+        BLMajor.InsertMajor(majorEmpty, ref errors, out ID1);
+        majorEmpty.id = ID1;
+        Assert.AreEqual(1, errors.Count);
+
+        //INSERT 2
+        int ID2;
+        BLMajor.InsertMajor(major50, ref errors, out ID2);
+        major50.id = ID2;
+        Assert.AreEqual(3, errors.Count);
+        
+        //VERIFY, GET 
+        //Get with a negative value for major id
+        Major verifyEmptyMajorEmpty = BLMajor.GetMajorDetail(majorEmpty.id, ref errors);
+        Assert.AreEqual(4, errors.Count);
+        Assert.AreEqual(null, verifyEmptyMajorEmpty);
+
+        //DELETE
+        //Delete with a negative value for major id
+        BLMajor.DeleteMajor(major50.id, ref errors);
+        Assert.AreEqual(5, errors.Count);
+        
+        //UPDATE
+        BLMajor.UpdateMajor(majorNull, ref errors);
+        Assert.AreEqual(6, errors.Count);
     }
   }
 }

@@ -13,6 +13,8 @@ namespace BL
         {
             ID = -1;
             BLCheck.checkMajorErrors(major, ref errors);
+            if (errors.Count > 0)
+                return;
             DALMajor.InsertMajor(major, ref errors, out ID);   
         }
 

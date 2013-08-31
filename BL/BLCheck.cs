@@ -295,8 +295,8 @@ namespace BL
             }
             else if (name.Length > 50)
             {
-                errors.Add("Major name cannot be more than 9");
-                System.Diagnostics.Debug.WriteLine("Major name cannot be more than 9!");
+                errors.Add("Major name cannot be more than 50");
+                System.Diagnostics.Debug.WriteLine("Major name cannot be more than 50!");
             }
         }
         //IN GENERAL
