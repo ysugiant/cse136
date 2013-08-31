@@ -61,7 +61,54 @@ namespace BLTest
 
         [TestMethod]
         public void BusinessLayerCourseScheduleTest()
-        {/*
+        {
+            //INSERT        InsertCourseSchedule(ScheduledCourse sched, ref List<string> errors)            
+            ScheduledCourse sCourse = new ScheduledCourse();
+            Course course = new Course();
+            
+            sCourse.year = 2013;
+            sCourse.quarter = "Fall";
+            sCourse.session = "A01";
+            sCourse.course.id = 1;
+            sCourse.timeID = 2;
+            sCourse.dayID = 3;
+            sCourse.instr_id = 1;
+           
+            List<string> errors = new List<string>();
+            int ID = 0;
+            BLCourseSchedule.InsertCourseSchedule(sCourse, ref errors, out ID);
+            sCourse.id = ID;
+            Assert.AreEqual(0, errors.Count);
+
+
+
+            //INSERT        InsertCourseSchedule(ScheduledCourse sched, ref List<string> errors)
+            //checkYear//checkScheduleID//checkYear//checkQuarter
+            //checkSession//checkCourseID//checkScheduleTimeID
+            //checkScheduleDayID//checkStaffID
+
+            //UPDATE        UpdateCourseSchedule(ScheduledCourse sched, ref List<string> errors)
+            //checkYear
+            //checkQuarter
+            //checkSession
+            //checkCourseID
+            //checkStaffID
+            //checkScheduleID
+            //checkScheduleDayID
+            //checkScheduleTimeID
+
+            //DELETE        DeleteCourseSchedule(int id, ref List<string> errors)
+            //checkScheduleID
+
+            //GET           GetCourseScheduleDetail(int id, ref List<string> errors)
+            //checkScheduleID
+
+            //GET LIST      GetCourseScheduleList(int year, string quarter, ref List<string> errors)
+            //checkYear
+            //checkQuarter
+
+
+            /*
             List<string> errors = new List<string>();
 
             BLStudent.InsertStudent(null, ref errors);
