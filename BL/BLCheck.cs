@@ -15,7 +15,8 @@ namespace BL
         
         public static void checkStudentErrors(Student student, ref List<string> errors)
         {
-            checkNullObject(student, ref errors);
+            if (checkNullObject(student, ref errors) == false)
+                return;
             checkStudentID(student.id, ref errors);
             checkName(student.first_name, "student", ref errors);
             checkEmail(student.email, ref errors);
@@ -32,11 +33,12 @@ namespace BL
 
         public static void checkStaffErrors(Staff staff, ref List<string> errors)
         {
-            checkNullObject(staff, ref errors);
+            if (checkNullObject(staff, ref errors) == false)
+                return;
             checkName(staff.first_name, "first", ref errors);
             checkName(staff.last_name, "last", ref errors);
             checkEmail(staff.email, ref errors);
-            checkPassword(staff.email, ref errors);
+            checkPassword(staff.password, ref errors);
             checkDepartmentErrors(staff.dept, ref errors);
             //don't need to check the instructor bit because it can only be true or false.
         }
@@ -48,7 +50,8 @@ namespace BL
        
         public static void checkDepartmentErrors(Department dept, ref List<string> errors)
         {
-            checkNullObject(dept, ref errors);
+            if (checkNullObject(dept, ref errors) == false)
+                return;
             checkDeptName(dept.deptName, ref errors);
             checkDeptID(dept.id, ref errors);
             checkChairID(dept.chairID, ref errors);
@@ -85,12 +88,14 @@ namespace BL
         
 
         //GENERAL ERROR CHECKING
-        static void checkNullObject(Object obj, ref List<string> errors)
+        static bool checkNullObject(Object obj, ref List<string> errors)
         {
             if (obj == null)
             {
                 errors.Add("Cannot insert or update a null object.");
+                return false;
             }
+            return true;
         }
         static void checkEmail(string email, ref List<string> errors)
         {
@@ -192,34 +197,43 @@ namespace BL
         //STUDENT
         public static void checkStudentLevel(StudentLevel level, ref List<string> errors)
         {
-            if (level.Equals("freshman") || level.Equals("sophomore") || level.Equals("junior") || 
-                     level.Equals("senior") || level.Equals("grad") || level.Equals("phd")) {
+            if (level.ToString().Equals("freshman") || level.ToString().Equals("sophomore") || level.ToString().Equals("junior") || 
+                     level.ToString().Equals("senior") || level.ToString().Equals("grad") || level.ToString().Equals("phd")) {
                          errors.Add("Student level cannot be anything other than: 'freshman', 'sophomore', 'junior'," +
                                      "'senior', 'grad', or 'phd'.");
             }
+            else if (level.Equals(null))
+                errors.Add("Cannot have a null student level.");
+            else if (level.ToString().Length == 0)
+                errors.Add("Student level cannot be an empty string.");
         }
 
         public static void checkStudentStatus(int status, ref List<string> errors)
         {
             if (status < 0)
             {
-                errors.Add("Student cannot have a null.");
+                errors.Add("Student status cannot be null.");
             }
         }
 
         public static void checkStudentShoeSize(float shoeSize, ref List<string> errors)
         {
-
+            if (shoeSize < 0.0)
+                errors.Add("Shoe size must be a non-negative value.");
         }
 
         public static void checkStudentWeight(int weight, ref List<string> errors)
         {
-
+            if (weight < 0)
+                errors.Add("Student's weight cannot be negative.");
         }
 
-        public static void checkStudentSSN(string name, ref List<string> errors)
+        public static void checkStudentSSN(string ssn, ref List<string> errors)
         {
-
+            if (ssn.Length != 9)
+                errors.Add("Student's ssn must be 9 characters in length.");
+            else if (ssn == null)
+                errors.Add("Student's ssn cannot be a null value.");
         }
         //IN GENERAL
             //CheckName

@@ -11,16 +11,23 @@ namespace BL
   {
     public static void InsertStudent(Student student, ref List<string> errors)
     {
-        BLCheck.checkStudentErrors(student, ref errors);
+      BLCheck.checkStudentErrors(student, ref errors);
+      //System.Diagnostics.Debug.WriteLine();
       if (errors.Count > 0)
-        return;
+      {
+          for (int i = 0; i < errors.Count; i++)
+          {
+              System.Diagnostics.Debug.WriteLine("There was an error caught." + errors[i]);
+          }
+          return;
+      }
 
       DALStudent.InsertStudent(student, ref errors);
     }
 
     public static void UpdateStudent(Student student, ref List<string> errors)
     {
-        BLCheck.checkStudentID(student.id, ref errors);
+      BLCheck.checkStudentID(student.id, ref errors);
 
       if (errors.Count > 0)
         return;

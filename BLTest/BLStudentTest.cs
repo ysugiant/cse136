@@ -99,7 +99,7 @@ namespace BLTest
       Student student = new Student();
       student.first_name = "first";
       student.last_name = " last";
-      student.id = Guid.NewGuid().ToString().Substring(0, 20);
+      student.id = "A12345678";//Guid.NewGuid().ToString().Substring(0, 8);
       student.ssn = "555555555";
       student.email = "myemail15@ucsd.edu";
       student.password = "pass123456";

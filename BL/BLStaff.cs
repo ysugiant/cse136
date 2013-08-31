@@ -9,9 +9,17 @@ namespace BL
 {
     public static class BLStaff
     {
-        public static void InsertStaff(Staff staffMember, List<string> errors, out int newStaffID)
+        public static void InsertStaff(Staff staffMember, ref List<string> errors, out int newStaffID)
         {
             BLCheck.checkStaffErrors(staffMember, ref errors);
+
+            if (errors.Count > 0)
+            {
+                newStaffID = -99;
+                for (int i = 0; i < errors.Count; i++)
+                    System.Diagnostics.Debug.WriteLine("Error caught." + errors[i]);
+                return;
+            }
             DALStaff.InsertStaff(staffMember, ref errors, out newStaffID);
         }
 
@@ -29,12 +37,7 @@ namespace BL
 
         public static Staff GetStaff(int id, ref List<string> errors)
         {
-            if (id < 0)
-            {
-                errors.Add("Invalid staff ID. ID must be a non-negative integer.");
-            }
-
-            // anything else to validate?
+            BLCheck.checkStaffID(id, ref errors);
 
             if (errors.Count > 0)
                 return null;
@@ -44,10 +47,7 @@ namespace BL
 
         public static void DeleteStaff(int id, ref List<string> errors)
         {
-            if (id < 0)
-            {
-                errors.Add("Invalid staff ID. ID must be a non-negative integer.");
-            }
+            BLCheck.checkStaffID(id, ref errors);
 
             if (errors.Count > 0)
                 return;

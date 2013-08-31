@@ -38,8 +38,9 @@ namespace BLTest
         }
 
         [TestMethod]
-        public void InsertStaffErrorTest()
+        public void BusinessLayerStaffTest()//InsertStaffErrorTest()
         {
+            //######################################TESTING INSERTION ERRORS#################################
             List<string> errors = new List<string>();
 
             int newStaffID;
@@ -47,79 +48,119 @@ namespace BLTest
             BLStaff.InsertStaff(null, ref errors, out newStaffID);
             Assert.AreEqual(1, errors.Count);
 
-            errors = new List<string>();
+            errors.Clear(); ;
 
             Staff instructor = new Staff();
             instructor.first_name = "";// fail, empty string
             instructor.last_name = null;// fail, null
-            instructor.email = "staff@....edu";//fail, regex
+            instructor.email = "staff@..!~<>.edu";//fail, regex
             instructor.password = "password123456789";// fail, > 15 chars
             instructor.dept = new Department();
+            instructor.dept.id = -99;// fail, negative dept ID
             instructor.dept.chairID = -1;// fail, negative ID
             instructor.dept.deptName = "";// fail, empty string
             instructor.isInstructor = true;// impossible to fail.
 
-            //Should catch the regEx for email, invalid formatting error
+            //Should catch 6 total errors...
             BLStaff.InsertStaff(instructor, ref errors, out newStaffID);
             instructor.id = newStaffID;//assigning the auto-inc staff_id to this instructor object
-            Assert.AreEqual(6, errors.Count);
+            Assert.AreEqual(7, errors.Count);
 
+            //########################################TESTING SELECTION ERRORS##############################
+            errors.Clear();// Resetting the errors log to begin anew.
+            BLStaff.GetStaff(-5, ref errors);// should result in 1 error, id.
+            Assert.AreEqual(1, errors.Count);
+
+            //#######################################TESTING DELETION ERRORS###############################
+            errors.Clear(); ;// Resetting the errors log to beging anew.
+            BLStaff.DeleteStaff(-5, ref errors);// Can only fail on the one parameter, id.
+            Assert.AreEqual(1, errors.Count);
+
+            //#######################################TESTING BLSTUDENT FUNCTIONS############################
+            errors.Clear();// Resetting the errors log to beging anew.
+            System.Diagnostics.Debug.WriteLine("The count of errorLog is: " + errors.Count);
+            Staff advisor = new Staff();
+            int staffID;
+            advisor.first_name = "first";
+            advisor.last_name = " last";
+            advisor.email = "myemail97@ucsd.edu";
+            advisor.password = "pass1234";
+            Department dept = new Department();
+            dept.id = 20;
+            dept.chairID = 177;
+            dept.deptName = "Physics";
+            advisor.dept = dept;
+            advisor.isInstructor = false;
+
+            BLStaff.InsertStaff(advisor, ref errors, out staffID);
+            advisor.id = staffID;
+            System.Diagnostics.Debug.WriteLine("The advisors new ID is: " + advisor.id);
+            Assert.AreEqual(0, errors.Count);
+
+            Staff verifyAdvisor = BLStaff.GetStaff(advisor.id, ref errors);
+            Assert.AreEqual(0, errors.Count);
+
+            Assert.AreEqual(advisor.id, verifyAdvisor.id);
+            Assert.AreEqual(advisor.first_name, verifyAdvisor.first_name);
+            Assert.AreEqual(advisor.last_name, verifyAdvisor.last_name);
+            Assert.AreEqual(advisor.email, verifyAdvisor.email);
+            Assert.AreEqual(advisor.password, verifyAdvisor.password);
+            Assert.AreEqual(advisor.dept.id, verifyAdvisor.dept.id);
+            Assert.AreEqual(advisor.isInstructor, verifyAdvisor.isInstructor);
+
+            BLStaff.DeleteStaff(advisor.id, ref errors);
+
+            Staff verifyEmptyAdvisor = BLStaff.GetStaff(advisor.id, ref errors);
+            Assert.AreEqual(0, errors.Count);
+            Assert.AreEqual(null, verifyEmptyAdvisor);
         }
 
-        [TestMethod]
+        /*[TestMethod]
         public void GetStaffErrorTest()
         {
             List<string> errors = new List<string>();
 
             BLStaff.GetStaff(-5, ref errors);
             Assert.AreEqual(1, errors.Count);
-        }
+        }*/
 
-        [TestMethod]
+        /*[TestMethod]
         public void DeleteStaffErrorTest()
         {
             List<string> errors = new List<string>();
 
-            BLStudent.DeleteStudent(null, ref errors);
+            BLStaff.DeleteStaff(null, ref errors);
             Assert.AreEqual(1, errors.Count);
-        }
+        }*/
 
-        [TestMethod]
+        /*[TestMethod]
         public void StaffInsertAndSelectTest()
         {
-            Student student = new Student();
-            int studentID;
-            student.first_name = "first";
-            student.last_name = " last";
-            student.id = Guid.NewGuid().ToString().Substring(0, 20);
-            student.ssn = "777777777";
-            student.email = "myemail97@ucsd.edu";
-            student.password = "pass1234";
-            student.shoe_size = 0;
-            student.weight = 0;
-            student.major = 1;
-            student.level = 0;
-            student.status = 0;
-            student.enrolled = new List<ScheduledCourse>();
-
             List<string> errors = new List<string>();
-            BLStudent.InsertStudent(student, ref errors);
-            student.id = studentID;
+
+            Staff advisor = new Staff();
+            int staffID;
+            advisor.first_name = "first";
+            advisor.last_name = " last";
+            advisor.email = "myemail97@ucsd.edu";
+            advisor.password = "pass1234";
+            advisor.dept = BLDepartment.GetDepartmentDetail("Computer Science and Engineering", ref errors);
+            advisor.isInstructor = false;
+            
+            BLStaff.InsertStaff(advisor, ref errors, out staffID);
+            advisor.id = staffID;
             Assert.AreEqual(0, errors.Count);
 
-            Student verifyStudent = BLStudent.GetStudent(student.id, ref errors);
-
+            Staff verifyAdvisor = BLStaff.GetStaff(advisor.id, ref errors);
             Assert.AreEqual(0, errors.Count);
-            Assert.AreEqual(student.first_name, verifyStudent.first_name);
-            Assert.AreEqual(student.last_name, verifyStudent.last_name);
-            Assert.AreEqual(student.id, verifyStudent.id);
-            Assert.AreEqual(student.ssn, verifyStudent.ssn);
-            Assert.AreEqual(student.email, verifyStudent.email);
-            Assert.AreEqual(student.shoe_size, verifyStudent.shoe_size);
-            Assert.AreEqual(student.weight, verifyStudent.weight);
-            Assert.AreEqual(student.major, verifyStudent.major);
-            Assert.AreEqual(student.level, verifyStudent.level);
-            Assert.AreEqual(student.status, verifyStudent.status);
+
+            Assert.AreEqual(advisor.id, verifyAdvisor.id);
+            Assert.AreEqual(advisor.first_name, verifyAdvisor.first_name);
+            Assert.AreEqual(advisor.last_name, verifyAdvisor.last_name);
+            Assert.AreEqual(advisor.email, verifyAdvisor.email);
+            Assert.AreEqual(advisor.password, verifyAdvisor.password);
+            Assert.AreEqual(advisor.dept.id, verifyAdvisor.dept.id);
+            Assert.AreEqual(advisor.isInstructor, verifyAdvisor.isInstructor);
 
             /*
             //List<ScheduledCourse> scheduleList = BLSchedule.GetScheduleList("", "", ref errors); // This was the original code.
@@ -154,13 +195,13 @@ namespace BLTest
             /* JUSTIN : now the student object is up-to-date, including their course schedule.
              * NOTE: I think we should always keep the object updated, through every method acting upon it. Yeah? No?
              * */
-            BLStudent.DeleteStudent(student.id, ref errors);
+            /*BLStaff.DeleteStaff(advisor.id, ref errors);
 
-            Student verifyEmptyStudent = BLStudent.GetStudent(student.id, ref errors);
+            Staff verifyEmptyAdvisor = BLStaff.GetStaff(advisor.id, ref errors);
             Assert.AreEqual(0, errors.Count);
-            Assert.AreEqual(null, verifyEmptyStudent);
+            Assert.AreEqual(null, verifyEmptyAdvisor);*/
 
-        }
+        //}
 
     }
 }
