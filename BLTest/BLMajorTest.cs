@@ -62,6 +62,73 @@ namespace BLTest
     [TestMethod]
     public void BusinessLayerMajorTest()
     {
+        //INSERT
+        List<string> errors = new List<string>(); //ERRORS list
+
+        Major major = new Major();
+        major.majorName = "Test Major";
+        major.deptId = 1;
+
+        int ID = -1;
+        BLMajor.InsertMajor(major.majorName, major.deptId, ref errors, out ID);
+        major.id = ID;
+
+        //check for errors
+        Assert.AreEqual(0, errors.Count);
+
+        //VERIFY, GET
+        Major verifyMajor = BLMajor.GetMajorDetail(ID, ref errors);
+        
+        //check for errors
+        Assert.AreEqual(0, errors.Count);
+
+        Assert.AreEqual(major.id, verifyMajor.id);
+        Assert.AreEqual(major.majorName, verifyMajor.majorName);
+        Assert.AreEqual(major.deptId, verifyMajor.deptId);
+
+        //check for errors
+        Assert.AreEqual(0, errors.Count);
+
+        //BLMajor.GetMajorDetail(ID, ref errors);
+
+        //UPDATE
+        Major major2 = new Major();
+
+        major2.id = major.id;
+        major2.majorName = "Test2 Major";
+        major2.deptId = 1;
+
+        BLMajor.UpdateMajor(major2.id, major2.majorName, major2.deptId, ref errors);
+
+        //VERIFY, GET
+        verifyMajor = BLMajor.GetMajorDetail(ID, ref errors);
+
+        //check for errors
+        Assert.AreEqual(0, errors.Count);
+
+        Assert.AreEqual(major2.id, verifyMajor.id);
+        Assert.AreEqual(major2.majorName, verifyMajor.majorName);
+        Assert.AreEqual(major2.deptId, verifyMajor.deptId);
+
+        //check for errors
+        Assert.AreEqual(0, errors.Count);
+
+        //GET LIST (NEED TO MODIFY?)
+        List<Tuple<string, string>> majorList = BLMajor.GetMajorList(ref errors);
+        Assert.AreEqual(0, errors.Count);
+
+        //DELETE
+        BLMajor.DeleteMajor(ID, ref errors);
+
+        //VERIFY, GET
+        Major verifyEmptyMajor = BLMajor.GetMajorDetail(ID, ref errors);
+        Assert.AreEqual(0, errors.Count);
+        Assert.AreEqual(null, verifyEmptyMajor);
+    }
+
+    [TestMethod]
+    public void BusinessLayerMajorErrorTest()
+    {
         //INSERT        InsertMajor(string majorName, int deptID, ref List<string> errors)
         //checkMajorName
         //CheckDeptID
@@ -78,27 +145,6 @@ namespace BLTest
         //CheckMajorID
 
         //GET LIST      GetMajorList(ref List<string> errors)
-        
-        
-        
-        /*
-      List<string> errors = new List<string>();
-
-      BLStudent.InsertStudent(null, ref errors);
-      Assert.AreEqual(1, errors.Count);
-
-      errors = new List<string>();
-
-      Student student = new Student();
-      student.id = "";
-      BLStudent.InsertStudent(student, ref errors);
-      Assert.AreEqual(1, errors.Count); */
-    }
-
-    [TestMethod]
-    public void BusinessLayerMajorErrorTest()
-    {
-
     }
   }
 }
