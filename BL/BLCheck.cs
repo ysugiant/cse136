@@ -45,7 +45,18 @@ namespace BL
         
         public static void checkCourseErrors(Course course, ref List<string> errors)
         {
-        
+            if (course == null)
+            {
+                errors.Add("Course Cannot insert or update a null object.");
+            }
+            else
+            {
+                checkCourseID(course.id, ref errors);
+                checkCourseTitle(course.title, ref errors);
+                checkCourseLevel(course.level, ref errors);
+                checkCourseDescription(course.description, ref errors);
+                checkCourseUnits(course.units, ref errors);
+            }
         }
        
         public static void checkDepartmentErrors(Department dept, ref List<string> errors)
@@ -408,32 +419,84 @@ namespace BL
             }
         }
 
-        public static void checkCourseLevel(string courselevel, ref List<string> errors)
+        public static void checkCourseLevel(CourseLevel courselevel, ref List<string> errors)
         {
+
             if (courselevel == null)
             {
                 errors.Add("course level cannot be null");
             }
-            else if (courselevel == "")
+            else if (courselevel.ToString() == "")
             {
                 errors.Add("course level cannot be empty");
             }
-            else if (courselevel.Length > 10)
+            else if (courselevel.ToString().Length > 10)
             {
                 errors.Add("course level cannot be more than 100");
             }
-            
+            else if (!checkCourseLevelValue(courselevel.ToString()))
+            {
+                errors.Add("course level should be lower, upper, grad");
+            }
 
         }
 
         public static void checkCourseDescription(string courseDescription, ref List<string> errors)
         {
+            if (courseDescription == null)
+            {
+                errors.Add("course descrpition cannot be null");
+            }
+            else if (courseDescription == "")
+            {
+                errors.Add("course descrpition cannot be empty");
+            }
+            else if (courseDescription.Length > 8000)
+            {
+                errors.Add("course descrpition cannot be more than 8000");
+            }
+        }
+
+        public static void checkCourseUnits(int courseUnits, ref List<string> errors)
+        {
+            if (courseUnits <= 0)
+            {
+                errors.Add("course units cannot be negative or zero");
+            }
+            else if (courseUnits > 13)
+            {
+                errors.Add("course units cannot be greater than 12");
+            }
+        }
+
+        //check course level value
+        public static Boolean checkCourseLevelValue(string courselvl)
+        {
+            Boolean tempcourselvl = false;
+            switch (courselvl)
+            {
+
+                case "lower":
+                    tempcourselvl = true;
+                    break;
+                case "upper":
+                    tempcourselvl = true;
+                    break;
+                case "grad":
+                    tempcourselvl = true;
+                    break;
+                default:
+                    tempcourselvl = false;
+                    break;
+            }
+            return tempcourselvl;
 
         }
 
-        public static void checkCourseUnits(string courseUnits, ref List<string> errors)
-        {
 
+        public static void checkCoursePreID(int id, ref List<string> errors)
+        {
+            checkID(id, "Course pre id", ref errors);
         }
         //IN GENERAL
             //CheckCourseID
