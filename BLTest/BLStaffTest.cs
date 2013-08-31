@@ -38,7 +38,7 @@ namespace BLTest
         }
 
         [TestMethod]
-        public void BusinessLayerErrorTest()
+        public void BusinessLayerStaffErrorTest()
         {
             //######################################TESTING INSERTION ERRORS#################################
             List<string> errors = new List<string>();
@@ -48,6 +48,7 @@ namespace BLTest
             BLStaff.InsertStaff(null, ref errors, out newStaffID);
             Assert.AreEqual(1, errors.Count);
 
+            errors.Clear();
             Staff instructor = new Staff();
             instructor.first_name = "";// fail, empty string
             instructor.last_name = null;// fail, null
@@ -62,6 +63,7 @@ namespace BLTest
             //Should catch 7 total errors...
             BLStaff.InsertStaff(instructor, ref errors, out newStaffID);
             instructor.id = newStaffID;//assigning the auto-inc staff_id to this instructor object
+            BLCheck.printErrorLog(ref errors);
             Assert.AreEqual(7, errors.Count);
 
             errors.Clear();

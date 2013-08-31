@@ -18,8 +18,8 @@ namespace BL
             if (checkNullObject(student, ref errors) == false)
                 return;
             checkStudentID(student.id, ref errors);
-            checkName(student.first_name, "student", ref errors);
-            checkName(student.last_name, "student", ref errors);
+            checkName(student.first_name, "first", ref errors);
+            checkName(student.last_name, "last", ref errors);
             checkEmail(student.email, ref errors);
             checkPassword(student.password, ref errors);
             checkStudentSSN(student.ssn, ref errors);
