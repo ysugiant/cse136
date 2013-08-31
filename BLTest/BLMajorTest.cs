@@ -123,9 +123,11 @@ namespace BLTest
         Major verifyEmptyMajor = BLMajor.GetMajorDetail(major2.id, ref errors);
         Assert.AreEqual(0, errors.Count);
         Assert.AreEqual(null, verifyEmptyMajor);
+
+        BLCheck.printErrorLog(ref errors);
     }
 
-      [TestMethod]
+    [TestMethod]
     public void BusinessLayerMajorErrorTest()
     {
         List<string> errors = new List<string>(); //ERRORS list
@@ -173,6 +175,8 @@ namespace BLTest
         //UPDATE
         BLMajor.UpdateMajor(majorNull, ref errors);
         Assert.AreEqual(6, errors.Count);
+
+        BLCheck.printErrorLog(ref errors);
     }
   }
 }

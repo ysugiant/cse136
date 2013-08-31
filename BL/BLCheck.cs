@@ -540,5 +540,14 @@ namespace BL
         //IN GENERAL
             //CheckCourseID
             //CheckCourseID for course_pre_id
+
+        public static void printErrorLog(ref List<string> errors)
+        {
+            System.Diagnostics.Debug.WriteLine("The following printout is the error log.");
+            for (int i = 0; i < errors.Count; i++)
+            {
+                System.Diagnostics.Debug.WriteLine(errors[i]);
+            }
+        }
     }
 }

@@ -134,6 +134,8 @@ namespace BLTest
             ScheduledCourse verifyEmptyCourseSchedule = BLCourseSchedule.GetCourseScheduleDetail(sCourse2.id, ref errors);
             Assert.AreEqual(0, errors.Count);
             Assert.AreEqual(null, verifyEmptyCourseSchedule);
+
+            BLCheck.printErrorLog(ref errors);
         }
 
         [TestMethod]
@@ -234,6 +236,8 @@ namespace BLTest
             Assert.AreEqual(14, errors.Count);
             BLCourseSchedule.UpdateCourseSchedule(schedSession2, ref errors);
             Assert.AreEqual(15, errors.Count);
+
+            BLCheck.printErrorLog(ref errors);
         }
     }
 }
