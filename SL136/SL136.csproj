@@ -44,6 +44,10 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SLEnrollment.cs" />
+    <Compile Include="SLDepartment.cs" />
+    <Compile Include="ISLDepartment.cs" />
+    <Compile Include="ISLEnrollment.cs" />
     <Compile Include="SLScheduleDay.cs" />
     <Compile Include="SLScheduleTime.cs" />
     <Compile Include="ISLScheduleDay.cs" />
