@@ -365,23 +365,36 @@ namespace BL
 
         public static void checkSession(string session, ref List<string> errors)
         {
-            string firstChar = session.Substring(0,1);
-            string secondChar = session.Substring(1, 1);
-            string thirdChar = session.Substring(2);
-
-            //System.Diagnostics.Debug.WriteLine("first char: " + firstChar);
-            //System.Diagnostics.Debug.WriteLine("second char: " + secondChar);
-            //System.Diagnostics.Debug.WriteLine("third char: " + thirdChar);
-
-            string strRegex1 = @"[A-Z]";
-            string strRegex2 = @"[0-9]";
-
-            if (!Regex.IsMatch(firstChar, strRegex1) ||
-                !Regex.IsMatch(secondChar, strRegex2) ||
-                !Regex.IsMatch(thirdChar, strRegex2))
+            if (session == null)
             {
-                errors.Add("The session format is incorrect");
-                System.Diagnostics.Debug.WriteLine("The session format is incorrect!");
+                errors.Add("The session cannot be null");
+                System.Diagnostics.Debug.WriteLine("The session cannot be null!");
+            }
+            else if (session == "")
+            {
+                errors.Add("The session cannot be empty");
+                System.Diagnostics.Debug.WriteLine("The session cannot be empty!");
+            }
+            else
+            {
+                string firstChar = session.Substring(0, 1);
+                string secondChar = session.Substring(1, 1);
+                string thirdChar = session.Substring(2);
+
+                //System.Diagnostics.Debug.WriteLine("first char: " + firstChar);
+                //System.Diagnostics.Debug.WriteLine("second char: " + secondChar);
+                //System.Diagnostics.Debug.WriteLine("third char: " + thirdChar);
+
+                string strRegex1 = @"[A-Z]";
+                string strRegex2 = @"[0-9]";
+
+                if (!Regex.IsMatch(firstChar, strRegex1) ||
+                    !Regex.IsMatch(secondChar, strRegex2) ||
+                    !Regex.IsMatch(thirdChar, strRegex2))
+                {
+                    errors.Add("The session format is incorrect");
+                    System.Diagnostics.Debug.WriteLine("The session format is incorrect!");
+                }
             }
         }
         //IN GENERAL

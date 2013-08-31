@@ -139,31 +139,101 @@ namespace BLTest
         [TestMethod]
         public void BusinessLayerCourseScheduleErrorTest()
         {
+            List<string> errors = new List<string>(); //ERRORS list
 
-            //INSERT        InsertCourseSchedule(ScheduledCourse sched, ref List<string> errors)
-            //checkYear//checkScheduleID//checkYear//checkQuarter
-            //checkSession//checkCourseID//checkScheduleTimeID
-            //checkScheduleDayID//checkStaffID
+            //MALFORMED POCOS
+            //errors.Add("Year cannot be greater than 2013"); [4 errors]
+            ScheduledCourse schedYearGreater = new ScheduledCourse();
+            schedYearGreater.course = new Course();
+            schedYearGreater.year = 2017;
+            schedYearGreater.quarter = "Fall";
+            schedYearGreater.session = "A1B";
+            schedYearGreater.course.id = -4;
+            schedYearGreater.instr_id = 61;
+            schedYearGreater.timeID = -3;
+            schedYearGreater.dayID = 3;
 
-            //UPDATE        UpdateCourseSchedule(ScheduledCourse sched, ref List<string> errors)
-            //checkYear
-            //checkQuarter
-            //checkSession
-            //checkCourseID
-            //checkStaffID
-            //checkScheduleID
-            //checkScheduleDayID
-            //checkScheduleTimeID
+            //errors.Add("Year cannot be less than 1950"); [4 errors]
+            ScheduledCourse schedYearLesser = new ScheduledCourse();
+            schedYearLesser.course = new Course();
+            schedYearLesser.year = 100;
+            schedYearLesser.quarter = "Fall";
+            schedYearLesser.session = "";
+            schedYearLesser.course.id = 1;
+            schedYearLesser.instr_id = -61;
+            schedYearLesser.timeID = 2;
+            schedYearLesser.dayID = -3;
 
-            //DELETE        DeleteCourseSchedule(int id, ref List<string> errors)
-            //checkScheduleID
+            //errors.Add("Quarter is invalid"); [2 errors]
+            ScheduledCourse schedQuarter = new ScheduledCourse();
+            schedQuarter.course = new Course();
+            schedQuarter.year = 2012;
+            schedQuarter.quarter = "Autumn";
+            schedQuarter.session = "123";
+            schedQuarter.course.id = 1;
+            schedQuarter.instr_id = 61;
+            schedQuarter.timeID = 2;
+            schedQuarter.dayID = 3;
 
-            //GET           GetCourseScheduleDetail(int id, ref List<string> errors)
-            //checkScheduleID
+            //errors.Add("The session format is incorrect"); [1 error]
+            ScheduledCourse schedSession = new ScheduledCourse();
+            schedSession.course = new Course();
+            schedSession.year = 2013;
+            schedSession.quarter = "Spring";
+            schedSession.session = "ABC";
+            schedSession.course.id = 1;
+            schedSession.instr_id = 61;
+            schedSession.timeID = 2;
+            schedSession.dayID = 3;
 
-            //GET LIST      GetCourseScheduleList(int year, string quarter, ref List<string> errors)
-            //checkYear
-            //checkQuarter
+            //errors.Add("The session format is incorrect"); [1 error]
+            ScheduledCourse schedSession2 = new ScheduledCourse();
+            schedSession2.course = new Course();
+            schedSession2.year = 2013;
+            schedSession2.quarter = "Spring";
+            schedSession2.session = null;
+            schedSession2.course.id = 1;
+            schedSession2.instr_id = 61;
+            schedSession2.timeID = 2;
+            schedSession2.dayID = 3;
+
+            //INSERT 1
+            int ID1;
+            BLCourseSchedule.InsertCourseSchedule(schedYearGreater, ref errors, out ID1);
+            schedYearGreater.id = ID1;
+            Assert.AreEqual(4, errors.Count);
+
+            //INSERT 2
+            int ID2;
+            BLCourseSchedule.InsertCourseSchedule(schedYearLesser, ref errors, out ID2);
+            schedYearLesser.id = ID2;
+            Assert.AreEqual(8, errors.Count);
+
+            //INSERT 3
+            int ID3;
+            BLCourseSchedule.InsertCourseSchedule(schedQuarter, ref errors, out ID3);
+            schedQuarter.id = ID3;
+            Assert.AreEqual(10, errors.Count);
+
+            //VERIFY, GET 
+            //Get with a negative value for course_schedule id
+            ScheduledCourse verifyEmptyCourseSchedule = BLCourseSchedule.GetCourseScheduleDetail(schedYearGreater.id, ref errors);
+            Assert.AreEqual(11, errors.Count);
+            Assert.AreEqual(null, verifyEmptyCourseSchedule);
+
+            //DELETE
+            //Delete with a negative value for course_schedule id
+            BLCourseSchedule.DeleteCourseSchedule(schedYearLesser.id, ref errors);
+            Assert.AreEqual(12, errors.Count);
+
+            BLCourseSchedule.DeleteCourseSchedule(schedQuarter.id, ref errors);
+            Assert.AreEqual(13, errors.Count);
+
+            //UPDATE
+            BLCourseSchedule.UpdateCourseSchedule(schedSession, ref errors);
+            Assert.AreEqual(14, errors.Count);
+            BLCourseSchedule.UpdateCourseSchedule(schedSession2, ref errors);
+            Assert.AreEqual(15, errors.Count);
         }
     }
 }
