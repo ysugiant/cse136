@@ -155,5 +155,22 @@ namespace BLTest
             Assert.AreEqual(0, errors.Count);
 
         }
+
+        [TestMethod]
+        public void BusinessLayerScheduleDayErrorTest()
+        {
+            string day = "TestDay123456789123456789123456789123456789123456789123456789";
+
+            List<string> errors = new List<string>();
+
+            BLScheduleDay.InsertScheduleDay(day, ref errors);
+            Assert.AreEqual(1, errors.Count);
+
+            //get doesnt have error checking
+
+            BLScheduleDay.DeleteScheduleDay(day, ref errors);
+            Assert.AreEqual(2, errors.Count);
+
+        }
     }
 }
