@@ -43,11 +43,18 @@ namespace BL
         
         public static void checkCourseErrors(Course course, ref List<string> errors)
         {
-            checkNullObject(course, ref errors);
-            checkCourseTitle(course.title, ref errors);
-            checkCourseLevel(course.level, ref errors);
-            checkCourseTitle(course.title, ref errors);
-            checkCourseUnits(course.units, ref errors);
+            if (course == null)
+            {
+                errors.Add("Course Cannot insert or update a null object.");
+            }
+            else
+            {
+                checkCourseID(course.id, ref errors);
+                checkCourseTitle(course.title, ref errors);
+                checkCourseLevel(course.level, ref errors);
+                checkCourseDescription(course.description, ref errors);
+                checkCourseUnits(course.units, ref errors);
+            }
         }
        
         public static void checkDepartmentErrors(Department dept, ref List<string> errors)
@@ -400,7 +407,7 @@ namespace BL
 
         public static void checkCourseLevel(CourseLevel courselevel, ref List<string> errors)
         {
-           
+
             if (courselevel == null)
             {
                 errors.Add("course level cannot be null");
