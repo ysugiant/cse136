@@ -64,7 +64,7 @@ namespace BLTest
         /// <summary>
         ///A test for InsertStudent
         ///</summary>
-        /*[TestMethod]
+        [TestMethod]
         public void BusinessLayerEnrollmentTest()
         {
             List<string> errors = new List<string>();
@@ -86,7 +86,11 @@ namespace BLTest
             BLStudent.InsertStudent(student, ref errors);
             Assert.AreEqual(0, errors.Count);
 
-            List<ScheduledCourse> scheduleList = BLCourseSchedule.GetCourseScheduleList(0, "", ref errors);
+            List<ScheduledCourse> scheduleList = new List<ScheduledCourse>();
+            for (int i = 101; i <= 110; i++)
+            {
+                scheduleList.Add(BLCourseSchedule.GetCourseScheduleDetail(i, ref errors));
+            }
             Assert.AreEqual(0, errors.Count);
             System.Diagnostics.Debug.WriteLine("pass1");
             // enroll all available scheduled courses for this student
@@ -100,7 +104,7 @@ namespace BLTest
             //updating grade
             for (int i = 0; i < scheduleList.Count; i++)
             {
-                BLEnrollment.UpdateEnrollment(student.id, scheduleList[i].id, "Aplus", ref errors);
+                BLEnrollment.UpdateEnrollment(student.id, scheduleList[i].id, "APLUS", ref errors);
                 Assert.AreEqual(0, errors.Count);
             }
 
@@ -112,7 +116,7 @@ namespace BLTest
             for (int i = 0; i < trans.Count; i++)
             {
                 System.Diagnostics.Debug.WriteLine(trans[i].grade);
-                Assert.AreEqual(trans[i].grade, "Aplus");
+                Assert.AreEqual(trans[i].grade, "APLUS");
             }
             System.Diagnostics.Debug.WriteLine("pass5");
 
@@ -124,69 +128,72 @@ namespace BLTest
             }
 
             BLStudent.DeleteStudent(student.id, ref errors);
+            Assert.AreEqual(0, errors.Count);
         }
 
 
-        /*[TestMethod]
+        [TestMethod]
         public void BusinessLayerEnrollmentErrorTest()
         {
             List<string> errors = new List<string>();
 
             Student student = new Student();
-            student.id = "A12345678"; // use the existing student ID 
+            student.id = "A12345649"; // use the existing student ID 
             student.first_name = "first2";
             student.last_name = " last2";
-            student.ssn = "777664321";
-            student.email = "myemail2@ucsd.edu";
+            student.ssn = "777664121";
+            student.email = "myemail102@ucsd.edu";
             student.password = "pass1234";
             student.shoe_size = 2;
             student.weight = 2;
             student.major = 1;//JUSTIN ADDED THIS
-            student.level = StudentLevel.senior;//JUSTIN ADDED THIS
+            student.level = (StudentLevel)Enum.Parse(typeof(StudentLevel), "freshman");//JUSTIN ADDED THIS
             student.status = 0;//JUSTIN ADDED THIS
 
             //System.Diagnostics.Debug.WriteLine("value of student.level is: " + student.level.ToString());
             BLStudent.InsertStudent(student, ref errors);
+            Assert.AreEqual(0, errors.Count);
 
-            List<ScheduledCourse> scheduleList = BLCourseSchedule.GetCourseScheduleList(0, "", ref errors);
+            List<ScheduledCourse> scheduleList = new List<ScheduledCourse>();
+            for (int i = 101; i <= 110; i++)
+            {
+                scheduleList.Add(BLCourseSchedule.GetCourseScheduleDetail(i, ref errors));
+            }
             Assert.AreEqual(0, errors.Count);
             System.Diagnostics.Debug.WriteLine("pass1");
+            int x = 0;
             // enroll all available scheduled courses for this student
             for (int i = 0; i < scheduleList.Count; i++)
             {
+                x++;
                 // this enrolls the student into one course at a time, hence the for loop
-                BLEnrollment.InsertEnrollment(student.id, scheduleList[i].id, ref errors);
-                Assert.AreEqual(0, errors.Count);
+                BLEnrollment.InsertEnrollment(student.id + "abc", scheduleList[i].id, ref errors);
+                Assert.AreEqual(x, errors.Count);
             }
             System.Diagnostics.Debug.WriteLine("pass1");
             //updating grade
             for (int i = 0; i < scheduleList.Count; i++)
             {
-                BLEnrollment.UpdateEnrollment(student.id, scheduleList[i].id, "Aplus", ref errors);
-                Assert.AreEqual(0, errors.Count);
+                x += 2;
+                BLEnrollment.UpdateEnrollment(student.id + "abc", scheduleList[i].id, "aplus", ref errors);
+                Assert.AreEqual(x, errors.Count);
             }
 
             //get enroll data
-            List<Enrollment> trans = BLEnrollment.GetEnrollment(student.id, ref errors);
-            Assert.AreEqual(0, errors.Count);
-            System.Diagnostics.Debug.WriteLine("pass1");
-            //compare the result
-            for (int i = 0; i < trans.Count; i++)
-            {
-                System.Diagnostics.Debug.WriteLine(trans[i].grade);
-                Assert.AreEqual(trans[i].grade, "Aplus");
-            }
-            System.Diagnostics.Debug.WriteLine("pass5");
-
-            // drop all available scheduled courses for this student
+            x++;
+            List<Enrollment> trans = BLEnrollment.GetEnrollment(student.id + "abc", ref errors);
+            Assert.AreEqual(x, errors.Count);
+            
             for (int i = 0; i < scheduleList.Count; i++)
             {
-                BLEnrollment.DeleteEnrollment(student.id, scheduleList[i].id, ref errors);
-                Assert.AreEqual(0, errors.Count);
+                x++;
+                BLEnrollment.DeleteEnrollment(student.id +"abc", scheduleList[i].id, ref errors);
+                Assert.AreEqual(x, errors.Count);
             }
-
-            BLStudent.DeleteStudent(student.id, ref errors);
-        }*/
+            System.Diagnostics.Debug.WriteLine("end");
+            BLStudent.DeleteStudent("A12345649", ref errors);   //Dont know why it is not working
+            Assert.AreEqual(x, errors.Count);
+        }
 
     }
 }
