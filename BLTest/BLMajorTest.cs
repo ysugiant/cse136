@@ -61,7 +61,27 @@ namespace BLTest
 
     [TestMethod]
     public void BusinessLayerMajorTest()
-    {/*
+    {
+        //INSERT        InsertMajor(string majorName, int deptID, ref List<string> errors)
+        //checkMajorName
+        //CheckDeptID
+
+        //UPDATE        UpdateMajor(int majorID, string majorName, int deptID, ref List<string> errors)
+        //checkMajorName
+        //CheckMajorID
+        //CheckDeptID
+
+        //DELETE        DeleteMajor(int id, ref List<string> errors)
+        //CheckMajorID
+
+        //GET           GetMajorDetail(int id, ref List<string> errors)
+        //CheckMajorID
+
+        //GET LIST      GetMajorList(ref List<string> errors)
+        
+        
+        
+        /*
       List<string> errors = new List<string>();
 
       BLStudent.InsertStudent(null, ref errors);

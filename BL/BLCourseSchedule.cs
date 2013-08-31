@@ -9,14 +9,14 @@ namespace BL
 {
     public static class BLCourseSchedule
     {
-        public static void InsertCourseSchedule(ScheduledCourse sched, ref List<string> errors)
+        public static void InsertCourseSchedule(ScheduledCourse sched, ref List<string> errors, out int ID)
         {
             BLCheck.checkCourseScheduleErrors(sched, ref errors);
             if (errors.Count > 0)
                 return;
 
-            int newScheduleID;
-            DALCourseSchedule.InsertCourseSchedule(sched, ref errors, out newScheduleID);
+            
+            DALCourseSchedule.InsertCourseSchedule(sched, ref errors, out ID);
         }
 
         public static void UpdateCourseSchedule(ScheduledCourse sched, ref List<string> errors)
