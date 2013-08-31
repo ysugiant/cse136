@@ -50,6 +50,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="BLCourseTest.cs" />
     <Compile Include="BLDepartmentTest.cs" />
     <Compile Include="BLEnrollmentTest.cs" />
     <Compile Include="BLScheduleDayTest.cs" />
