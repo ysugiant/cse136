@@ -76,9 +76,9 @@ namespace BLTest
             BLStaff.DeleteStaff(-5, ref errors);// Can only fail on the one parameter, id.
             Assert.AreEqual(1, errors.Count);
 
-            //#######################################TESTING BLSTUDENT FUNCTIONS############################
+            //#######################################TESTING BLSTAFF FUNCTIONS############################
             errors.Clear();// Resetting the errors log to beging anew.
-            System.Diagnostics.Debug.WriteLine("The count of errorLog is: " + errors.Count);
+            
             Staff advisor = new Staff();
             int staffID;
             advisor.first_name = "first";

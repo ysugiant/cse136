@@ -16,17 +16,17 @@ namespace BL
             if (errors.Count > 0)
             {
                 newStaffID = -99;
-                for (int i = 0; i < errors.Count; i++)
-                    System.Diagnostics.Debug.WriteLine("Error caught." + errors[i]);
+                //for (int i = 0; i < errors.Count; i++)
+                //    System.Diagnostics.Debug.WriteLine("Error caught." + errors[i]);
                 return;
             }
+            System.Diagnostics.Debug.WriteLine("No errors detected in InsertStaff from BL.");
             DALStaff.InsertStaff(staffMember, ref errors, out newStaffID);
         }
 
         public static void UpdateStaff(Staff staffMember, ref List<string> errors)
         {
-            if (staffMember.id < 0)
-                errors.Add("Staff id must be a non-negative integer.");
+            BLCheck.checkStaffID(staffMember.id, ref errors);
             BLCheck.checkStaffErrors(staffMember, ref errors);
 
             if (errors.Count > 0)

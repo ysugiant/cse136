@@ -19,6 +19,7 @@ namespace BL
                 return;
             checkStudentID(student.id, ref errors);
             checkName(student.first_name, "student", ref errors);
+            checkName(student.last_name, "student", ref errors);
             checkEmail(student.email, ref errors);
             checkPassword(student.password, ref errors);
             checkStudentSSN(student.ssn, ref errors);
@@ -26,9 +27,10 @@ namespace BL
             checkStudentWeight(student.weight, ref errors);
             checkMajorID(student.major, ref errors);
             checkStudentLevel(student.level, ref errors);
-            for (int i = 0; i < student.enrolled.Count; i++) {
-                checkCourseScheduleErrors(student.enrolled[i], ref errors);
-            }
+            checkStudentStatus(student.status, ref errors);
+            //for (int i = 0; i < student.enrolled.Count; i++) {
+            //    checkCourseScheduleErrors(student.enrolled[i], ref errors);
+            //}
         }
 
         public static void checkStaffErrors(Staff staff, ref List<string> errors)
@@ -208,10 +210,11 @@ namespace BL
         //STUDENT
         public static void checkStudentLevel(StudentLevel level, ref List<string> errors)
         {
-            if (level.ToString().Equals("freshman") || level.ToString().Equals("sophomore") || level.ToString().Equals("junior") || 
-                     level.ToString().Equals("senior") || level.ToString().Equals("grad") || level.ToString().Equals("phd")) {
-                         errors.Add("Student level cannot be anything other than: 'freshman', 'sophomore', 'junior'," +
-                                     "'senior', 'grad', or 'phd'.");
+            System.Diagnostics.Debug.WriteLine("Current student level: " + level.ToString());
+            if (!(level.ToString().Equals("freshman") || level.ToString().Equals("sophomore") || level.ToString().Equals("junior") || 
+                level.ToString().Equals("senior") || level.ToString().Equals("grad") || level.ToString().Equals("phd"))) {
+                   errors.Add("Student level cannot be anything other than: 'freshman', 'sophomore', 'junior'," +
+                              "'senior', 'grad', or 'phd'.");
             }
             else if (level.Equals(null))
                 errors.Add("Cannot have a null student level.");
@@ -221,9 +224,9 @@ namespace BL
 
         public static void checkStudentStatus(int status, ref List<string> errors)
         {
-            if (status < 0)
+            if (status < 0 || status > 3)
             {
-                errors.Add("Student status cannot be null.");
+                errors.Add("Student status must be between 0 and 3 (good,probation,subject,disqualified).");
             }
         }
 

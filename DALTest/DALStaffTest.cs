@@ -75,7 +75,9 @@ namespace DALTest
             instructor.email = "myemail@ucsd.edu";
             instructor.password = "pass1234";
             instructor.dept = new Department();
-            instructor.dept.id = 1;
+            instructor.dept.id = 20;
+            instructor.dept.deptName = "Physics";
+            instructor.dept.chairID = 117;
             instructor.isInstructor = true;
             //System.Diagnostics.Debug.WriteLine("Instructor info: " + instructor.ToString());
 

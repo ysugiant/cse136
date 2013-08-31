@@ -60,57 +60,63 @@ namespace BLTest
     #endregion
 
     [TestMethod]
-    public void InsertStudentErrorTest()
+    public void BusinessLayerStudentTest() //InsertStudentErrorTest()
     {
+      //######################################TESTING INSERTION ERRORS#################################
       List<string> errors = new List<string>();
 
       BLStudent.InsertStudent(null, ref errors);
       Assert.AreEqual(1, errors.Count);
 
-      errors = new List<string>();
+      errors.Clear();
 
       Student student = new Student();
-      student.id = "";
+      student.id = "";// fail, student id, cannot be empty.
+      student.ssn = "justinbogart";// fail, too long
+      student.email = "blah@more!~...Blah@32";// fail, regex
+      student.password = "someCrazyBullshitPasswordThatIsTooLong";// fail, too many characters
+      student.first_name = null;// fail, cannot be null
+      student.last_name = "";// fail, cannot be empty
+      student.shoe_size = -20;// fail, cannot be non-positive
+      student.weight = -135;// fail, cannot be non-positive
+      student.level = (StudentLevel)Enum.Parse(typeof(StudentLevel), "freshman");
+      student.status = 99;// fail, must be between 0-2
+      student.major = -1;// fail, cannot be negative
+
       BLStudent.InsertStudent(student, ref errors);
-      Assert.AreEqual(1, errors.Count);
-    }
 
-    [TestMethod]
-    public void GetStudentErrorTest()
-    {
-      List<string> errors = new List<string>();
+      // 10 errors should have been logged.
+      Assert.AreEqual(10, errors.Count);
 
+      //########################################TESTING SELECTION ERRORS##############################
+      errors.Clear();
       BLStudent.GetStudent(null, ref errors);
       Assert.AreEqual(1, errors.Count);
-    }
 
-    [TestMethod]
-    public void DeleteStudentErrorTest()
-    {
-      List<string> errors = new List<string>();
-
+      //#######################################TESTING DELETION ERRORS###############################
+      errors.Clear();
       BLStudent.DeleteStudent(null, ref errors);
       Assert.AreEqual(1, errors.Count);
-    }
 
-    [TestMethod]
-    public void StudentInsertAndSelectTest()
-    {
-      Student student = new Student();
+      //#######################################TESTING BLSTUDENT FUNCTIONS############################
+      errors.Clear();
+      student = new Student();
       student.first_name = "first";
       student.last_name = " last";
-      student.id = "A12345678";//Guid.NewGuid().ToString().Substring(0, 8);
+      student.id = "A12345678";
       student.ssn = "555555555";
       student.email = "myemail15@ucsd.edu";
       student.password = "pass123456";
       student.shoe_size = 0;
       student.weight = 0;
       student.major = 1;
-      student.level = 0;
+      //student.level = 0;
+      student.level = new StudentLevel();
+      student.level = (StudentLevel)Enum.Parse(typeof(StudentLevel), "senior");// fail, must be a legitimate student level
       student.status = 0;
       student.enrolled = new List<ScheduledCourse>();
 
-      List<string> errors = new List<string>();
+      errors.Clear();
       BLStudent.InsertStudent(student, ref errors);
       Assert.AreEqual(0, errors.Count);
 
@@ -128,45 +134,11 @@ namespace BLTest
       Assert.AreEqual(student.level, verifyStudent.level);
       Assert.AreEqual(student.status, verifyStudent.status);
 
-      //List<ScheduledCourse> scheduleList = BLSchedule.GetScheduleList("", "", ref errors); // This was the original code.
-      //List<ScheduledCourse> scheduleList = BLCourseSchedule.GetScheduleList(2011, "Fall", ref errors);//JUSTIN ADDED THIS FOR DUBUG PURPOSES
-      //Assert.AreEqual(0, errors.Count);
-
-      // enroll all available scheduled courses for this student
-      /*for (int i = 0; i < scheduleList.Count; i++)
-      {
-        student.enrolled.Add(scheduleList[i]);// JUSTIN : for testing purposes. Will compare this with the List<ScheduledCourse>.
-        //System.Diagnostics.Debug.WriteLine("Added a course to student course schedule: " + student.enrolled[i].course.title);//JUSTIN ADDED THIS
-        
-        BLStudent.EnrollSchedule(student.id, scheduleList[i].id, ref errors);
-        //System.Diagnostics.Debug.WriteLine("Added a course to scheduleList: " + scheduleList[i].course.title);//JUSTIN ADDED THIS
-        Assert.AreEqual(0, errors.Count);
-      }
-
-      // JUSTIN : Extra test to ensure that ALL the courses from the selected course schedule were added, verifies by count.
-      System.Diagnostics.Debug.WriteLine("scheduleList size: " + scheduleList.Count + "\nStudent schedule size: " + student.enrolled.Count);//JUSTIN ADDED THIS
-      Assert.AreEqual(scheduleList.Count, student.enrolled.Count);
-
-      // drop all available scheduled courses for this student
-      for (int i = 0; i < scheduleList.Count; i++)
-      {
-        BLStudent.DropEnrolledSchedule(student.id, scheduleList[i].id, ref errors);
-        // This is not an accurate test because it doesn't verify that the student's enrollment schedule is empty.
-        Assert.AreEqual(0, errors.Count);
-        student.enrolled.Remove(scheduleList[i]);// JUSTIN : to use in the following assertion.
-      }
-      Assert.AreEqual(0, student.enrolled.Count);// JUSTIN : This makes sure that the student's enroll Sched is empty.
-
-      /* JUSTIN : now the student object is up-to-date, including their course schedule.
-       * NOTE: I think we should always keep the object updated, through every method acting upon it. Yeah? No?
-       * */
       BLStudent.DeleteStudent(student.id, ref errors);
 
       Student verifyEmptyStudent = BLStudent.GetStudent(student.id, ref errors);
       Assert.AreEqual(0, errors.Count);
       Assert.AreEqual(null, verifyEmptyStudent);
-
     }
-
   }
 }

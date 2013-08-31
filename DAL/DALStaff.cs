@@ -48,7 +48,7 @@ namespace DAL
             catch (Exception e)
             {
                 errors.Add("Error: " + e.ToString());
-                System.Diagnostics.Debug.WriteLine(e);//JUSTIN ADDED THIS
+                System.Diagnostics.Debug.WriteLine("Error occurred during insertStaff in DAL.\n" + e);//JUSTIN ADDED THIS
             }
             finally
             {
