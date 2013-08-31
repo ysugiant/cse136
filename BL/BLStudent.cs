@@ -15,10 +15,10 @@ namespace BL
       //System.Diagnostics.Debug.WriteLine();
       if (errors.Count > 0)
       {
-          for (int i = 0; i < errors.Count; i++)
+          /*for (int i = 0; i < errors.Count; i++)
           {
               System.Diagnostics.Debug.WriteLine("There was an error caught." + errors[i]);
-          }
+          }*/
           return;
       }
 

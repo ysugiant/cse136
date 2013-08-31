@@ -38,7 +38,7 @@ namespace BLTest
         }
 
         [TestMethod]
-        public void BusinessLayerStaffTest()//InsertStaffErrorTest()
+        public void BusinessLayerErrorTest()
         {
             //######################################TESTING INSERTION ERRORS#################################
             List<string> errors = new List<string>();
@@ -47,8 +47,6 @@ namespace BLTest
             //Should catch the null object error
             BLStaff.InsertStaff(null, ref errors, out newStaffID);
             Assert.AreEqual(1, errors.Count);
-
-            errors.Clear(); ;
 
             Staff instructor = new Staff();
             instructor.first_name = "";// fail, empty string
@@ -61,10 +59,64 @@ namespace BLTest
             instructor.dept.deptName = "";// fail, empty string
             instructor.isInstructor = true;// impossible to fail.
 
-            //Should catch 6 total errors...
+            //Should catch 7 total errors...
             BLStaff.InsertStaff(instructor, ref errors, out newStaffID);
             instructor.id = newStaffID;//assigning the auto-inc staff_id to this instructor object
             Assert.AreEqual(7, errors.Count);
+
+            errors.Clear();
+            int newStaffID2;
+            Staff instructor2 = new Staff();
+            instructor2.first_name = null;// fail, null
+            instructor2.last_name = "111111111111111111111111111111111111111111111111111111111111";// fail, too long
+            instructor2.email = null;//fail, null
+            instructor2.password = null;// fail, null
+            instructor2.dept = new Department();
+            instructor2.dept.id = 20;
+            instructor2.dept.chairID = 177;
+            instructor2.dept.deptName = null;// fail, null
+            instructor2.isInstructor = true;// impossible to fail.
+
+            //Should catch 5 total errors...
+            BLStaff.InsertStaff(instructor2, ref errors, out newStaffID2);
+            instructor2.id = newStaffID2;//assigning the auto-inc staff_id to this instructor object
+            Assert.AreEqual(5, errors.Count);
+
+            errors.Clear();
+            int newStaffID3;
+            Staff instructor3 = new Staff();
+            instructor3.first_name = "George";
+            instructor3.last_name = "Costanza";
+            instructor3.email = "";//fail, empty
+            instructor3.password = "";// fail, empty
+            instructor3.dept = new Department();
+            instructor3.dept.id = 20;
+            instructor3.dept.chairID = 177;
+            instructor3.dept.deptName = "SomeCrazyLongDepartmentNameThatShouldNotBeInTheDatabase";// fail, too long
+            instructor3.isInstructor = false;// impossible to fail.
+
+            //Should catch 3 total errors...
+            BLStaff.InsertStaff(instructor3, ref errors, out newStaffID3);
+            instructor3.id = newStaffID3;//assigning the auto-inc staff_id to this instructor object
+            Assert.AreEqual(3, errors.Count);
+
+            errors.Clear();
+            int newStaffID4;
+            Staff instructor4 = new Staff();
+            instructor4.first_name = "George";
+            instructor4.last_name = "Costanza";
+            instructor4.email = "someilegitamatebullshitlongpasswordthatshouldnotbeinthedatabase@ucsd.edu";//fail, too long
+            instructor4.password = "glorious";
+            instructor4.dept = new Department();
+            instructor4.dept.id = 20;
+            instructor4.dept.chairID = 177;
+            instructor4.dept.deptName = "Physics";
+            instructor4.isInstructor = false;// impossible to fail.
+
+            //Should catch 1 total error
+            BLStaff.InsertStaff(instructor4, ref errors, out newStaffID4);
+            instructor4.id = newStaffID4;//assigning the auto-inc staff_id to this instructor object
+            Assert.AreEqual(1, errors.Count);
 
             //########################################TESTING SELECTION ERRORS##############################
             errors.Clear();// Resetting the errors log to begin anew.
@@ -75,10 +127,14 @@ namespace BLTest
             errors.Clear(); ;// Resetting the errors log to beging anew.
             BLStaff.DeleteStaff(-5, ref errors);// Can only fail on the one parameter, id.
             Assert.AreEqual(1, errors.Count);
+        }
+
+        [TestMethod]
+        public void BusinessLayerStaffTest()
+        {
+            List<string> errors = new List<string>();
 
             //#######################################TESTING BLSTAFF FUNCTIONS############################
-            errors.Clear();// Resetting the errors log to beging anew.
-            
             Staff advisor = new Staff();
             int staffID;
             advisor.first_name = "first";

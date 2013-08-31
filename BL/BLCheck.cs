@@ -112,7 +112,13 @@ namespace BL
         }
         static void checkEmail(string email, ref List<string> errors)
         {
-            if (email != null && email.Length <= 50)
+            if (email == null)
+                errors.Add("The email given cannot be null.");
+            else if (email.Equals(""))
+                errors.Add("Email cannot be empty.");
+            else if (email.Length > 50)
+                errors.Add("The email cannot be longer than 50 characters.");
+            else if (email != null && email.Length <= 50)
             {
                 string strRegex = @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z";
                 if (!Regex.IsMatch(email, strRegex))
@@ -244,10 +250,11 @@ namespace BL
 
         public static void checkStudentSSN(string ssn, ref List<string> errors)
         {
-            if (ssn.Length != 9)
-                errors.Add("Student's ssn must be 9 characters in length.");
-            else if (ssn == null)
+            if (ssn == null)
                 errors.Add("Student's ssn cannot be a null value.");
+            else if (ssn.Length != 9)
+                errors.Add("Student's ssn must be 9 characters in length.");
+            
         }
         //IN GENERAL
             //CheckName
@@ -508,5 +515,14 @@ namespace BL
         //IN GENERAL
             //CheckCourseID
             //CheckCourseID for course_pre_id
+
+        public static void printErrorLog(ref List<string> errors)
+        {
+            System.Diagnostics.Debug.WriteLine("The following printout is the error log.");
+            for (int i = 0; i < errors.Count; i++)
+            {
+                System.Diagnostics.Debug.WriteLine(errors[i]);
+            }
+        }
     }
 }

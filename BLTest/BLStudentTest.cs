@@ -59,48 +59,103 @@ namespace BLTest
     //
     #endregion
 
+
     [TestMethod]
-    public void BusinessLayerStudentTest() //InsertStudentErrorTest()
+    public void BusinessLayerStudentErrorTest()
     {
-      //######################################TESTING INSERTION ERRORS#################################
+        //######################################TESTING INSERTION ERRORS#################################
+        List<string> errors = new List<string>();
+
+        BLStudent.InsertStudent(null, ref errors);
+        Assert.AreEqual(1, errors.Count);
+
+        errors.Clear();
+        Student student = new Student();
+        student.id = "";// fail, student id, cannot be empty.
+        student.ssn = "justinbogart";// fail, too long
+        student.email = "blah@more!~...Blah@32";// fail, regex
+        student.password = "someCrazyBullshitPasswordThatIsTooLong";// fail, too many characters
+        student.first_name = null;// fail, cannot be null
+        student.last_name = "";// fail, cannot be empty
+        student.shoe_size = -20;// fail, cannot be non-positive
+        student.weight = -135;// fail, cannot be non-positive
+        student.level = (StudentLevel)Enum.Parse(typeof(StudentLevel), "freshman");
+        student.status = 99;// fail, must be between 0-2
+        student.major = -1;// fail, cannot be negative
+        BLStudent.InsertStudent(student, ref errors);
+        // 10 errors should have been logged.
+        Assert.AreEqual(10, errors.Count);
+
+        errors.Clear();
+        Student student2 = new Student();
+        student2.id = null;// fail, student id cannot be null
+        student2.ssn = null;// fail, null
+        student2.email = null;// fail, null
+        student2.password = null;// fail, null
+        student2.first_name = "";// fail, cannot be null
+        student2.last_name = null;// fail, cannot be empty
+        student2.shoe_size = 10;
+        student2.weight = 135;
+        student2.level = (StudentLevel)Enum.Parse(typeof(StudentLevel), "senior");
+        student2.status = 0;
+        student2.major = 1;
+        BLStudent.InsertStudent(student2, ref errors);
+        // 6 errors should have been logged.
+        Assert.AreEqual(6, errors.Count);
+
+        errors.Clear();
+        Student student3 = new Student();
+        student3.id = "11111111111111111111111";// fail, student id too long
+        student3.ssn = "456123589";
+        student3.email = "lemmetalkwithjustinandjerhongandleenaandgrandmaandothers@gmail.com";// fail, too long
+        student3.password = "";// fail, empty
+        student3.first_name = "111111111111111111111111111111111111111111111111111";// fail, too long
+        student3.last_name = "Coolio";
+        student3.shoe_size = 10;
+        student3.weight = 135;
+        student3.level = (StudentLevel)Enum.Parse(typeof(StudentLevel), "senior");
+        student3.status = 0;
+        student3.major = 1;
+        BLStudent.InsertStudent(student3, ref errors);
+        // 4 errors should have been logged.
+        //System.Diagnostics.Debug.WriteLine("Student3 has " + errors.Count + " errors.");
+        Assert.AreEqual(4, errors.Count);
+
+        errors.Clear();
+        Student student4 = new Student();
+        student4.id = "A12345689";
+        student4.ssn = "456123589";
+        student4.email = "";// fail, empty
+        student4.password = "huyeahyeah";
+        student4.first_name = "Bob";
+        student4.last_name = "Coolio";
+        student4.shoe_size = 10;
+        student4.weight = 135;
+        student4.level = (StudentLevel)Enum.Parse(typeof(StudentLevel), "senior");
+        student4.status = 0;
+        student4.major = 1;
+        BLStudent.InsertStudent(student4, ref errors);
+        // 1 error should have been logged.
+        Assert.AreEqual(1, errors.Count);
+
+        //########################################TESTING SELECTION ERRORS##############################
+        errors.Clear();
+        BLStudent.GetStudent(null, ref errors);
+        Assert.AreEqual(1, errors.Count);
+
+        //#######################################TESTING DELETION ERRORS###############################
+        errors.Clear();
+        BLStudent.DeleteStudent(null, ref errors);
+        Assert.AreEqual(1, errors.Count);
+    }
+
+    [TestMethod]
+    public void BusinessLayerStudentTest()
+    {
       List<string> errors = new List<string>();
 
-      BLStudent.InsertStudent(null, ref errors);
-      Assert.AreEqual(1, errors.Count);
-
-      errors.Clear();
-
-      Student student = new Student();
-      student.id = "";// fail, student id, cannot be empty.
-      student.ssn = "justinbogart";// fail, too long
-      student.email = "blah@more!~...Blah@32";// fail, regex
-      student.password = "someCrazyBullshitPasswordThatIsTooLong";// fail, too many characters
-      student.first_name = null;// fail, cannot be null
-      student.last_name = "";// fail, cannot be empty
-      student.shoe_size = -20;// fail, cannot be non-positive
-      student.weight = -135;// fail, cannot be non-positive
-      student.level = (StudentLevel)Enum.Parse(typeof(StudentLevel), "freshman");
-      student.status = 99;// fail, must be between 0-2
-      student.major = -1;// fail, cannot be negative
-
-      BLStudent.InsertStudent(student, ref errors);
-
-      // 10 errors should have been logged.
-      Assert.AreEqual(10, errors.Count);
-
-      //########################################TESTING SELECTION ERRORS##############################
-      errors.Clear();
-      BLStudent.GetStudent(null, ref errors);
-      Assert.AreEqual(1, errors.Count);
-
-      //#######################################TESTING DELETION ERRORS###############################
-      errors.Clear();
-      BLStudent.DeleteStudent(null, ref errors);
-      Assert.AreEqual(1, errors.Count);
-
       //#######################################TESTING BLSTUDENT FUNCTIONS############################
-      errors.Clear();
-      student = new Student();
+      Student student = new Student();
       student.first_name = "first";
       student.last_name = " last";
       student.id = "A12345678";
@@ -110,7 +165,6 @@ namespace BLTest
       student.shoe_size = 0;
       student.weight = 0;
       student.major = 1;
-      //student.level = 0;
       student.level = new StudentLevel();
       student.level = (StudentLevel)Enum.Parse(typeof(StudentLevel), "senior");// fail, must be a legitimate student level
       student.status = 0;

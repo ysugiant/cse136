@@ -20,7 +20,7 @@ namespace BL
                 //    System.Diagnostics.Debug.WriteLine("Error caught." + errors[i]);
                 return;
             }
-            System.Diagnostics.Debug.WriteLine("No errors detected in InsertStaff from BL.");
+            //System.Diagnostics.Debug.WriteLine("No errors detected in InsertStaff from BL.");
             DALStaff.InsertStaff(staffMember, ref errors, out newStaffID);
         }
 
