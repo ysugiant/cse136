@@ -106,7 +106,7 @@ namespace DALTest
             sCourse.timeID = 13;
 
             List<string> errors = new List<string>();
-            int ID = 0;
+            int ID = -1;
             DALCourseSchedule.InsertCourseSchedule(sCourse, ref errors, out ID);
             sCourse.id = ID;
             Assert.AreEqual(0, errors.Count);

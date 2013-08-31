@@ -153,7 +153,10 @@ namespace BL
         static void checkID(int id, string tableName, ref List<string> errors)
         {
             if (id < 0)
+            {
                 errors.Add(tableName + " ID cannot be negative");
+                System.Diagnostics.Debug.WriteLine(tableName + " ID cannot be negative!");
+            }
         }
 
         public static void checkMajorID(int id, ref List<string> errors)
@@ -281,11 +284,20 @@ namespace BL
         public static void checkMajorName(string name, ref List<string> errors)
         {
             if (name == null)
+            {
                 errors.Add("Major name cannot be null");
+                System.Diagnostics.Debug.WriteLine("Major name cannot be null!");
+            }
             else if (name == "")
+            {
                 errors.Add("Major name cannot be empty");
+                System.Diagnostics.Debug.WriteLine("Major name cannot be empty!");
+            }
             else if (name.Length > 50)
+            {
                 errors.Add("Major name cannot be more than 9");
+                System.Diagnostics.Debug.WriteLine("Major name cannot be more than 9!");
+            }
         }
         //IN GENERAL
             //CheckMajorID
@@ -327,38 +339,50 @@ namespace BL
         public static void checkYear(int year, ref List<string> errors)
         {
             if (year > 2014)
+            {
                 errors.Add("Year cannot be greater than 2013");
+                System.Diagnostics.Debug.WriteLine("Year cannot be greater than 2013!");
+            }
             else if (year < 1950)
+            {
                 errors.Add("Year cannot be less than 1950");
+                System.Diagnostics.Debug.WriteLine("Year cannot be less than 1950!");
+            }
         }
 
         public static void checkQuarter(string quarter, ref List<string> errors)
         {
-            if (!quarter.Equals("Fall") ||
-                !quarter.Equals("Winter") ||
-                !quarter.Equals("Spring") ||
-                !quarter.Equals("Summer 1") ||
-                !quarter.Equals("Summer 2"))
+            if (!(quarter.Equals("Fall") ||
+                quarter.Equals("Winter") ||
+                quarter.Equals("Spring") ||
+                quarter.Equals("Summer 1") ||
+                quarter.Equals("Summer 2")))
+            {
                 errors.Add("Quarter is invalid");
+                System.Diagnostics.Debug.WriteLine("Quarter is invalid!");
+            }
         }
 
         public static void checkSession(string session, ref List<string> errors)
         {
-            string firstChar = session.Substring(0, 0);
+            string firstChar = session.Substring(0,1);
             string secondChar = session.Substring(1, 1);
-            string thirdChar = session.Substring(2, 2);
+            string thirdChar = session.Substring(2);
 
-            System.Diagnostics.Debug.WriteLine("first char: " + firstChar);
-            System.Diagnostics.Debug.WriteLine("second char: " + secondChar);
-            System.Diagnostics.Debug.WriteLine("third char: " + thirdChar);
+            //System.Diagnostics.Debug.WriteLine("first char: " + firstChar);
+            //System.Diagnostics.Debug.WriteLine("second char: " + secondChar);
+            //System.Diagnostics.Debug.WriteLine("third char: " + thirdChar);
 
-            string strRegex1 = @"[A-Za-z]";
+            string strRegex1 = @"[A-Z]";
             string strRegex2 = @"[0-9]";
 
             if (!Regex.IsMatch(firstChar, strRegex1) ||
                 !Regex.IsMatch(secondChar, strRegex2) ||
                 !Regex.IsMatch(thirdChar, strRegex2))
+            {
                 errors.Add("The session format is incorrect");
+                System.Diagnostics.Debug.WriteLine("The session format is incorrect!");
+            }
         }
         //IN GENERAL
             //CheckCourseID

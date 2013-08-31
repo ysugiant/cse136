@@ -9,15 +9,11 @@ namespace BL
 {
     public static class BLMajor
     {
-        public static void InsertMajor(string majorName, int deptID, ref List<string> errors)
+        public static void InsertMajor(string majorName, int deptID, ref List<string> errors, out int ID)
         {
             BLCheck.checkMajorName(majorName, ref errors);
             BLCheck.checkDeptID(deptID, ref errors);
-            if (errors.Count > 0)
-                return;
-
-            int majorID;
-            DALMajor.InsertMajor(majorName, deptID, ref errors, out majorID);   
+            DALMajor.InsertMajor(majorName, deptID, ref errors, out ID);   
         }
 
         public static void UpdateMajor(int majorID, string majorName, int deptID, ref List<string> errors)
