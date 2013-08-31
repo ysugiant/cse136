@@ -153,10 +153,8 @@ namespace BL
         static void checkID(int id, string tableName, ref List<string> errors)
         {
             if (id < 0)
-            {
                 errors.Add(tableName + " ID cannot be negative");
-                System.Diagnostics.Debug.WriteLine(tableName + " ID cannot be negative!");
-            }
+            
         }
 
         public static void checkMajorID(int id, ref List<string> errors)
@@ -292,17 +290,14 @@ namespace BL
             if (name == null)
             {
                 errors.Add("Major name cannot be null");
-                System.Diagnostics.Debug.WriteLine("Major name cannot be null!");
             }
             else if (name == "")
             {
                 errors.Add("Major name cannot be empty");
-                System.Diagnostics.Debug.WriteLine("Major name cannot be empty!");
             }
             else if (name.Length > 50)
             {
                 errors.Add("Major name cannot be more than 50");
-                System.Diagnostics.Debug.WriteLine("Major name cannot be more than 50!");
             }
         }
         //IN GENERAL
@@ -347,12 +342,10 @@ namespace BL
             if (year > 2014)
             {
                 errors.Add("Year cannot be greater than 2013");
-                System.Diagnostics.Debug.WriteLine("Year cannot be greater than 2013!");
             }
             else if (year < 1950)
             {
                 errors.Add("Year cannot be less than 1950");
-                System.Diagnostics.Debug.WriteLine("Year cannot be less than 1950!");
             }
         }
 
@@ -365,7 +358,6 @@ namespace BL
                 quarter.Equals("Summer 2")))
             {
                 errors.Add("Quarter is invalid");
-                System.Diagnostics.Debug.WriteLine("Quarter is invalid!");
             }
         }
 
@@ -373,13 +365,11 @@ namespace BL
         {
             if (session == null)
             {
-                errors.Add("The session cannot be null");
-                System.Diagnostics.Debug.WriteLine("The session cannot be null!");
+                errors.Add("The session cannot be null");                
             }
             else if (session == "")
             {
                 errors.Add("The session cannot be empty");
-                System.Diagnostics.Debug.WriteLine("The session cannot be empty!");
             }
             else
             {
@@ -399,7 +389,6 @@ namespace BL
                     !Regex.IsMatch(thirdChar, strRegex2))
                 {
                     errors.Add("The session format is incorrect");
-                    System.Diagnostics.Debug.WriteLine("The session format is incorrect!");
                 }
             }
         }
