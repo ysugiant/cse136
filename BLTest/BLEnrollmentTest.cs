@@ -129,6 +129,8 @@ namespace BLTest
 
             BLStudent.DeleteStudent(student.id, ref errors);
             Assert.AreEqual(0, errors.Count);
+
+            BLCheck.printErrorLog(ref errors);
         }
 
 
@@ -193,6 +195,8 @@ namespace BLTest
             System.Diagnostics.Debug.WriteLine("end");
             BLStudent.DeleteStudent("A12345649", ref errors);   //Dont know why it is not working
             Assert.AreEqual(x, errors.Count);
+
+            BLCheck.printErrorLog(ref errors);
         }
 
     }
