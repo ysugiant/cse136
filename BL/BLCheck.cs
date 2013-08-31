@@ -271,9 +271,15 @@ namespace BL
             {
                 errors.Add("Grade cannot be empty");
             }
-            else if (grade.Length > 50)
+            else if (grade.Length > 10)
             {
-                errors.Add("Grade cannot be more than 50");
+                errors.Add("Grade cannot be more than 10");
+            }
+            else
+            {
+                string strRegex = @"^[ABC][PLUS|MINUS]$|[ABCDF]";
+                if (!Regex.IsMatch(grade, strRegex))
+                    errors.Add("Grade format is incorrect");
             }
         }
         //IN GENERAL
