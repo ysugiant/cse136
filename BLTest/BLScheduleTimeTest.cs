@@ -152,5 +152,19 @@ namespace BLTest
             Assert.AreEqual(x, false);
             Assert.AreEqual(0, errors.Count);
         }
+
+
+        [TestMethod]
+        public void BusinessLayerScheduleTimeErrorTest()
+        {
+            string time = "23.00-24.00123456789123456789123456789123456789123456789";
+
+            List<string> errors = new List<string>();
+            BLScheduleTime.InsertScheduleTime(time, ref errors);
+            Assert.AreEqual(1, errors.Count);
+
+            BLScheduleTime.DeleteScheduleTime(time, ref errors);
+            Assert.AreEqual(2, errors.Count);
+        }
     }
 }
