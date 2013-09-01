@@ -251,8 +251,11 @@ namespace BL
 
         public static void checkStudentSSN(string ssn, ref List<string> errors)
         {
+            string strRegex = @"[0-9]{9}";
             if (ssn == null)
                 errors.Add("Student's ssn cannot be a null value.");
+            else if (!Regex.IsMatch(ssn, strRegex))
+                errors.Add("Student's ssn most be all numerical characters.");
             else if (ssn.Length != 9)
                 errors.Add("Student's ssn must be 9 characters in length.");
             

@@ -106,7 +106,7 @@ namespace BLTest
         errors.Clear();
         Student student3 = new Student();
         student3.id = "11111111111111111111111";// fail, student id too long
-        student3.ssn = "456123589";
+        student3.ssn = "1234f6789";// fail, ssn cannot contain non-numeric characters
         student3.email = "lemmetalkwithjustinandjerhongandleenaandgrandmaandothers@gmail.com";// fail, too long
         student3.password = "";// fail, empty
         student3.first_name = "111111111111111111111111111111111111111111111111111";// fail, too long
@@ -117,9 +117,9 @@ namespace BLTest
         student3.status = 0;
         student3.major = 1;
         BLStudent.InsertStudent(student3, ref errors);
-        // 4 errors should have been logged.
-        //System.Diagnostics.Debug.WriteLine("Student3 has " + errors.Count + " errors.");
-        Assert.AreEqual(4, errors.Count);
+        // 5 errors should have been logged.
+        BLCheck.printErrorLog(ref errors);
+        Assert.AreEqual(5, errors.Count);
 
         errors.Clear();
         Student student4 = new Student();
