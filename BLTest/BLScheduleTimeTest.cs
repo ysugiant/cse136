@@ -165,6 +165,7 @@ namespace BLTest
 
             BLScheduleTime.DeleteScheduleTime(time, ref errors);
             Assert.AreEqual(2, errors.Count);
+            System.Diagnostics.Debug.WriteLine("error count: " + errors.Count);
         }
     }
 }
