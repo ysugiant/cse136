@@ -9,8 +9,10 @@ using BL;
 
 namespace SL136
 {
-    class ISLMajor
+    [ServiceContract]
+    public interface ISLMajor
     {
+
         [OperationContract]
          List<Tuple<string, string>> GetMajorList(ref List<string> errors);
 

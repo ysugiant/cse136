@@ -9,7 +9,7 @@ using BL;
 
 namespace SL136
 {
-    class SLMajor
+    public class SLMajor : ISLMajor
     {
         public List<Tuple<string, string>> GetMajorList(ref List<string> errors)
         {
