@@ -18,9 +18,6 @@ namespace POCO
     [DataMember]
     public int chairID { get; set; }
 
-    [DataMember]
-    public List<string> majorList { get; set; }
-
     public override string ToString()
     {
         return id + ";" +
