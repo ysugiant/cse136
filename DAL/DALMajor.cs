@@ -146,12 +146,13 @@ namespace DAL
             return major;
         }
 
-        public static List<Tuple<string, string>> GetMajorList(ref List<string> errors)
+        public static List<Major> GetMajorList(ref List<string> errors)
         {
             SqlConnection conn = new SqlConnection(connection_string);
-            string major = null;
-            string dept = null;
-            List<Tuple<string, string>> majorList = null;
+            //string major = null;
+            //string dept = null;
+            Major major = null;
+            List<Major> majorList = null;
 
             try 
             {
@@ -166,12 +167,14 @@ namespace DAL
                 if (myDS.Tables[0].Rows.Count == 0)
                     return null;
 
-                majorList = new List<Tuple<string, string>>();
+                majorList = new List<Major>();
                 for (int i = 0; i < myDS.Tables[0].Rows.Count; i++)
                 {
-                    major = myDS.Tables[0].Rows[i]["major_name"].ToString();
-                    dept = myDS.Tables[0].Rows[i]["dept_name"].ToString(); 
-                    majorList.Add(Tuple.Create(major,dept));
+                    major = new Major();
+                    major.id = Convert.ToInt32(myDS.Tables[0].Rows[i]["major_id"].ToString()); 
+                    major.majorName = myDS.Tables[0].Rows[i]["major_name"].ToString();
+                    major.deptId = Convert.ToInt32(myDS.Tables[0].Rows[i]["dept_id"].ToString());
+                    majorList.Add(major);
                 }
             }
             catch (Exception e)

@@ -113,7 +113,7 @@ namespace BLTest
         Assert.AreEqual(0, errors.Count);
 
         //GET LIST (NEED TO MODIFY?)
-        List<Tuple<string, string>> majorList = BLMajor.GetMajorList(ref errors);
+        List<Major> majorList = BLMajor.GetMajorList(ref errors);
         Assert.AreEqual(0, errors.Count);
 
         //DELETE

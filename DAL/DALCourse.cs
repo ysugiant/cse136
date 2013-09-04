@@ -183,11 +183,8 @@ namespace DAL
 
                 SqlDataAdapter mySA = new SqlDataAdapter(strSQL, conn);
                 mySA.SelectCommand.CommandType = CommandType.StoredProcedure;
-
                 mySA.SelectCommand.Parameters.Add(new SqlParameter("@course_title", SqlDbType.VarChar, 100));
-
                 mySA.SelectCommand.Parameters["@course_title"].Value = course_title;
-
 
                 DataSet myDS = new DataSet();
                 mySA.Fill(myDS);
@@ -204,18 +201,17 @@ namespace DAL
 
                 if (myDS.Tables[1] != null)
                 {
-                    course.prerequisite_list = new List<Prerequisite>();
+                    course.prerequisite_list = new List<Course>();
 
 
                     for (int i = 0; i < myDS.Tables[1].Rows.Count; i++)
                     {
-                        Prerequisite prerequisite = new Prerequisite();
-                        prerequisite.course = new Course();
-                        prerequisite.course.id = Convert.ToInt32(myDS.Tables[1].Rows[i]["course_pre_id"]);
-                        prerequisite.course.title = myDS.Tables[1].Rows[i]["course_pre_title"].ToString();
-                        prerequisite.course.level = (CourseLevel)Enum.Parse(typeof(CourseLevel), myDS.Tables[1].Rows[i]["course_pre_level"].ToString());
-                        prerequisite.course.description = myDS.Tables[1].Rows[i]["course_pre_description"].ToString();
-                        prerequisite.course.units = Convert.ToInt32(myDS.Tables[1].Rows[i]["course_pre_units"]);
+                        Course prerequisite = new Course();
+                        prerequisite.id = Convert.ToInt32(myDS.Tables[1].Rows[i]["course_pre_id"]);
+                        prerequisite.title = myDS.Tables[1].Rows[i]["course_pre_title"].ToString();
+                        prerequisite.level = (CourseLevel)Enum.Parse(typeof(CourseLevel), myDS.Tables[1].Rows[i]["course_pre_level"].ToString());
+                        prerequisite.description = myDS.Tables[1].Rows[i]["course_pre_description"].ToString();
+                        prerequisite.units = Convert.ToInt32(myDS.Tables[1].Rows[i]["course_pre_units"]);
 
                         course.prerequisite_list.Add(prerequisite);
                     }
@@ -223,7 +219,7 @@ namespace DAL
                 else
                 {
                     System.Diagnostics.Debug.WriteLine(course.id + " does NOT have a prerequisites.");
-                    course.prerequisite_list = new List<Prerequisite>();
+                    course.prerequisite_list = new List<Course>();
                 }
 
             }

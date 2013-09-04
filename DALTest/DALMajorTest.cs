@@ -118,7 +118,7 @@ namespace DALTest
             Assert.AreEqual(0, errors.Count);
 
             //GET LIST (NEED TO MODIFY?)
-            List<Tuple<string, string>> majorList = DALMajor.GetMajorList(ref errors);
+            List<Major> majorList = DALMajor.GetMajorList(ref errors);
             Assert.AreEqual(0, errors.Count);
 
             //DELETE

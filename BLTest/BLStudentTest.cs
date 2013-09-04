@@ -158,7 +158,7 @@ namespace BLTest
       Student student = new Student();
       student.first_name = "first";
       student.last_name = " last";
-      student.id = "A12345678";
+      student.id = "A99999999";
       student.ssn = "555555555";
       student.email = "myemail15@ucsd.edu";
       student.password = "pass123456";

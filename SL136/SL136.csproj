@@ -44,6 +44,8 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SLMajor.cs" />
+    <Compile Include="ISLMajor.cs" />
     <Compile Include="ISLStaff.cs" />
     <Compile Include="SLStaff.cs" />
     <Compile Include="SLEnrollment.cs" />

@@ -46,7 +46,6 @@
     <Compile Include="GPA.cs" />
     <Compile Include="Major.cs" />
     <Compile Include="Department.cs" />
-    <Compile Include="Prerequisite.cs" />
     <Compile Include="Instructor.cs" />
     <Compile Include="Staff.cs" />
     <Compile Include="Course.cs" />

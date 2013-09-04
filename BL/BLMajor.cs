@@ -45,7 +45,7 @@ namespace BL
             DALMajor.DeleteMajor(id, ref errors);
         }
 
-        public static List<Tuple<string, string>> GetMajorList(ref List<string> errors)
+        public static List<Major> GetMajorList(ref List<string> errors)
         {
             return DALMajor.GetMajorList(ref errors);
         }

@@ -25,7 +25,7 @@ namespace POCO
         public int units { get; set; }
 
         [DataMember]
-        public List<Prerequisite> prerequisite_list;
+        public List<Course> prerequisite_list;
 
         public override string ToString()
         {
