@@ -12,15 +12,8 @@ namespace BL
     public static void InsertStudent(Student student, ref List<string> errors)
     {
       BLCheck.checkStudentErrors(student, ref errors);
-      //System.Diagnostics.Debug.WriteLine();
       if (errors.Count > 0)
-      {
-          /*for (int i = 0; i < errors.Count; i++)
-          {
-              System.Diagnostics.Debug.WriteLine("There was an error caught." + errors[i]);
-          }*/
           return;
-      }
 
       DALStudent.InsertStudent(student, ref errors);
     }
@@ -60,31 +53,6 @@ namespace BL
       return DALStudent.GetStudentList(ref errors);
     }
 
-    /*public static void EnrollSchedule(string student_id, int schedule_id, ref List<string> errors)
-    {
-      ScheduledCourse sCourse = BLCourseSchedule.GetCourseScheduleDetail(student_id, ref errors);
-      
-      BLCheck.checkScheduleErrors(
-      if (errors.Count > 0)
-        return;
-
-      DALStudent.EnrollSchedule(student_id, schedule_id, ref errors);
-    }
-
-    public static void DropEnrolledSchedule(string student_id, int schedule_id, ref List<string> errors)
-    {
-      if (student_id == null)
-      {
-        errors.Add("Invalid student ID");
-      }
-
-      // anything else to validate?
-
-      if (errors.Count > 0)
-        return;
-
-      DALStudent.DropEnrolledSchedule(student_id, schedule_id, ref errors);
-    }*/
 
   }
 }
