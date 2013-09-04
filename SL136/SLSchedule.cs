@@ -16,5 +16,27 @@ namespace SL136
     {
       return BLCourseSchedule.GetCourseScheduleList(year, quarter, ref errors);
     }
+
+    public ScheduledCourse GetCourseScheduleDetail(int id, ref List<string> errors)
+    {
+        return BLCourseSchedule.GetCourseScheduleDetail(id,ref errors);
+    }
+
+    public void InsertCourseSchedule(ScheduledCourse sched, ref List<string> errors, out int ID)
+    {
+        BLCourseSchedule.InsertCourseSchedule(sched, ref errors,out  ID);
+    }
+
+    public void UpdateCourseSchedule(ScheduledCourse sched, ref List<string> errors)
+    {
+        BLCourseSchedule.UpdateCourseSchedule(sched, ref errors);
+    }
+
+    public void DeleteCourseSchedule(int id, ref List<string> errors)
+    {
+        BLCourseSchedule.DeleteCourseSchedule(id, ref errors);
+    }
+
+
   }
 }
