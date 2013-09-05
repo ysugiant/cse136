@@ -163,7 +163,7 @@ namespace DAL
             course.id = Convert.ToInt32(myDS.Tables[0].Rows[0]["course_id"].ToString());
             course.units = Convert.ToInt32(myDS.Tables[0].Rows[0]["units"].ToString());
             course.title = myDS.Tables[0].Rows[0]["course_title"].ToString();            
-            course.level = (CourseLevel)Enum.Parse(typeof(CourseLevel), myDS.Tables[0].Rows[0]["course_level"].ToString());//JUSTIN ADDED THIS
+            course.level = myDS.Tables[0].Rows[0]["course_level"].ToString();//JUSTIN ADDED THIS
             course.description = myDS.Tables[0].Rows[0]["course_description"].ToString();
             sCourse.course = course;
 
@@ -236,7 +236,7 @@ namespace DAL
             {
               id = Convert.ToInt32(myDS.Tables[0].Rows[i]["course_id"].ToString()),
               title = myDS.Tables[0].Rows[i]["course_title"].ToString(),
-              level = (CourseLevel)Enum.Parse(typeof(CourseLevel), myDS.Tables[0].Rows[i]["course_level"].ToString()),//JUSTIN ADDED THIS
+              level =  myDS.Tables[0].Rows[i]["course_level"].ToString(),//JUSTIN ADDED THIS
               description = myDS.Tables[0].Rows[i]["course_description"].ToString(),
               units = Convert.ToInt32(myDS.Tables[0].Rows[i]["units"].ToString())//JUSTIN ADDED THIS
             };

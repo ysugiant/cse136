@@ -188,7 +188,7 @@ namespace DAL
                     course.id = Convert.ToInt32(myDS.Tables[1].Rows[i]["course_id"]);
                     course.title = myDS.Tables[1].Rows[i]["course_title"].ToString();
                     course.description = myDS.Tables[1].Rows[i]["course_description"].ToString();
-                    course.level = (CourseLevel)Enum.Parse(typeof(CourseLevel), myDS.Tables[0].Rows[0]["level"].ToString());//JUSTIN ADDED THIS
+                    course.level =  myDS.Tables[0].Rows[0]["level"].ToString();//JUSTIN ADDED THIS
                     course.units = Convert.ToInt32(myDS.Tables[1].Rows[i]["units"].ToString());//JUSTIN ADDED THIS
                     schedule.course = course;
                     System.Diagnostics.Debug.WriteLine("Added " + schedule.course.id + " to student schedule");//JUSTIN ADDED THIS

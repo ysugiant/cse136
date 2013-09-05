@@ -72,7 +72,7 @@ namespace BLTest
         {
             Course course = new Course();
             course.title = "BL CSE TEST";
-            course.level = (CourseLevel)Enum.Parse(typeof(CourseLevel), "grad");
+            course.level =  "grad";
             course.description = "test insert course";
             course.units = 10;
 
@@ -94,7 +94,7 @@ namespace BLTest
             Course course2 = new Course();
             course2.id = BLCourse.GetCourse(course.title, ref errors).id;
             course2.title = "BL CSE TEST TWO";
-            course2.level = (CourseLevel)Enum.Parse(typeof(CourseLevel), "lower");
+            course2.level ="lower";
             course2.description = "test insert course 2";
             course2.units = 10;
 
@@ -155,10 +155,11 @@ namespace BLTest
             Course course = new Course();
             course.id = -1;
             course.title = "";
+            course.level = "";
             course.description = "";
             course.units = -1;
             BLCourse.InsertCourse(course, ref errors);
-            Assert.AreEqual(4, errors.Count);
+            Assert.AreEqual(5, errors.Count);
 
 
 

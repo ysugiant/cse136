@@ -71,7 +71,7 @@ namespace DALTest
             //student has 11 fields, and one list of <Schedule>'s
             Course course = new Course();
             course.title = "CSE TEST";
-            course.level = (CourseLevel)Enum.Parse(typeof(CourseLevel),"grad");
+            course.level = "grad";
             course.description = "test insert course";
             course.units = 10;
           
@@ -93,7 +93,7 @@ namespace DALTest
             Course course2 = new Course();
             course2.id =  DALCourse.GetCourseDetail(course.title, ref errors).id;
             course2.title = "CSE TEST TWO";
-            course2.level = (CourseLevel)Enum.Parse(typeof(CourseLevel), "lower");
+            course2.level =  "lower";
             course2.description = "test insert course 2";
             course2.units = 20;
 

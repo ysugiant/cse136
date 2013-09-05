@@ -464,14 +464,10 @@ namespace BL
             }
         }
 
-        public static void checkCourseLevel(CourseLevel courselevel, ref List<string> errors)
+        public static void checkCourseLevel(String courselevel, ref List<string> errors)
         {
 
-            if (courselevel == null)
-            {
-                errors.Add("course level cannot be null");
-            }
-            else if (courselevel.ToString() == "")
+            if (courselevel.ToString() == "")
             {
                 errors.Add("course level cannot be empty");
             }

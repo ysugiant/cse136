@@ -38,7 +38,7 @@ namespace DAL
                     Course course = new Course();
                     course.id = Convert.ToInt32(myDS.Tables[0].Rows[i]["course_id"]);
                     course.title = myDS.Tables[0].Rows[i]["course_title"].ToString();
-                    course.level = (CourseLevel)Enum.Parse(typeof(CourseLevel), myDS.Tables[0].Rows[i]["course_level"].ToString());
+                    course.level = myDS.Tables[0].Rows[i]["course_level"].ToString();
                     course.description = myDS.Tables[0].Rows[i]["course_description"].ToString();
                     course.units = Convert.ToInt32(myDS.Tables[0].Rows[i]["units"]);
                     courseList.Add(course);
@@ -195,7 +195,7 @@ namespace DAL
                 course = new Course();
                 course.id = Convert.ToInt32(myDS.Tables[0].Rows[0]["course_id"]);
                 course.title = myDS.Tables[0].Rows[0]["course_title"].ToString();
-                course.level = (CourseLevel)Enum.Parse(typeof(CourseLevel), myDS.Tables[0].Rows[0]["course_level"].ToString());
+                course.level = myDS.Tables[0].Rows[0]["course_level"].ToString();
                 course.description = myDS.Tables[0].Rows[0]["course_description"].ToString();
                 course.units = Convert.ToInt32(myDS.Tables[0].Rows[0]["units"]);
 
@@ -209,7 +209,7 @@ namespace DAL
                         Course prerequisite = new Course();
                         prerequisite.id = Convert.ToInt32(myDS.Tables[1].Rows[i]["course_pre_id"]);
                         prerequisite.title = myDS.Tables[1].Rows[i]["course_pre_title"].ToString();
-                        prerequisite.level = (CourseLevel)Enum.Parse(typeof(CourseLevel), myDS.Tables[1].Rows[i]["course_pre_level"].ToString());
+                        prerequisite.level =  myDS.Tables[1].Rows[i]["course_pre_level"].ToString();
                         prerequisite.description = myDS.Tables[1].Rows[i]["course_pre_description"].ToString();
                         prerequisite.units = Convert.ToInt32(myDS.Tables[1].Rows[i]["course_pre_units"]);
 
