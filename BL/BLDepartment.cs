@@ -18,6 +18,11 @@ namespace BL
             return (DALDepartment.GetDepartmentDetail(name, ref errors));
         }
 
+        public static List<Department> GetDepartmentList(ref List<string> errors)
+        {
+            return (DALDepartment.GetDepartmentList(ref errors));
+        }
+
         public static void InsertDepartment(Department dept, ref List<string> errors)
         {
             BLCheck.checkDepartmentErrors(dept, ref errors);
