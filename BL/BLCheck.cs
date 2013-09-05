@@ -215,9 +215,10 @@ namespace BL
         }
 
         //STUDENT
-        public static void checkStudentLevel(StudentLevel level, ref List<string> errors)
+        //public static void checkStudentLevel(StudentLevel level, ref List<string> errors)
+        public static void checkStudentLevel(string level, ref List<string> errors)
         {
-            System.Diagnostics.Debug.WriteLine("Current student level: " + level.ToString());
+            /*System.Diagnostics.Debug.WriteLine("Current student level: " + level.ToString());
             if (!(level.ToString().Equals("freshman") || level.ToString().Equals("sophomore") || level.ToString().Equals("junior") || 
                 level.ToString().Equals("senior") || level.ToString().Equals("grad") || level.ToString().Equals("phd"))) {
                    errors.Add("Student level cannot be anything other than: 'freshman', 'sophomore', 'junior'," +
@@ -226,7 +227,12 @@ namespace BL
             else if (level.Equals(null))
                 errors.Add("Cannot have a null student level.");
             else if (level.ToString().Length == 0)
-                errors.Add("Student level cannot be an empty string.");
+                errors.Add("Student level cannot be an empty string.");*/
+            if (!(level.Equals("freshman") || level.Equals("sophomore") || level.Equals("junior") ||
+                level.Equals("senior") || level.Equals("grad") || level.Equals("phd")))
+            {
+                errors.Add("Student level must be one of the following: 'freshman', 'sophomore', 'junior', 'senior, 'grad', 'phd'.");
+            }
         }
 
         public static void checkStudentStatus(int status, ref List<string> errors)

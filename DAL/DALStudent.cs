@@ -175,7 +175,8 @@ namespace DAL
             student.shoe_size = (float)Convert.ToDouble(myDS.Tables[0].Rows[0]["shoe_size"].ToString());
             student.weight = Convert.ToInt32(myDS.Tables[0].Rows[0]["weight"].ToString());
             student.major = Convert.ToInt32(myDS.Tables[0].Rows[0]["major_id"].ToString());//JUSTIN ADDED THIS
-            student.level = (StudentLevel)Enum.Parse(typeof(StudentLevel), myDS.Tables[0].Rows[0]["level"].ToString());//JUSTIN ADDED THIS
+            //student.level = (StudentLevel)Enum.Parse(typeof(StudentLevel), myDS.Tables[0].Rows[0]["level"].ToString());//JUSTIN ADDED THIS
+            student.level = myDS.Tables[0].Rows[0]["level"].ToString();//JUSTIN ADDED THIS
             student.status = Convert.ToInt32(myDS.Tables[0].Rows[0]["status"].ToString());//JUSTIN ADDED THIS
 
             if (myDS.Tables[1] != null)
@@ -252,7 +253,8 @@ namespace DAL
           student.shoe_size = (float)Convert.ToDouble(myDS.Tables[0].Rows[i]["shoe_size"].ToString());
           student.weight = Convert.ToInt32(myDS.Tables[0].Rows[i]["weight"].ToString());
           student.major = Convert.ToInt32(myDS.Tables[0].Rows[i]["major_id"].ToString());//JUSTIN ADDED THIS
-          student.level = (StudentLevel)Enum.Parse(typeof(StudentLevel), myDS.Tables[0].Rows[i]["level"].ToString());//JUSTIN ADDED THIS
+          //student.level = (StudentLevel)Enum.Parse(typeof(StudentLevel), myDS.Tables[0].Rows[i]["level"].ToString());//JUSTIN ADDED THIS
+          student.level = myDS.Tables[0].Rows[i]["level"].ToString();//JUSTIN ADDED THIS
           student.status = Convert.ToInt32(myDS.Tables[0].Rows[i]["status"].ToString());//JUSTIN ADDED THIS
           studentList.Add(student);
         }
