@@ -79,7 +79,8 @@ namespace BLTest
         student.last_name = "";// fail, cannot be empty
         student.shoe_size = -20;// fail, cannot be non-positive
         student.weight = -135;// fail, cannot be non-positive
-        student.level = (StudentLevel)Enum.Parse(typeof(StudentLevel), "freshman");
+        //student.level = (StudentLevel)Enum.Parse(typeof(StudentLevel), "freshman");
+        student.level = "freshman";
         student.status = 99;// fail, must be between 0-2
         student.major = -1;// fail, cannot be negative
         BLStudent.InsertStudent(student, ref errors);
@@ -96,7 +97,8 @@ namespace BLTest
         student2.last_name = null;// fail, cannot be empty
         student2.shoe_size = 10;
         student2.weight = 135;
-        student2.level = (StudentLevel)Enum.Parse(typeof(StudentLevel), "senior");
+        //student2.level = (StudentLevel)Enum.Parse(typeof(StudentLevel), "senior");
+        student2.level = "senior";
         student2.status = 0;
         student2.major = 1;
         BLStudent.InsertStudent(student2, ref errors);
@@ -113,7 +115,8 @@ namespace BLTest
         student3.last_name = "Coolio";
         student3.shoe_size = 10;
         student3.weight = 135;
-        student3.level = (StudentLevel)Enum.Parse(typeof(StudentLevel), "senior");
+        //student3.level = (StudentLevel)Enum.Parse(typeof(StudentLevel), "senior");
+        student3.level = "senior";
         student3.status = 0;
         student3.major = 1;
         BLStudent.InsertStudent(student3, ref errors);
@@ -131,7 +134,8 @@ namespace BLTest
         student4.last_name = "Coolio";
         student4.shoe_size = 10;
         student4.weight = 135;
-        student4.level = (StudentLevel)Enum.Parse(typeof(StudentLevel), "senior");
+        //student4.level = (StudentLevel)Enum.Parse(typeof(StudentLevel), "senior");
+        student4.level = "senior";
         student4.status = 0;
         student4.major = 1;
         BLStudent.InsertStudent(student4, ref errors);
@@ -165,8 +169,9 @@ namespace BLTest
       student.shoe_size = 0;
       student.weight = 0;
       student.major = 1;
-      student.level = new StudentLevel();
-      student.level = (StudentLevel)Enum.Parse(typeof(StudentLevel), "senior");// fail, must be a legitimate student level
+      //student.level = new StudentLevel();
+      //student.level = (StudentLevel)Enum.Parse(typeof(StudentLevel), "senior");// fail, must be a legitimate student level
+      student.level = "senior";// fail, must be a legitimate student level
       student.status = 0;
       student.enrolled = new List<ScheduledCourse>();
 

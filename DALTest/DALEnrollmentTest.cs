@@ -79,7 +79,8 @@ namespace DALTest
             student.shoe_size = 2;
             student.weight = 2;
             student.major = 1;//JUSTIN ADDED THIS
-            student.level = StudentLevel.senior;//JUSTIN ADDED THIS
+            //student.level = StudentLevel.senior;//JUSTIN ADDED THIS
+            student.level = "senior";//JUSTIN ADDED THIS
             student.status = 0;//JUSTIN ADDED THIS
 
             //System.Diagnostics.Debug.WriteLine("value of student.level is: " + student.level.ToString());

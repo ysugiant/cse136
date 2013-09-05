@@ -77,7 +77,8 @@ namespace DALTest
       student.shoe_size = 0;
       student.weight = 0;
       student.major = 1;//JUSTIN ADDED THIS
-      student.level = StudentLevel.freshman;//JUSTIN ADDED THIS
+      //student.level = StudentLevel.freshman;//JUSTIN ADDED THIS
+      student.level = "freshman";//JUSTIN ADDED THIS
       student.status = 0;//JUSTIN ADDED THIS
       student.enrolled = new List<ScheduledCourse>();//JUSTIN ADDED THIS
 
@@ -113,7 +114,8 @@ namespace DALTest
       student2.shoe_size = 2;
       student2.weight = 2;
       student2.major = 1;//JUSTIN ADDED THIS
-      student2.level = StudentLevel.senior;//JUSTIN ADDED THIS
+      //student2.level = StudentLevel.senior;//JUSTIN ADDED THIS
+      student2.level = "senior";//JUSTIN ADDED THIS
       student2.status = 0;//JUSTIN ADDED THIS
 
       //System.Diagnostics.Debug.WriteLine("value of student.level is: " + student.level.ToString());

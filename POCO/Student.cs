@@ -34,7 +34,8 @@ namespace POCO
     public int weight { get; set; }
 
     [DataMember]
-    public StudentLevel level { get; set; }//JUSTIN ADDED THIS
+    //public StudentLevel level { get; set; }//JUSTIN ADDED THIS
+    public string level { get; set; }//JUSTIN ADDED THIS
 
     [DataMember]
     public int status { get; set; }
