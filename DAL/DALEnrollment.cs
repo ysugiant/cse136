@@ -63,7 +63,7 @@ namespace DAL
                       {
                         id = Convert.ToInt32(myDS.Tables[0].Rows[i]["course_id"]),
                         title = myDS.Tables[0].Rows[i]["course_title"].ToString(),
-                        level = (CourseLevel)Enum.Parse(typeof(CourseLevel), myDS.Tables[0].Rows[i]["course_level"].ToString()),
+                        level = myDS.Tables[0].Rows[i]["course_level"].ToString(),
                         description = myDS.Tables[0].Rows[i]["course_description"].ToString(),
                         units = Convert.ToInt32(myDS.Tables[0].Rows[i]["units"])
                       };

@@ -16,7 +16,7 @@ namespace POCO
         public string title { get; set; }
 
         [DataMember]
-        public CourseLevel level { get; set; }
+        public String level { get; set; }
 
         [DataMember]
         public string description { get; set; }
