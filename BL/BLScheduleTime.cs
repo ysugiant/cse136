@@ -19,7 +19,7 @@ namespace BL
             DALScheduleTime.InsertScheduleTime(time, ref errors);
         }
 
-        public static List<string> GetScheduleTimeList(ref List<string> errors)
+        public static Dictionary<string, string> GetScheduleTimeList(ref List<string> errors)
         {
             return (DALScheduleTime.GetScheduleTimeList(ref errors));
         }

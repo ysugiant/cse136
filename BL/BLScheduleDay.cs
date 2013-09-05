@@ -19,7 +19,7 @@ namespace BL
             DALScheduleDay.InsertScheduleDay(day, ref errors);
         }
 
-        public static List<string> GetScheduleDayList(ref List<string> errors)
+        public static Dictionary<string, string> GetScheduleDayList(ref List<string> errors)
         {
             return (DALScheduleDay.GetScheduleDayList(ref errors));
         }

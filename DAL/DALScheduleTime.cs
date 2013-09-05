@@ -43,10 +43,10 @@ namespace DAL
         }
 
 
-        public static List<string> GetScheduleTimeList(ref List<string> errors)
+        public static Dictionary<string, string> GetScheduleTimeList(ref List<string> errors)
         {
             SqlConnection conn = new SqlConnection(connection_string);
-            List<string> time = new List<string>();
+            Dictionary<string, string> time = new Dictionary<string, string>();
 
             try
             {
@@ -63,7 +63,7 @@ namespace DAL
 
                 for (int i = 0; i < myDS.Tables[0].Rows.Count; i++)
                 {
-                    time.Add(myDS.Tables[0].Rows[i]["schedule_time"].ToString());
+                    time.Add(myDS.Tables[0].Rows[i]["schedule_time_id"].ToString(), myDS.Tables[0].Rows[i]["schedule_time"].ToString());
                 }
                 
             }

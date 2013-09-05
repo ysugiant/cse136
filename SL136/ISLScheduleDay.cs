@@ -15,7 +15,7 @@ namespace SL136
   {
 
     [OperationContract]
-    List<string> GetScheduleDayList(ref List<string> errors);
+    Dictionary<string, string> GetScheduleDayList(ref List<string> errors);
 
     [OperationContract]
     void InsertScheduleDay(string day, ref List<string> errors);

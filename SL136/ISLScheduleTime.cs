@@ -15,7 +15,7 @@ namespace SL136
   {
 
     [OperationContract]
-    List<string> GetScheduleTimeList(ref List<string> errors);
+    Dictionary<string, string> GetScheduleTimeList(ref List<string> errors);
 
     [OperationContract]
     void InsertScheduleTime(string time, ref List<string> errors);

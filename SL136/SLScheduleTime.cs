@@ -22,7 +22,7 @@ namespace SL136
       BLScheduleTime.DeleteScheduleTime(id, ref errors);
     }
 
-    public List<string> GetScheduleTimeList(ref List<string> errors)
+    public Dictionary<string, string> GetScheduleTimeList(ref List<string> errors)
     {
       return BLScheduleTime.GetScheduleTimeList(ref errors);
     }
