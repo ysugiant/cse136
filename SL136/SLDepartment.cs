@@ -27,6 +27,11 @@ namespace SL136
       return BLDepartment.GetDepartmentDetail(name, ref errors);
     }
 
+    public List<Department> GetDepartmentList(ref List<string> errors)
+    {
+        return BLDepartment.GetDepartmentList(ref errors);
+    }
+
     public void UpdateDepartment(Department dept, ref List<string> errors)
     {
         BLDepartment.UpdateDepartment(dept, ref errors);

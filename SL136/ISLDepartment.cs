@@ -18,6 +18,9 @@ namespace SL136
     Department GetDepartmentDetail(string name, ref List<string> errors);
 
     [OperationContract]
+    List<Department> GetDepartmentList(ref List<string> errors);
+
+    [OperationContract]
     void InsertDepartment(Department dept, ref List<string> errors);
 
     [OperationContract]
