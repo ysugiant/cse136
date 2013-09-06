@@ -123,7 +123,7 @@ namespace DAL
 
             try
             {
-                string strSQL = "spGetDepartmentInfo";
+                string strSQL = "spGetDepartmentList";
 
                 SqlDataAdapter mySA = new SqlDataAdapter(strSQL, conn);
                 mySA.SelectCommand.CommandType = CommandType.StoredProcedure;
@@ -137,9 +137,9 @@ namespace DAL
                 for (int i = 0; i < myDS.Tables[0].Rows.Count; i++)
                 {
                     Department dept = new Department();
-                    dept.id = Convert.ToInt32(myDS.Tables[0].Rows[0]["dept_id"].ToString());
-                    dept.deptName = myDS.Tables[0].Rows[0]["dept_name"].ToString();
-                    dept.chairID = Convert.ToInt32(myDS.Tables[0].Rows[0]["chair_id"].ToString());
+                    dept.id = Convert.ToInt32(myDS.Tables[0].Rows[i]["dept_id"].ToString());
+                    dept.deptName = myDS.Tables[0].Rows[i]["dept_name"].ToString();
+                    dept.chairID = Convert.ToInt32(myDS.Tables[0].Rows[i]["chair_id"].ToString());
                     deptList.Add(dept);
                 }
             }

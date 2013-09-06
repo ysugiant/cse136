@@ -9,14 +9,9 @@ namespace BL
 {
     public static class BLEnrollment
     {
-        public static List<Enrollment> GetEnrollment(string student_id, ref List<string> errors)
+        public static List<Enrollment> GetEnrollment(ref List<string> errors)
         {
-            BLCheck.checkStudentID(student_id, ref errors);
-
-            if (errors.Count > 0)
-                return new List<Enrollment>();
-
-            return (DALEnrollment.GetEnrollment(student_id, ref errors));
+            return (DALEnrollment.GetEnrollment(ref errors));
         }
 
         public static void InsertEnrollment(string student_id, int schedule_id, ref List<string> errors)
