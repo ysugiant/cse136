@@ -41,15 +41,15 @@ namespace BL
             DALDepartment.UpdateDepartment(dept, ref errors);
         }
 
-        public static void DeleteDepartment(string name, ref List<string> errors)
+        public static void DeleteDepartment(int id, ref List<string> errors)
         {
-            BLCheck.checkDeptName(name, ref errors);
+            BLCheck.checkDeptID(id, ref errors);
 
 
             if (errors.Count > 0)
                 return;
 
-            DALDepartment.DeleteDepartment(name, ref errors);
+            DALDepartment.DeleteDepartment(id, ref errors);
         }
     }
 }

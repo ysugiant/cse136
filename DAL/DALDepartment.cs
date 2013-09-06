@@ -156,7 +156,7 @@ namespace DAL
             return deptList;
         }
 
-        public static void DeleteDepartment(string name, ref List<string> errors)
+        public static void DeleteDepartment(int id, ref List<string> errors)
         {
             SqlConnection conn = new SqlConnection(connection_string);
             try
@@ -165,9 +165,9 @@ namespace DAL
 
                 SqlDataAdapter mySA = new SqlDataAdapter(strSQL, conn);
                 mySA.SelectCommand.CommandType = CommandType.StoredProcedure;
-                mySA.SelectCommand.Parameters.Add(new SqlParameter("@dept_name", SqlDbType.VarChar,50));
+                mySA.SelectCommand.Parameters.Add(new SqlParameter("@id", SqlDbType.Int));
                 
-                mySA.SelectCommand.Parameters["@dept_name"].Value = name;
+                mySA.SelectCommand.Parameters["@id"].Value = id;
 
                 DataSet myDS = new DataSet();
                 mySA.Fill(myDS);

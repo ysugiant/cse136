@@ -17,9 +17,9 @@ namespace SL136
       BLDepartment.InsertDepartment(dept, ref errors);
     }
 
-    public void DeleteDepartment(string name, ref List<string> errors)
+    public void DeleteDepartment(int id, ref List<string> errors)
     {
-      BLDepartment.DeleteDepartment(name, ref errors);
+      BLDepartment.DeleteDepartment(id, ref errors);
     }
 
     public Department GetDepartmentDetail(string name, ref List<string> errors)
