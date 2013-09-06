@@ -17,7 +17,7 @@ namespace SL136
       BLScheduleDay.InsertScheduleDay(day, ref errors);
     }
 
-    public void DeleteScheduleDay(string id, ref List<string> errors)
+    public void DeleteScheduleDay(int id, ref List<string> errors)
     {
       BLScheduleDay.DeleteScheduleDay(id, ref errors);
     }

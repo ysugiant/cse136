@@ -21,7 +21,7 @@ namespace SL136
     void InsertScheduleDay(string day, ref List<string> errors);
 
     [OperationContract]
-    void DeleteScheduleDay(string id, ref List<string> errors);
+    void DeleteScheduleDay(int id, ref List<string> errors);
 
   }
 }

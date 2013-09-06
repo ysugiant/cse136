@@ -80,7 +80,7 @@ namespace DAL
             return day;
         }
 
-        public static void DeleteScheduleDay(string day, ref List<string> errors)
+        public static void DeleteScheduleDay(int id, ref List<string> errors)
         {
             SqlConnection conn = new SqlConnection(connection_string);
             try
@@ -89,9 +89,9 @@ namespace DAL
 
                 SqlDataAdapter mySA = new SqlDataAdapter(strSQL, conn);
                 mySA.SelectCommand.CommandType = CommandType.StoredProcedure;
-                mySA.SelectCommand.Parameters.Add(new SqlParameter("@schedule_day", SqlDbType.VarChar, 50));
+                mySA.SelectCommand.Parameters.Add(new SqlParameter("@id", SqlDbType.Int));
 
-                mySA.SelectCommand.Parameters["@schedule_day"].Value = day;
+                mySA.SelectCommand.Parameters["@id"].Value = id;
 
                 DataSet myDS = new DataSet();
                 mySA.Fill(myDS);

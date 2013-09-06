@@ -17,7 +17,7 @@ namespace SL136
       BLScheduleTime.InsertScheduleTime(time, ref errors);
     }
 
-    public void DeleteScheduleTime(string id, ref List<string> errors)
+    public void DeleteScheduleTime(int id, ref List<string> errors)
     {
       BLScheduleTime.DeleteScheduleTime(id, ref errors);
     }
