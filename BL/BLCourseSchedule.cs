@@ -54,5 +54,10 @@ namespace BL
 
             return (DALCourseSchedule.GetCourseScheduleList(year, quarter, ref errors));
         }
+
+        public static List<ScheduledCourse> GetScheduleListComplete(ref List<string> errors)
+        {
+            return DALCourseSchedule.GetScheduleListComplete(ref errors);
+        }
     }
 }

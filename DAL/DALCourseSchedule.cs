@@ -258,5 +258,66 @@ namespace DAL
 
       return scheduleList;
     }
+
+    public static List<ScheduledCourse> GetScheduleListComplete(ref List<string> errors)
+    {
+        SqlConnection conn = new SqlConnection(connection_string);
+        //string major = null;
+        //string dept = null;
+        ScheduledCourse schedule = null;
+        List<ScheduledCourse> schedList = null;
+
+        try
+        {
+            string strSQL = "spGetScheduleListComplete";
+
+            SqlDataAdapter mySA = new SqlDataAdapter(strSQL, conn);
+            mySA.SelectCommand.CommandType = CommandType.StoredProcedure;
+
+            DataSet myDS = new DataSet();
+            mySA.Fill(myDS);
+
+            if (myDS.Tables[0].Rows.Count == 0)
+                return null;
+
+            schedList = new List<ScheduledCourse>();
+            for (int i = 0; i < myDS.Tables[0].Rows.Count; i++)
+            {
+                schedule = new ScheduledCourse();
+                schedule.id = Convert.ToInt32(myDS.Tables[0].Rows[i]["schedule_id"].ToString());
+                schedule.year = Convert.ToInt32(myDS.Tables[0].Rows[i]["year"].ToString());
+                schedule.quarter = myDS.Tables[0].Rows[i]["quarter"].ToString();
+                schedule.session = myDS.Tables[0].Rows[i]["session"].ToString();
+                schedule.time = myDS.Tables[0].Rows[i]["schedule_time"].ToString();//JUSTIN ADDED THIS
+                schedule.day = myDS.Tables[0].Rows[i]["schedule_day"].ToString();//JUSTIN ADDED THIS
+                schedule.instructor_fName = myDS.Tables[0].Rows[i]["instr_fName"].ToString();//JUSTIN ADDED THIS
+                schedule.instructor_lName = myDS.Tables[0].Rows[i]["instr_lName"].ToString();//JUSTIN ADDED THIS
+                schedule.timeID = Convert.ToInt32(myDS.Tables[0].Rows[i]["schedule_time_id"].ToString());
+                schedule.dayID = Convert.ToInt32(myDS.Tables[0].Rows[i]["schedule_day_id"].ToString());
+                schedule.instr_id = Convert.ToInt32(myDS.Tables[0].Rows[i]["staff_id"].ToString());
+                schedule.course =
+                  new Course
+                  {
+                      id = Convert.ToInt32(myDS.Tables[0].Rows[i]["course_id"].ToString()),
+                      title = myDS.Tables[0].Rows[i]["course_title"].ToString(),
+                      level = myDS.Tables[0].Rows[i]["course_level"].ToString(),//JUSTIN ADDED THIS
+                      description = myDS.Tables[0].Rows[i]["course_description"].ToString(),
+                      units = Convert.ToInt32(myDS.Tables[0].Rows[i]["units"].ToString())//JUSTIN ADDED THIS
+                  };
+                schedList.Add(schedule);
+            }
+        }
+        catch (Exception e)
+        {
+            errors.Add("Error: " + e.ToString());
+        }
+        finally
+        {
+            conn.Dispose();
+            conn = null;
+        }
+
+        return schedList;
+    }
   }
 }
