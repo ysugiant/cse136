@@ -24,14 +24,14 @@ namespace BL
             return (DALScheduleDay.GetScheduleDayList(ref errors));
         }
 
-        public static void DeleteScheduleDay(string day, ref List<string> errors)
+        public static void DeleteScheduleDay(int id, ref List<string> errors)
         {
-            BLCheck.checkScheduleDay(day, ref errors);
+            BLCheck.checkScheduleDayID(id, ref errors);
 
             if (errors.Count > 0)
                 return;
 
-            DALScheduleDay.DeleteScheduleDay(day, ref errors);
+            DALScheduleDay.DeleteScheduleDay(id, ref errors);
         }
 
     }

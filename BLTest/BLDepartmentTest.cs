@@ -81,7 +81,7 @@ namespace BLTest
             Assert.AreEqual(0, errors.Count);
             Assert.AreEqual(dept.ToString(), dept.ToString());
 
-            BLDepartment.DeleteDepartment(dept.deptName, ref errors);
+            BLDepartment.DeleteDepartment(dept.id, ref errors);
 
             //UPDATE TEST
             dept = new Department();
@@ -107,7 +107,7 @@ namespace BLTest
             Assert.AreEqual(0, errors.Count);
             Assert.AreEqual(dept.ToString(), dept.ToString());
 
-            BLDepartment.DeleteDepartment(dept.deptName, ref errors);
+            BLDepartment.DeleteDepartment(dept.id, ref errors);
 
             //GET TEST
             dept = new Department();
@@ -123,7 +123,7 @@ namespace BLTest
             Assert.AreEqual(0, errors.Count);
             Assert.AreEqual(dept.ToString(), dept.ToString());
 
-            BLDepartment.DeleteDepartment(dept.deptName, ref errors);
+            BLDepartment.DeleteDepartment(dept.id, ref errors);
 
             //DELETE TEST
             dept = new Department();
@@ -139,7 +139,7 @@ namespace BLTest
             Assert.AreEqual(0, errors.Count);
             Assert.AreEqual(dept.ToString(), dept.ToString());
 
-            BLDepartment.DeleteDepartment(dept.deptName, ref errors);
+            BLDepartment.DeleteDepartment(dept.id, ref errors);
             Assert.AreEqual(0, errors.Count);
 
             verifyDept = BLDepartment.GetDepartmentDetail(dept.deptName, ref errors);
@@ -165,7 +165,7 @@ namespace BLTest
             BLDepartment.UpdateDepartment(dept, ref errors);
             Assert.AreEqual(5, errors.Count);
 
-            BLDepartment.DeleteDepartment(dept.deptName, ref errors);
+            BLDepartment.DeleteDepartment(-125543, ref errors);
             Assert.AreEqual(6, errors.Count);
         }
     }

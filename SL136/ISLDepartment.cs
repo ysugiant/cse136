@@ -24,7 +24,7 @@ namespace SL136
     void InsertDepartment(Department dept, ref List<string> errors);
 
     [OperationContract]
-    void DeleteDepartment(string name, ref List<string> errors);
+    void DeleteDepartment(int id, ref List<string> errors);
 
     [OperationContract]
     void UpdateDepartment(Department dept, ref List<string> errors);

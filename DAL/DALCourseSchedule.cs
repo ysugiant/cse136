@@ -231,6 +231,9 @@ namespace DAL
           schedule.day = myDS.Tables[0].Rows[i]["schedule_day"].ToString();//JUSTIN ADDED THIS
           schedule.instructor_fName = myDS.Tables[0].Rows[i]["instr_fName"].ToString();//JUSTIN ADDED THIS
           schedule.instructor_lName = myDS.Tables[0].Rows[i]["instr_lName"].ToString();//JUSTIN ADDED THIS
+          schedule.timeID = Convert.ToInt32(myDS.Tables[0].Rows[i]["schedule_time_id"].ToString());
+          schedule.dayID = Convert.ToInt32(myDS.Tables[0].Rows[i]["schedule_day_id"].ToString());
+          schedule.instr_id = Convert.ToInt32(myDS.Tables[0].Rows[i]["staff_id"].ToString());
           schedule.course =
             new Course
             {

@@ -10,6 +10,9 @@ namespace POCO
     public class Enrollment
     {
         [DataMember]
+        public string student_id { get; set; }
+
+        [DataMember]
         public ScheduledCourse ScheduledCourse { get; set; }
 
         [DataMember]

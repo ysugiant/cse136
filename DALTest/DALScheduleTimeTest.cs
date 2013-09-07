@@ -73,23 +73,15 @@ namespace DALTest
             DALScheduleTime.InsertScheduleTime(time, ref errors);
 
             Assert.AreEqual(0, errors.Count);
-            List<string> listtime = DALScheduleTime.GetScheduleTimeList(ref errors);
+            Dictionary<string, string> listtime = DALScheduleTime.GetScheduleTimeList(ref errors);
 
             System.Diagnostics.Debug.WriteLine(listtime.Count);
 
-            bool x = false;
-            for (int i = 0; i < listtime.Count; i++)
-            {
-                System.Diagnostics.Debug.WriteLine(listtime[i]);
-
-                if (listtime[i] == time)
-                    x = true;
-            }
-            Assert.AreEqual(x, true);
+            Assert.AreEqual(listtime.ContainsValue(time), true);
             Assert.AreEqual(0, errors.Count);
 
 
-            DALScheduleTime.DeleteScheduleTime(time, ref errors);
+            DALScheduleTime.DeleteScheduleTime(Convert.ToInt32(listtime.FirstOrDefault(x => x.Value.Contains(time)).Key), ref errors);
 
         //GET TEST
             time = "23.00-24.00";
@@ -101,19 +93,11 @@ namespace DALTest
 
             System.Diagnostics.Debug.WriteLine(listtime.Count);
 
-            x = false;
-            for (int i = 0; i < listtime.Count; i++)
-            {
-                System.Diagnostics.Debug.WriteLine(listtime[i]);
-
-                if (listtime[i] == time)
-                    x = true;
-            }
-            Assert.AreEqual(x, true);
+            Assert.AreEqual(listtime.ContainsValue(time), true);
             Assert.AreEqual(0, errors.Count);
 
 
-            DALScheduleTime.DeleteScheduleTime(time, ref errors);
+            DALScheduleTime.DeleteScheduleTime(Convert.ToInt32(listtime.FirstOrDefault(x => x.Value.Contains(time)).Key), ref errors);
 
         //DELETE TEST
             time = "23.00-24.00";
@@ -125,31 +109,15 @@ namespace DALTest
 
             System.Diagnostics.Debug.WriteLine(listtime.Count);
 
-            x = false;
-            for (int i = 0; i < listtime.Count; i++)
-            {
-                System.Diagnostics.Debug.WriteLine(listtime[i]);
-
-                if (listtime[i] == time)
-                    x = true;
-            }
-            Assert.AreEqual(x, true);
+            Assert.AreEqual(listtime.ContainsValue(time), true);
             Assert.AreEqual(0, errors.Count);
 
-            DALScheduleTime.DeleteScheduleTime(time, ref errors);
+            DALScheduleTime.DeleteScheduleTime(Convert.ToInt32(listtime.FirstOrDefault(x => x.Value.Contains(time)).Key), ref errors);
             Assert.AreEqual(0, errors.Count);
 
             listtime = DALScheduleTime.GetScheduleTimeList(ref errors);
 
-            x = false;
-            for (int i = 0; i < listtime.Count; i++)
-            {
-                System.Diagnostics.Debug.WriteLine(listtime[i]);
-
-                if (listtime[i] == time)
-                    x = true;
-            }
-            Assert.AreEqual(x, false);
+            Assert.AreEqual(listtime.ContainsValue(time), false);
             Assert.AreEqual(0, errors.Count);
         }
     }

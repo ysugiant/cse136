@@ -24,14 +24,14 @@ namespace BL
             return (DALScheduleTime.GetScheduleTimeList(ref errors));
         }
 
-        public static void DeleteScheduleTime(string time, ref List<string> errors)
+        public static void DeleteScheduleTime(int id, ref List<string> errors)
         {
-            BLCheck.checkScheduleTime(time, ref errors);
+            BLCheck.checkScheduleTimeID(id, ref errors);
 
             if (errors.Count > 0)
                 return;
 
-            DALScheduleTime.DeleteScheduleTime(time, ref errors);
+            DALScheduleTime.DeleteScheduleTime(id, ref errors);
         }
 
     }

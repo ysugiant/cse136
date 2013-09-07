@@ -22,9 +22,9 @@ namespace SL136
       BLEnrollment.DeleteEnrollment(student_id, schedule_id, ref errors);
     }
 
-    public List<Enrollment> GetEnrollmentList(string student_id, ref List<string> errors)
+    public List<Enrollment> GetEnrollmentList( ref List<string> errors)
     {
-      return BLEnrollment.GetEnrollment(student_id, ref errors);
+      return BLEnrollment.GetEnrollment(ref errors);
     }
 
     public void UpdateEnrollment(string student_id, int schedule_id, string grade, ref List<string> errors)

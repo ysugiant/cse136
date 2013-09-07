@@ -73,23 +73,15 @@ namespace BLTest
             BLScheduleTime.InsertScheduleTime(time, ref errors);
 
             Assert.AreEqual(0, errors.Count);
-            List<string> listtime = BLScheduleTime.GetScheduleTimeList(ref errors);
+            Dictionary<string, string> listtime = BLScheduleTime.GetScheduleTimeList(ref errors);
 
             System.Diagnostics.Debug.WriteLine(listtime.Count);
 
-            bool x = false;
-            for (int i = 0; i < listtime.Count; i++)
-            {
-                System.Diagnostics.Debug.WriteLine(listtime[i]);
-
-                if (listtime[i] == time)
-                    x = true;
-            }
-            Assert.AreEqual(x, true);
+            Assert.AreEqual(listtime.ContainsValue(time), true);
             Assert.AreEqual(0, errors.Count);
 
 
-            BLScheduleTime.DeleteScheduleTime(time, ref errors);
+            BLScheduleTime.DeleteScheduleTime(Convert.ToInt32(listtime.FirstOrDefault(x => x.Value.Contains(time)).Key), ref errors);
 
             //GET TEST
             time = "23.00-24.00";
@@ -101,19 +93,12 @@ namespace BLTest
 
             System.Diagnostics.Debug.WriteLine(listtime.Count);
 
-            x = false;
-            for (int i = 0; i < listtime.Count; i++)
-            {
-                System.Diagnostics.Debug.WriteLine(listtime[i]);
 
-                if (listtime[i] == time)
-                    x = true;
-            }
-            Assert.AreEqual(x, true);
+            Assert.AreEqual(listtime.ContainsValue(time), true);
             Assert.AreEqual(0, errors.Count);
 
 
-            BLScheduleTime.DeleteScheduleTime(time, ref errors);
+            BLScheduleTime.DeleteScheduleTime(Convert.ToInt32(listtime.FirstOrDefault(x => x.Value.Contains(time)).Key), ref errors);
 
             //DELETE TEST
             time = "23.00-24.00";
@@ -125,31 +110,17 @@ namespace BLTest
 
             System.Diagnostics.Debug.WriteLine(listtime.Count);
 
-            x = false;
-            for (int i = 0; i < listtime.Count; i++)
-            {
-                System.Diagnostics.Debug.WriteLine(listtime[i]);
 
-                if (listtime[i] == time)
-                    x = true;
-            }
-            Assert.AreEqual(x, true);
+            Assert.AreEqual(listtime.ContainsValue(time), true);
             Assert.AreEqual(0, errors.Count);
 
-            BLScheduleTime.DeleteScheduleTime(time, ref errors);
+            BLScheduleTime.DeleteScheduleTime(Convert.ToInt32(listtime.FirstOrDefault(x => x.Value.Contains(time)).Key), ref errors);
             Assert.AreEqual(0, errors.Count);
 
             listtime = BLScheduleTime.GetScheduleTimeList(ref errors);
 
-            x = false;
-            for (int i = 0; i < listtime.Count; i++)
-            {
-                System.Diagnostics.Debug.WriteLine(listtime[i]);
 
-                if (listtime[i] == time)
-                    x = true;
-            }
-            Assert.AreEqual(x, false);
+            Assert.AreEqual(listtime.ContainsValue(time), false);
             Assert.AreEqual(0, errors.Count);
         }
 
@@ -163,7 +134,7 @@ namespace BLTest
             BLScheduleTime.InsertScheduleTime(time, ref errors);
             Assert.AreEqual(1, errors.Count);
 
-            BLScheduleTime.DeleteScheduleTime(time, ref errors);
+            BLScheduleTime.DeleteScheduleTime(-3343, ref errors);
             Assert.AreEqual(2, errors.Count);
             System.Diagnostics.Debug.WriteLine("error count: " + errors.Count);
         }

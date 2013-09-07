@@ -81,7 +81,7 @@ namespace DALTest
             Assert.AreEqual(0, errors.Count);
             Assert.AreEqual(dept.ToString(), dept.ToString());
 
-            DALDepartment.DeleteDepartment(dept.deptName, ref errors);
+            DALDepartment.DeleteDepartment(dept.id, ref errors);
 
         //UPDATE TEST
             dept = new Department();
@@ -107,7 +107,7 @@ namespace DALTest
             Assert.AreEqual(0, errors.Count);
             Assert.AreEqual(dept.ToString(), dept.ToString());
 
-            DALDepartment.DeleteDepartment(dept.deptName, ref errors);
+            DALDepartment.DeleteDepartment(dept.id, ref errors);
 
          //GET TEST
             dept = new Department();
@@ -123,7 +123,7 @@ namespace DALTest
             Assert.AreEqual(0, errors.Count);
             Assert.AreEqual(dept.ToString(), dept.ToString());
 
-            DALDepartment.DeleteDepartment(dept.deptName, ref errors);
+            DALDepartment.DeleteDepartment(dept.id, ref errors);
 
         //DELETE TEST
             dept = new Department();
@@ -139,7 +139,7 @@ namespace DALTest
             Assert.AreEqual(0, errors.Count);
             Assert.AreEqual(dept.ToString(), dept.ToString());
 
-            DALDepartment.DeleteDepartment(dept.deptName, ref errors);
+            DALDepartment.DeleteDepartment(dept.id, ref errors);
             Assert.AreEqual(0, errors.Count);
 
             verifyDept = DALDepartment.GetDepartmentDetail(dept.deptName, ref errors);

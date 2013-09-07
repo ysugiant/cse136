@@ -14,7 +14,7 @@ namespace DAL
         static string connection_string = ConfigurationManager.AppSettings["dsn"];
 
         //Done By student
-        public static List<Enrollment> GetEnrollment(string id, ref List<string> errors)
+        public static List<Enrollment> GetEnrollment(ref List<string> errors)
         {
             SqlConnection conn = new SqlConnection(connection_string);
             List<Enrollment> grade = null;
@@ -23,10 +23,6 @@ namespace DAL
                 string strSQL = "spGetEnrollmentList";
 
                 SqlDataAdapter mySA = new SqlDataAdapter(strSQL, conn);
-
-                mySA.SelectCommand.Parameters.Add(new SqlParameter("@student_id", SqlDbType.VarChar, 20));
-                mySA.SelectCommand.Parameters["@student_id"].Value = id;
-                
 
                 mySA.SelectCommand.CommandType = CommandType.StoredProcedure;
 
@@ -68,6 +64,7 @@ namespace DAL
                         units = Convert.ToInt32(myDS.Tables[0].Rows[i]["units"])
                       };
                     gr.ScheduledCourse = sc;
+                    gr.student_id = myDS.Tables[0].Rows[i]["student_id"].ToString();
                     grade.Add(gr);
                 }
             }

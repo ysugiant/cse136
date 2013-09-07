@@ -15,7 +15,7 @@ namespace SL136
   {
 
     [OperationContract]
-    List<Enrollment> GetEnrollmentList(string student_id, ref List<string> errors);
+    List<Enrollment> GetEnrollmentList(ref List<string> errors);
 
     [OperationContract]
     void InsertEnrollment(string student_id, int schedule_id, ref List<string> errors);

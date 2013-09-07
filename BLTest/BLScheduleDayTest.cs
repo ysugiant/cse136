@@ -73,23 +73,15 @@ namespace BLTest
             BLScheduleDay.InsertScheduleDay(day, ref errors);
 
             Assert.AreEqual(0, errors.Count);
-            List<string> listday = BLScheduleDay.GetScheduleDayList(ref errors);
+            Dictionary<string, string> listday = BLScheduleDay.GetScheduleDayList(ref errors);
 
             System.Diagnostics.Debug.WriteLine(listday.Count);
 
-            bool x = false;
-            for (int i = 0; i < listday.Count; i++)
-            {
-                System.Diagnostics.Debug.WriteLine(listday[i]);
-
-                if (listday[i] == day)
-                    x = true;
-            }
-            Assert.AreEqual(x, true);
+            Assert.AreEqual(listday.ContainsValue(day), true);
             Assert.AreEqual(0, errors.Count);
 
 
-            BLScheduleDay.DeleteScheduleDay(day, ref errors);
+            BLScheduleDay.DeleteScheduleDay(Convert.ToInt32(listday.FirstOrDefault(x => x.Value.Contains(day)).Key), ref errors);
 
             //TEST
             day = "TestDay";
@@ -101,19 +93,11 @@ namespace BLTest
 
             System.Diagnostics.Debug.WriteLine(listday.Count);
 
-            x = false;
-            for (int i = 0; i < listday.Count; i++)
-            {
-                System.Diagnostics.Debug.WriteLine(listday[i]);
-
-                if (listday[i] == day)
-                    x = true;
-            }
-            Assert.AreEqual(x, true);
+            Assert.AreEqual(listday.ContainsValue(day), true);
             Assert.AreEqual(0, errors.Count);
 
 
-            BLScheduleDay.DeleteScheduleDay(day, ref errors);
+            BLScheduleDay.DeleteScheduleDay(Convert.ToInt32(listday.FirstOrDefault(x => x.Value.Contains(day)).Key), ref errors);
 
             //DELETE TEST
             day = "TestDay";
@@ -126,32 +110,16 @@ namespace BLTest
 
             System.Diagnostics.Debug.WriteLine(listday.Count);
 
-            x = false;
-            for (int i = 0; i < listday.Count; i++)
-            {
-                System.Diagnostics.Debug.WriteLine(listday[i]);
-
-                if (listday[i] == day)
-                    x = true;
-            }
-            Assert.AreEqual(x, true);
+            Assert.AreEqual(listday.ContainsValue(day), true);
             Assert.AreEqual(0, errors.Count);
 
 
-            BLScheduleDay.DeleteScheduleDay(day, ref errors);
+            BLScheduleDay.DeleteScheduleDay(Convert.ToInt32(listday.FirstOrDefault(x => x.Value.Contains(day)).Key), ref errors);
             Assert.AreEqual(0, errors.Count);
 
             listday = BLScheduleDay.GetScheduleDayList(ref errors);
 
-            x = false;
-            for (int i = 0; i < listday.Count; i++)
-            {
-                System.Diagnostics.Debug.WriteLine(listday[i]);
-
-                if (listday[i] == day)
-                    x = true;
-            }
-            Assert.AreEqual(x, false);
+            Assert.AreEqual(listday.ContainsValue(day), false);
             Assert.AreEqual(0, errors.Count);
 
         }
@@ -168,7 +136,7 @@ namespace BLTest
 
             //get doesnt have error checking
 
-            BLScheduleDay.DeleteScheduleDay(day, ref errors);
+            BLScheduleDay.DeleteScheduleDay(-3141, ref errors);
             Assert.AreEqual(2, errors.Count);
 
         }
