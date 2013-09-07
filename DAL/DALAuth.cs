@@ -39,6 +39,7 @@ namespace DAL
         {
           logon.role = myDS.Tables[0].Rows[0]["role"].ToString();
           logon.id = myDS.Tables[0].Rows[0]["id"].ToString();
+          logon.chair = myDS.Tables[0].Rows[0]["chair"].ToString();
         }
       }
       catch (Exception e)
