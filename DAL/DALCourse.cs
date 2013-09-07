@@ -198,12 +198,10 @@ namespace DAL
                 course.level = myDS.Tables[0].Rows[0]["course_level"].ToString();
                 course.description = myDS.Tables[0].Rows[0]["course_description"].ToString();
                 course.units = Convert.ToInt32(myDS.Tables[0].Rows[0]["units"]);
+                course.prerequisite_list = new List<Course>();
 
-                if (myDS.Tables[1] != null)
+                if (myDS.Tables[1].Rows.Count > 0)
                 {
-                    course.prerequisite_list = new List<Course>();
-
-
                     for (int i = 0; i < myDS.Tables[1].Rows.Count; i++)
                     {
                         Course prerequisite = new Course();
@@ -218,8 +216,7 @@ namespace DAL
                 }
                 else
                 {
-                    System.Diagnostics.Debug.WriteLine(course.id + " does NOT have a prerequisites.");
-                    course.prerequisite_list = new List<Course>();
+                    System.Diagnostics.Debug.WriteLine(course.id + " does NOT have any prerequisites.");
                 }
 
             }

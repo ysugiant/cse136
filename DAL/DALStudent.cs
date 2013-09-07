@@ -179,28 +179,33 @@ namespace DAL
             //student.level = (StudentLevel)Enum.Parse(typeof(StudentLevel), myDS.Tables[0].Rows[0]["level"].ToString());//JUSTIN ADDED THIS
             student.level = myDS.Tables[0].Rows[0]["level"].ToString();//JUSTIN ADDED THIS
             student.status = Convert.ToInt32(myDS.Tables[0].Rows[0]["status"].ToString());//JUSTIN ADDED THIS
-
-            if (myDS.Tables[1] != null)
+            student.enrolled = new List<ScheduledCourse>();
+            if (myDS.Tables[1].Rows.Count > 0)
             {
-                student.enrolled = new List<ScheduledCourse>();
-                ScheduledCourse schedule = new ScheduledCourse();
-                Course course = new Course();
+                //student.enrolled = new List<ScheduledCourse>();
+                
+                
                 for (int i = 0; i < myDS.Tables[1].Rows.Count; i++)
                 {
+                    ScheduledCourse schedule = new ScheduledCourse();
+                    Course course = new Course();
                     course.id = Convert.ToInt32(myDS.Tables[1].Rows[i]["course_id"]);
                     course.title = myDS.Tables[1].Rows[i]["course_title"].ToString();
                     course.description = myDS.Tables[1].Rows[i]["course_description"].ToString();
-                    course.level =  myDS.Tables[0].Rows[0]["level"].ToString();//JUSTIN ADDED THIS
+                    course.level =  myDS.Tables[0].Rows[0]["course_level"].ToString();//JUSTIN ADDED THIS
                     course.units = Convert.ToInt32(myDS.Tables[1].Rows[i]["units"].ToString());//JUSTIN ADDED THIS
-                    schedule.course = course;
-                    System.Diagnostics.Debug.WriteLine("Added " + schedule.course.id + " to student schedule");//JUSTIN ADDED THIS
-
-                    schedule.quarter = myDS.Tables[1].Rows[i]["quarter"].ToString();
-                    schedule.year = Convert.ToInt32(myDS.Tables[1].Rows[i]["year"].ToString());
-                    schedule.session = myDS.Tables[1].Rows[i]["session"].ToString();
+                    
+                    //System.Diagnostics.Debug.WriteLine("Added " + schedule.course.id + " to student schedule");//JUSTIN ADDED THIS
                     schedule.id = Convert.ToInt32(myDS.Tables[1].Rows[i]["schedule_id"].ToString());
+                    schedule.year = Convert.ToInt32(myDS.Tables[1].Rows[i]["year"].ToString());
+                    schedule.quarter = myDS.Tables[1].Rows[i]["quarter"].ToString();
+                    schedule.session = myDS.Tables[1].Rows[i]["session"].ToString();
+                    schedule.course = course;
                     schedule.time = myDS.Tables[1].Rows[i]["schedule_time"].ToString();//JUSTIN ADDED THIS
                     schedule.day = myDS.Tables[1].Rows[i]["schedule_day"].ToString();//JUSTIN ADDED THIS
+                    schedule.timeID = Convert.ToInt32(myDS.Tables[1].Rows[i]["schedule_time_id"].ToString());
+                    schedule.dayID = Convert.ToInt32(myDS.Tables[1].Rows[i]["schedule_day_id"].ToString());
+                    schedule.instr_id = Convert.ToInt32(myDS.Tables[1].Rows[i]["staff_id"].ToString());
                     schedule.instructor_fName = myDS.Tables[1].Rows[i]["instr_fName"].ToString();//JUSTIN ADDED THIS
                     schedule.instructor_lName = myDS.Tables[1].Rows[i]["instr_lName"].ToString();//JUSTIN ADDED THIS
 
