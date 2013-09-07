@@ -87,7 +87,7 @@ namespace DAL
 
                 SqlDataAdapter mySA = new SqlDataAdapter(strSQL, conn);
                 mySA.SelectCommand.CommandType = CommandType.StoredProcedure;
-                mySA.SelectCommand.Parameters.Add(new SqlParameter("@dept_name", SqlDbType.VarChar, 50));
+                mySA.SelectCommand.Parameters.Add(new SqlParameter("@dept_name", SqlDbType.VarChar,50));
 
                 mySA.SelectCommand.Parameters["@dept_name"].Value = name;
 

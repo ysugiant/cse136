@@ -17,6 +17,9 @@ namespace SL136
     List<ScheduledCourse> GetScheduleList(int year, string quarter, ref List<string> errors);
 
     [OperationContract]
+    List<ScheduledCourse> GetScheduleListComplete(ref List<string> errors);
+
+    [OperationContract]
     void InsertCourseSchedule(ScheduledCourse sched, ref List<string> errors, out int ID); //maybe need to fix,~!
 
     [OperationContract]

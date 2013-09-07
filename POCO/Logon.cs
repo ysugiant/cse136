@@ -14,5 +14,8 @@ namespace POCO
 
     [DataMember]
     public string role { get; set; }
+
+    [DataMember]
+    public string chair { get; set; }
   }
 }
