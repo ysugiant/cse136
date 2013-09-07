@@ -171,95 +171,11 @@ namespace BLTest
             Staff verifyEmptyAdvisor = BLStaff.GetStaff(advisor.id, ref errors);
             Assert.AreEqual(0, errors.Count);
             Assert.AreEqual(null, verifyEmptyAdvisor);
+
+            //##################################TESTING GETSTAFF LIST ####################################
+            /*errors.Clear();
+            List<Staff> staffList = BLStaff.GetStaffList(ref errors);
+            Assert.AreEqual(staffList.Count,100);*/
         }
-
-        /*[TestMethod]
-        public void GetStaffErrorTest()
-        {
-            List<string> errors = new List<string>();
-
-            BLStaff.GetStaff(-5, ref errors);
-            Assert.AreEqual(1, errors.Count);
-        }*/
-
-        /*[TestMethod]
-        public void DeleteStaffErrorTest()
-        {
-            List<string> errors = new List<string>();
-
-            BLStaff.DeleteStaff(null, ref errors);
-            Assert.AreEqual(1, errors.Count);
-        }*/
-
-        /*[TestMethod]
-        public void StaffInsertAndSelectTest()
-        {
-            List<string> errors = new List<string>();
-
-            Staff advisor = new Staff();
-            int staffID;
-            advisor.first_name = "first";
-            advisor.last_name = " last";
-            advisor.email = "myemail97@ucsd.edu";
-            advisor.password = "pass1234";
-            advisor.dept = BLDepartment.GetDepartmentDetail("Computer Science and Engineering", ref errors);
-            advisor.isInstructor = false;
-            
-            BLStaff.InsertStaff(advisor, ref errors, out staffID);
-            advisor.id = staffID;
-            Assert.AreEqual(0, errors.Count);
-
-            Staff verifyAdvisor = BLStaff.GetStaff(advisor.id, ref errors);
-            Assert.AreEqual(0, errors.Count);
-
-            Assert.AreEqual(advisor.id, verifyAdvisor.id);
-            Assert.AreEqual(advisor.first_name, verifyAdvisor.first_name);
-            Assert.AreEqual(advisor.last_name, verifyAdvisor.last_name);
-            Assert.AreEqual(advisor.email, verifyAdvisor.email);
-            Assert.AreEqual(advisor.password, verifyAdvisor.password);
-            Assert.AreEqual(advisor.dept.id, verifyAdvisor.dept.id);
-            Assert.AreEqual(advisor.isInstructor, verifyAdvisor.isInstructor);
-
-            /*
-            //List<ScheduledCourse> scheduleList = BLSchedule.GetScheduleList("", "", ref errors); // This was the original code.
-            List<ScheduledCourse> scheduleList = BLSchedule.GetScheduleList(2011, "Fall", ref errors);//JUSTIN ADDED THIS FOR DUBUG PURPOSES
-            Assert.AreEqual(0, errors.Count);
-
-            // enroll all available scheduled courses for this student
-            for (int i = 0; i < scheduleList.Count; i++)
-            {
-                student.enrolled.Add(scheduleList[i]);// JUSTIN : for testing purposes. Will compare this with the List<ScheduledCourse>.
-                //System.Diagnostics.Debug.WriteLine("Added a course to student course schedule: " + student.enrolled[i].course.title);//JUSTIN ADDED THIS
-
-                BLStudent.EnrollSchedule(student.id, scheduleList[i].id, ref errors);
-                //System.Diagnostics.Debug.WriteLine("Added a course to scheduleList: " + scheduleList[i].course.title);//JUSTIN ADDED THIS
-                Assert.AreEqual(0, errors.Count);
-            }
-
-            // JUSTIN : Extra test to ensure that ALL the courses from the selected course schedule were added, verifies by count.
-            System.Diagnostics.Debug.WriteLine("scheduleList size: " + scheduleList.Count + "\nStudent schedule size: " + student.enrolled.Count);//JUSTIN ADDED THIS
-            Assert.AreEqual(scheduleList.Count, student.enrolled.Count);
-
-            // drop all available scheduled courses for this student
-            for (int i = 0; i < scheduleList.Count; i++)
-            {
-                BLStudent.DropEnrolledSchedule(student.id, scheduleList[i].id, ref errors);
-                // This is not an accurate test because it doesn't verify that the student's enrollment schedule is empty.
-                Assert.AreEqual(0, errors.Count);
-                student.enrolled.Remove(scheduleList[i]);// JUSTIN : to use in the following assertion.
-            }
-            Assert.AreEqual(0, student.enrolled.Count);// JUSTIN : This makes sure that the student's enroll Sched is empty.
-
-            /* JUSTIN : now the student object is up-to-date, including their course schedule.
-             * NOTE: I think we should always keep the object updated, through every method acting upon it. Yeah? No?
-             * */
-            /*BLStaff.DeleteStaff(advisor.id, ref errors);
-
-            Staff verifyEmptyAdvisor = BLStaff.GetStaff(advisor.id, ref errors);
-            Assert.AreEqual(0, errors.Count);
-            Assert.AreEqual(null, verifyEmptyAdvisor);*/
-
-        //}
-
     }
 }
