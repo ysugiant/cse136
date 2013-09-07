@@ -76,7 +76,7 @@ namespace DAL
             }
         }
 
-        public static Department GetDepartmentDetail(string name, ref List<string> errors)
+        public static Department GetDepartmentDetail(int id, ref List<string> errors)
         {
             SqlConnection conn = new SqlConnection(connection_string);
             Department dept = null;
@@ -87,9 +87,9 @@ namespace DAL
 
                 SqlDataAdapter mySA = new SqlDataAdapter(strSQL, conn);
                 mySA.SelectCommand.CommandType = CommandType.StoredProcedure;
-                mySA.SelectCommand.Parameters.Add(new SqlParameter("@dept_name", SqlDbType.VarChar, 50));
+                mySA.SelectCommand.Parameters.Add(new SqlParameter("@dept_id", SqlDbType.Int));
 
-                mySA.SelectCommand.Parameters["@dept_name"].Value = name;
+                mySA.SelectCommand.Parameters["@dept_id"].Value = id;
 
                 DataSet myDS = new DataSet();
                 mySA.Fill(myDS);
