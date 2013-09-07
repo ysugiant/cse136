@@ -22,9 +22,9 @@ namespace SL136
       BLDepartment.DeleteDepartment(id, ref errors);
     }
 
-    public Department GetDepartmentDetail(int id, ref List<string> errors)
+    public Department GetDepartmentDetail(string name, ref List<string> errors)
     {
-      return BLDepartment.GetDepartmentDetail(id, ref errors);
+      return BLDepartment.GetDepartmentDetail(name, ref errors);
     }
 
     public List<Department> GetDepartmentList(ref List<string> errors)

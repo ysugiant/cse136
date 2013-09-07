@@ -15,7 +15,7 @@ namespace SL136
   {
 
     [OperationContract]
-    Department GetDepartmentDetail(int id, ref List<string> errors);
+    Department GetDepartmentDetail(string name, ref List<string> errors);
 
     [OperationContract]
     List<Department> GetDepartmentList(ref List<string> errors);

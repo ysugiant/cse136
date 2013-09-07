@@ -9,13 +9,13 @@ namespace BL
 {
     public static class BLDepartment
     {
-        public static Department GetDepartmentDetail(int id, ref List<string> errors)
+        public static Department GetDepartmentDetail(string name, ref List<string> errors)
         {
-            BLCheck.checkDeptID(id, ref errors);
+            BLCheck.checkDeptName(name, ref errors);
             if (errors.Count > 0)
                 return null;
 
-            return (DALDepartment.GetDepartmentDetail(id, ref errors));
+            return (DALDepartment.GetDepartmentDetail(name, ref errors));
         }
 
         public static List<Department> GetDepartmentList(ref List<string> errors)
