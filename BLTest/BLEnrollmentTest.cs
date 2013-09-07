@@ -110,7 +110,7 @@ namespace BLTest
             }
 
             //get enroll data
-            List<Enrollment> trans = BLEnrollment.GetEnrollment(student.id, ref errors);
+            List<Enrollment> trans = BLEnrollment.GetEnrollment( ref errors);
             Assert.AreEqual(0, errors.Count);
             System.Diagnostics.Debug.WriteLine("pass1");
             //compare the result
@@ -189,7 +189,7 @@ namespace BLTest
 
             //get enroll data
             x++;
-            List<Enrollment> trans = BLEnrollment.GetEnrollment(student.id + "abc", ref errors);
+            List<Enrollment> trans = BLEnrollment.GetEnrollment(ref errors);
             Assert.AreEqual(x, errors.Count);
             
             for (int i = 0; i < scheduleList.Count; i++)

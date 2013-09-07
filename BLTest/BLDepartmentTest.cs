@@ -75,7 +75,7 @@ namespace BLTest
             BLDepartment.InsertDepartment(dept, ref errors);
 
             Assert.AreEqual(0, errors.Count);
-            Department verifyDept = BLDepartment.GetDepartmentDetail(dept.deptName, ref errors);
+            Department verifyDept = BLDepartment.GetDepartmentDetail(dept.id, ref errors);
             dept.id = verifyDept.id;
             Assert.AreEqual(dept.ToString(), verifyDept.ToString());
             Assert.AreEqual(0, errors.Count);
@@ -93,7 +93,7 @@ namespace BLTest
             Assert.AreEqual(0, errors.Count);
 
             //updating
-            verifyDept = BLDepartment.GetDepartmentDetail(dept.deptName, ref errors);
+            verifyDept = BLDepartment.GetDepartmentDetail(dept.id, ref errors);
             dept.id = verifyDept.id;
             dept.deptName = "Te Department";
             dept.chairID = 1;
@@ -101,7 +101,7 @@ namespace BLTest
 
             Assert.AreEqual(0, errors.Count);
 
-            verifyDept = BLDepartment.GetDepartmentDetail(dept.deptName, ref errors);
+            verifyDept = BLDepartment.GetDepartmentDetail(dept.id, ref errors);
             dept.id = verifyDept.id;
             Assert.AreEqual(dept.ToString(), verifyDept.ToString());
             Assert.AreEqual(0, errors.Count);
@@ -117,7 +117,7 @@ namespace BLTest
             BLDepartment.InsertDepartment(dept, ref errors);
 
             Assert.AreEqual(0, errors.Count);
-            verifyDept = BLDepartment.GetDepartmentDetail(dept.deptName, ref errors);
+            verifyDept = BLDepartment.GetDepartmentDetail(dept.id, ref errors);
             dept.id = verifyDept.id;
             Assert.AreEqual(dept.ToString(), verifyDept.ToString());
             Assert.AreEqual(0, errors.Count);
@@ -133,7 +133,7 @@ namespace BLTest
             BLDepartment.InsertDepartment(dept, ref errors);
 
             Assert.AreEqual(0, errors.Count);
-            verifyDept = BLDepartment.GetDepartmentDetail(dept.deptName, ref errors);
+            verifyDept = BLDepartment.GetDepartmentDetail(dept.id, ref errors);
             dept.id = verifyDept.id;
             Assert.AreEqual(dept.ToString(), verifyDept.ToString());
             Assert.AreEqual(0, errors.Count);
@@ -142,7 +142,7 @@ namespace BLTest
             BLDepartment.DeleteDepartment(dept.id, ref errors);
             Assert.AreEqual(0, errors.Count);
 
-            verifyDept = BLDepartment.GetDepartmentDetail(dept.deptName, ref errors);
+            verifyDept = BLDepartment.GetDepartmentDetail(dept.id, ref errors);
             Assert.AreEqual(0, errors.Count);
             Assert.AreEqual(verifyDept, null);
 
@@ -159,7 +159,7 @@ namespace BLTest
             BLDepartment.InsertDepartment(dept, ref errors);
             Assert.AreEqual(2, errors.Count);
 
-            Department verifyDept = BLDepartment.GetDepartmentDetail(dept.deptName, ref errors);
+            Department verifyDept = BLDepartment.GetDepartmentDetail(dept.id, ref errors);
             Assert.AreEqual(3, errors.Count);
 
             BLDepartment.UpdateDepartment(dept, ref errors);

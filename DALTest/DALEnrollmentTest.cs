@@ -105,7 +105,7 @@ namespace DALTest
             }
 
             //get enroll data
-            List<Enrollment> trans = DALEnrollment.GetEnrollment(student.id, ref errors);
+            List<Enrollment> trans = DALEnrollment.GetEnrollment( ref errors);
             Assert.AreEqual(0, errors.Count);
             System.Diagnostics.Debug.WriteLine("pass1");
             //compare the result
