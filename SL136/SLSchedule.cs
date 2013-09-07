@@ -17,6 +17,11 @@ namespace SL136
       return BLCourseSchedule.GetCourseScheduleList(year, quarter, ref errors);
     }
 
+    public List<ScheduledCourse> GetScheduleListComplete(ref List<string> errors)
+    {
+        return BLCourseSchedule.GetScheduleListComplete(ref errors);
+    }
+
     public ScheduledCourse GetCourseScheduleDetail(int id, ref List<string> errors)
     {
         return BLCourseSchedule.GetCourseScheduleDetail(id,ref errors);
