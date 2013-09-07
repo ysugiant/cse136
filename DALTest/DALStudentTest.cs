@@ -70,9 +70,9 @@ namespace DALTest
       Student student = new Student();
       student.first_name = "first";
       student.last_name = " last";
-      student.id = Guid.NewGuid().ToString().Substring(0, 20);
-      student.ssn = "8889912";
-      student.email = "myemail@ucsd.edu";
+      student.id = "A" + Guid.NewGuid().ToString().Substring(0, 8);
+      student.ssn = "888991224";
+      student.email = "myemail484@ucsd.edu";
       student.password = "pass1234";
       student.shoe_size = 0;
       student.weight = 0;
@@ -82,13 +82,14 @@ namespace DALTest
       student.status = 0;//JUSTIN ADDED THIS
       student.enrolled = new List<ScheduledCourse>();//JUSTIN ADDED THIS
 
+      System.Diagnostics.Debug.WriteLine("Student ID: " + student.id);
       List<string> errors = new List<string>();
       DALStudent.InsertStudent(student, ref errors);
       Assert.AreEqual(0, errors.Count);
 
       Student verifyStudent = DALStudent.GetStudentDetail(student.id, ref errors);
-      //Assert.AreEqual(student.ToString(),verifyStudent.ToString());//JUSTIN ADDED THIS
       Assert.AreEqual(0, errors.Count);
+
       Assert.AreEqual(student.first_name, verifyStudent.first_name);
       Assert.AreEqual(student.last_name, verifyStudent.last_name);
       Assert.AreEqual(student.id, verifyStudent.id);
@@ -108,8 +109,8 @@ namespace DALTest
       System.Diagnostics.Debug.WriteLine("value of student2's id is: " + student2.id);//JUSTIN ADDED THIS
       student2.first_name = "first2";
       student2.last_name = " last2";
-      student2.ssn = "777664321";
-      student2.email = "myemail2@ucsd.edu";
+      student2.ssn = "002254879";
+      student2.email = "myemail24442@ucsd.edu";
       student2.password = "pass1234";
       student2.shoe_size = 2;
       student2.weight = 2;

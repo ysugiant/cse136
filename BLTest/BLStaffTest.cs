@@ -173,9 +173,10 @@ namespace BLTest
             Assert.AreEqual(null, verifyEmptyAdvisor);
 
             //##################################TESTING GETSTAFF LIST ####################################
-            /*errors.Clear();
+            errors.Clear();
             List<Staff> staffList = BLStaff.GetStaffList(ref errors);
-            Assert.AreEqual(staffList.Count,100);*/
+            Assert.AreEqual(errors.Count, 0);
+            Assert.AreEqual(staffList.Count,306);
         }
     }
 }

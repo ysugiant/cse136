@@ -232,7 +232,10 @@ namespace DAL
                     staffMember.last_name = myDS.Tables[0].Rows[i]["last_name"].ToString();
                     staffMember.email = myDS.Tables[0].Rows[i]["email"].ToString();
                     staffMember.password = myDS.Tables[0].Rows[i]["password"].ToString();
+                    staffMember.dept = new Department();
                     staffMember.dept.id = Convert.ToInt32(myDS.Tables[0].Rows[i]["dept_id"].ToString());
+                    staffMember.dept.deptName = myDS.Tables[0].Rows[i]["dept_name"].ToString();
+                    staffMember.dept.chairID = Convert.ToInt32(myDS.Tables[0].Rows[i]["chair_id"].ToString());
                     staffMember.isInstructor = Convert.ToBoolean(myDS.Tables[0].Rows[i]["instructor"].ToString());
                     staffList.Add(staffMember);
                 }
@@ -240,6 +243,7 @@ namespace DAL
             catch (Exception e)
             {
                 errors.Add("Error: " + e.ToString());
+                System.Diagnostics.Debug.WriteLine("Error caught in getStaffList: " + e.ToString());
             }
             finally
             {

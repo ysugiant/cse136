@@ -107,6 +107,7 @@ namespace DAL
       catch (Exception e)
       {
         errors.Add("Error: " + e.ToString());
+        System.Diagnostics.Debug.WriteLine("Error caught during updateStudent: " + e.ToString());
       }
       finally
       {
