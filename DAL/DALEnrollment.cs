@@ -41,6 +41,7 @@ namespace DAL
                 {
                     Enrollment gr = new Enrollment();
                     ScheduledCourse sc = new ScheduledCourse();
+                    sc.id = Convert.ToInt32(myDS.Tables[0].Rows[i]["schedule_id"].ToString());
                     sc.year = Convert.ToInt32(myDS.Tables[0].Rows[i]["year"].ToString());
                     sc.quarter = myDS.Tables[0].Rows[i]["quarter"].ToString();
                     sc.day = myDS.Tables[0].Rows[i]["schedule_day"].ToString();
